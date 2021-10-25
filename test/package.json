@@ -1,0 +1,18 @@
+{
+  "license": "MIT",
+  "private": "true",
+  "name": "@dailei/test",
+  "type": "module",
+  "version": "1.1.0",
+  "scripts": {
+    "clean": "rimraf pdfs reports && mkdirp pdfs reports",
+    "export": "node --experimental-specifier-resolution=node src/export-slides.js",
+    "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "jest-html-reporters": "^2.1.1",
+    "pdf-lib": "^1.16.0",
+    "puppeteer-core": "^10.2.0"
+  }
+}

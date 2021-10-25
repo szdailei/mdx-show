@@ -1,0 +1,12 @@
+[static-server]
+port = 3000
+root = 'web'  # Web服务的根目录，此目录必须有index.html
+
+[api-server]
+port = 3001
+
+[download-server]
+port = 3002
+
+[storage]
+root = '.' # 存放mdx文件的目录。如果需要，此目录下可以有images和videos子目录

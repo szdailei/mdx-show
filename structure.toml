@@ -1,0 +1,11 @@
+readme = "README.md"
+example = 'example/*'
+
+dest = "dist/"
+destOfWeb = "dist/web/"
+destOfConfig = 'dist/web/mdx-show.toml'
+
+src = "src/"
+srcOfClient = "packages/client/src/"
+srcOfWeb = "packages/client/public/*"
+srcOfConfig = "mdx-show.toml"
