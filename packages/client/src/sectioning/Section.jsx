@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from '../styled/styled';
 
 /**
 @examples
@@ -20,8 +20,8 @@ const Section = React.forwardRef(({ style, ...rest }, ref) => {
     display: 'grid',
     ...style,
   };
-  const Styled = styled.section(objStyle);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('section');
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 export default Section;

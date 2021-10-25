@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import styled from './styled';
 
 // eslint-disable-next-line react/prop-types
 const Input = React.forwardRef(({ type, style, ...rest }, ref) => {
@@ -28,9 +28,9 @@ const Input = React.forwardRef(({ type, style, ...rest }, ref) => {
       break;
   }
 
-  const Styled = styled.input(objStyle);
+  const Styled = styled('input');
 
-  return <Styled type={type} {...rest} ref={ref} />;
+  return <Styled type={type} {...rest} style={objStyle} ref={ref} />;
 });
 
 Input.propTypes = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from '../styled/styled';
 
 // eslint-disable-next-line react/prop-types
 const Header = React.forwardRef(({ style, ...rest }, ref) => {
@@ -10,8 +10,8 @@ const Header = React.forwardRef(({ style, ...rest }, ref) => {
     fontWeight: '700',
     ...style,
   };
-  const Styled = styled.header(objStyle);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('header');
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 export default Header;

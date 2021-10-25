@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from './styled';
 
 // eslint-disable-next-line react/prop-types
 const GridContainer = React.forwardRef(({ style, ...rest }, ref) => {
@@ -8,9 +8,9 @@ const GridContainer = React.forwardRef(({ style, ...rest }, ref) => {
     alignItems: 'center',
     ...style,
   };
-  const Styled = styled.div(objStyle);
+  const Styled = styled('div');
 
-  return <Styled {...rest} ref={ref} />;
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 export default GridContainer;

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import styled from '@emotion/styled';
+import styled from './styled';
 
 // eslint-disable-next-line react/prop-types
 const TextArea = React.forwardRef(({ style, ...rest }, ref) => {
@@ -24,8 +24,8 @@ const TextArea = React.forwardRef(({ style, ...rest }, ref) => {
     },
   };
 
-  const Styled = styled.textarea(objStyle);
-  return <Styled {...rest} onChange={onChange} rows={minRows} ref={ref} />;
+  const Styled = styled('textarea');
+  return <Styled {...rest} style={objStyle} onChange={onChange} rows={minRows} ref={ref} />;
 });
 
 export default TextArea;

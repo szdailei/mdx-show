@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from './styled';
 
 const TH = React.forwardRef(({ style, ...rest }, ref) => {
-  const Styled = styled.th(style);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('th');
+  return <Styled {...rest} style={style} ref={ref} />;
 });
 
 const TD = React.forwardRef(({ style, ...rest }, ref) => {
-  const Styled = styled.td(style);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('td');
+  return <Styled {...rest} style={style} ref={ref} />;
 });
 
 const TR = React.forwardRef(({ style, ...rest }, ref) => {
@@ -18,18 +18,18 @@ const TR = React.forwardRef(({ style, ...rest }, ref) => {
     ...style,
   };
 
-  const Styled = styled.tr(objStyle);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('tr');
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 const THead = React.forwardRef(({ style, ...rest }, ref) => {
-  const Styled = styled.thead(style);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('thead');
+  return <Styled {...rest} style={style} ref={ref} />;
 });
 
 const TBody = React.forwardRef(({ style, ...rest }, ref) => {
-  const Styled = styled.tbody(style);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('tbody');
+  return <Styled {...rest} style={style} ref={ref} />;
 });
 
 const Table = React.forwardRef(({ style, ...rest }, ref) => {
@@ -38,8 +38,8 @@ const Table = React.forwardRef(({ style, ...rest }, ref) => {
     ...style,
   };
 
-  const Styled = styled.table(objStyle);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('table');
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 export { TH, TD, TR, THead, TBody, Table };

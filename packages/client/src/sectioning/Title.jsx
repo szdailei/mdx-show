@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import styled from '../styled/styled';
 
 // eslint-disable-next-line react/prop-types
 const Title = React.forwardRef(({ children, style, ...rest }, ref) => {
@@ -17,11 +17,13 @@ const Title = React.forwardRef(({ children, style, ...rest }, ref) => {
     fontWeight: '700',
     ...style,
   };
-  const Styled = styled.div(containerStyle);
-  const StyledItem = styled.div(itemStyle);
+  const Styled = styled('div');
+  const StyledItem = styled('div');
   return (
-    <Styled {...rest} ref={ref}>
-      <StyledItem id="title">{children}</StyledItem>
+    <Styled {...rest} style={containerStyle} ref={ref}>
+      <StyledItem id="title" style={itemStyle}>
+        {children}
+      </StyledItem>
     </Styled>
   );
 });

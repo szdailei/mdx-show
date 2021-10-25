@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from '../styled/styled';
 
 // eslint-disable-next-line react/prop-types
 const Footer = React.forwardRef(({ style, ...rest }, ref) => {
@@ -8,8 +8,8 @@ const Footer = React.forwardRef(({ style, ...rest }, ref) => {
     fontSize: '0.7em',
     ...style,
   };
-  const Styled = styled.footer(objStyle);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('footer');
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 export default Footer;

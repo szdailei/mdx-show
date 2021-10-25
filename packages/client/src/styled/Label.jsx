@@ -1,10 +1,10 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from './styled';
 
 // eslint-disable-next-line react/prop-types
 const Label = React.forwardRef(({ style, ...rest }, ref) => {
-  const Styled = styled.label(style);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('label');
+  return <Styled {...rest} style={style} ref={ref} />;
 });
 
 export default Label;

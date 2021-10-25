@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
+import styled from './styled';
 
 /**
 @example
@@ -14,10 +14,10 @@ roles.forEach((role, key) => {
 */
 // eslint-disable-next-line react/prop-types
 const Select = React.forwardRef(({ options, style, ...rest }, ref) => {
-  const Styled = styled.select(style);
+  const Styled = styled('select');
 
   return (
-    <Styled {...rest} ref={ref}>
+    <Styled {...rest} style={style} ref={ref}>
       {options}
     </Styled>
   );

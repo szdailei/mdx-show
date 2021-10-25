@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import TOML from 'toml';
+import TOMLParser from '@iarna/toml/parse-string';
 import getRootDir from './root';
 
 /*
@@ -33,7 +33,7 @@ async function getRelativeStructure() {
   const root = getRootDir();
   const structureFile = path.join(root, 'structure.toml');
   const data = await fs.promises.readFile(structureFile, 'utf8');
-  const structure = TOML.parse(data);
+  const structure = TOMLParser(data);
   structure.root = root
   return structure  
 }

@@ -1,19 +1,37 @@
 {
-  "author": "Dai Lei <szdailei@gmail.com>",
+  "author": {
+    "name": "Dai Lei",
+    "email": "szdailei@gmail.com"
+  },
+  "description": "Write with MDX, slides show with browser",
   "exports": "./dist/index.js",
   "keywords": [
     "mdx",
+    "presentation",
     "show",
     "slides"
   ],
   "license": "MIT",
   "name": "mdx-show",
   "private": true,
+  "repository": {
+    "url": "https://github.com/szdailei/mdx-show"
+  },
+  "homepage": "https://github.com/szdailei/mdx-show#readme",
+  "main": "dist/index.js",
   "type": "module",
+  "version": "0.1.0",
   "workspaces": [
     "packages/*",
     "test"
   ],
+  "files": [
+    "dist",
+    "example"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "format": "prettier --write packages/**/* src/**/* scripts/**/* test/**/*",
     "lint": "eslint packages src scripts test",
@@ -25,13 +43,12 @@
     "bundle": "node --experimental-specifier-resolution=node scripts/bundle/bundle.js"
   },
   "dependencies": {
-    "@emotion/react": "^11.4.0",
-    "@emotion/styled": "^11.3.0",
+    "@iarna/toml": "^2.2.5",
+    "@stitches/react": "^1.2.5",
     "loglevel": "^1.7.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "toml": "^3.0.0"
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",

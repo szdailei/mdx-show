@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '@emotion/styled';
+import styled from '../styled/styled';
 
 /**
 @examples
@@ -14,8 +14,8 @@ const Article = React.forwardRef(({ style, ...rest }, ref) => {
     ...style,
   };
 
-  const Styled = styled.article(objStyle);
-  return <Styled {...rest} ref={ref} />;
+  const Styled = styled('article');
+  return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
 export default Article;

@@ -1,11 +1,11 @@
 import fs from 'fs';
 import path from 'path';
-import TOML from 'toml';
+import TOMLParser from '@iarna/toml/parse-string';
 import { getWorkDir, getTheScriptDir } from '../structure';
 
 async function getConfig(configFileName) {
   const data = await fs.promises.readFile(configFileName, 'utf8');
-  return TOML.parse(data);
+  return TOMLParser(data);
 }
 
 async function getConfigInConfigScriptDir(configFileName) {
