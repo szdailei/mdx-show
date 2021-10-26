@@ -1,6 +1,6 @@
 import http from 'http';
 import { graphql } from 'graphql/index.mjs';
-import { schema, resolvers } from './graphql-loader';
+import { schema, resolvers } from './graphql-loader.js';
 
 function requestHandler(req, res) {
   req.on('error', (err) => {

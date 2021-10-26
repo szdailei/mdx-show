@@ -1,10 +1,10 @@
 import path from 'path';
 import minimist from 'minimist';
-import { defaultVars, getApiServerPort, getDownloadServerPort } from '../default-vars';
-import log from './log';
-import start from './start';
-import HELP from './HELP';
-import VERSION from './VERSION';
+import { defaultVars, getApiServerPort, getDownloadServerPort } from '../default-vars.js';
+import log from './log.js';
+import start from './start.js';
+import HELP from './HELP.js';
+import VERSION from './VERSION.js';
 
 async function mdxShow(argv) {
   const theScriptDir = new URL('.', import.meta.url).pathname;
@@ -51,4 +51,4 @@ async function mdxShow(argv) {
   start({ staticRoot, storageRoot, staticServerPort, apiServerPort, downloadServerPort });
 }
 
-export default mdxShow
+export default mdxShow;

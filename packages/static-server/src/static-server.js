@@ -5,7 +5,7 @@ import zlib from 'zlib';
 import { Transform } from 'stream';
 import LRU from 'quick-lru';
 import mime from 'mime';
-import log from './lib/log';
+import log from './lib/log.js';
 
 const MAX_CACHED_FILES = 50;
 const MAX_CACHED_SIZE = 10 * 1024 * 1024;

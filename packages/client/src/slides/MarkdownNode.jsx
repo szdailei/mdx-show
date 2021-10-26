@@ -107,17 +107,9 @@ function MarkdownNode(token, children, parent) {
       break;
     case 'text':
       if (parent && parent.type === 'paragraph' && parent.tokens && parent.tokens.length === 1) {
-        node = (
-          <P key={makeid()}>
-            {children}
-          </P>
-        );
+        node = <P key={makeid()}>{children}</P>;
       } else {
-        node = (
-          <Span key={makeid()}>
-            {children}
-          </Span>
-        );
+        node = <Span key={makeid()}>{children}</Span>;
       }
       break;
     default:

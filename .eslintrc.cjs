@@ -21,6 +21,7 @@ module.exports = {
   },
   extends: ['airbnb', 'plugin:react-hooks/recommended', 'prettier'],
   rules: {
+    'import/extensions': 'off',
     'import/no-extraneous-dependencies': 'off',
     'react/jsx-props-no-spreading': 'off',
   },

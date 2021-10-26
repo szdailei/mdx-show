@@ -35,8 +35,8 @@
     "access": "public"
   },
   "scripts": {
-    "format": "prettier --write packages/**/* src/**/* scripts/**/* test/**/*",
-    "lint": "eslint packages src scripts test",
+    "format": "prettier --write packages/**/* src/**/* scripts/**/* test/src/**/*",
+    "lint": "eslint packages src scripts test --ext .js,.jsx,.mjs",
     "stylelint": "stylelint --syntax \"css-in-js\" \"packages/client/src/**/*.{jsx,tsx}\"",
     "clean": "rimraf dist/",
     "build": "node --experimental-specifier-resolution=node scripts/rollup/build.js",

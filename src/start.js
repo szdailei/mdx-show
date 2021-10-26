@@ -1,8 +1,8 @@
-import staticServer from '../packages/static-server/src/static-server';
-import graphqlServer from '../packages/api-server/src/graphql-server';
-import storage from '../packages/api-server/src/lib/storage';
-import log from './log';
-import stop from './stop';
+import staticServer from '../packages/static-server/src/static-server.js';
+import graphqlServer from '../packages/api-server/src/graphql-server.js';
+import storage from '../packages/api-server/src/lib/storage.js';
+import log from './log.js';
+import stop from './stop.js';
 
 function start({ staticRoot, storageRoot, staticServerPort, apiServerPort, downloadServerPort }) {
   storage.setStorageRoot(storageRoot);
