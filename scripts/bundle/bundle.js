@@ -1,7 +1,7 @@
 import minimist from 'minimist';
 import log from 'loglevel';
 import shell from 'shelljs';
-import { getStructure } from '../../structure';
+import { getStructure } from '../structure';
 import HELP from './HELP';
 import bundleServers from './bundle-servers';
 

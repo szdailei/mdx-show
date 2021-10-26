@@ -8,7 +8,7 @@ import json from '@rollup/plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import path from 'path';
 import shell from 'shelljs';
-import { getStructure } from '../../structure';
+import { getStructure } from '../structure';
 import inline from './inline';
 
 const mode = process.env.NODE_ENV;
@@ -42,7 +42,7 @@ async function build(inputOptions, outputOptions) {
   shell.mkdir(dest, destOfWeb);
 
   const inputOptions = {
-    input: path.join(src, 'start.js'),
+    input: path.join(src, 'index.js'),
     plugins,
   };
   const outputOptions = {

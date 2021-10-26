@@ -1,4 +1,4 @@
-import defaultVars from '../../../../default-vars'
+import {defaultVars} from '../../../../default-vars'
 import { getDownloadFileUrl } from './network';
 
 function getImagesDir() {

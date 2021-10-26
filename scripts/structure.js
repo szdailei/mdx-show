@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { packageDirectory } from 'pkg-dir';
 import TOMLParser from '@iarna/toml/parse-string';
-import getRootDir from './root';
 
 /*
 @require  none
@@ -25,17 +25,22 @@ function getTheScriptDir() {
   return theScriptDir;
 }
 
-function getWorkDir() {
+function getWorkingDir() {
   return process.cwd();
 }
 
+async function getRootDir() {
+  const root = await packageDirectory();
+  return root;
+}
+
 async function getRelativeStructure() {
-  const root = getRootDir();
-  const structureFile = path.join(root, 'structure.toml');
+  const root = await getRootDir();
+  const structureFile = path.join(root, 'scripts/structure.toml');
   const data = await fs.promises.readFile(structureFile, 'utf8');
   const structure = TOMLParser(data);
-  structure.root = root
-  return structure  
+  structure.root = root;
+  return structure;
 }
 
 function getAbsoluteStructureByStruc(struc) {
@@ -60,4 +65,4 @@ async function getStructure() {
   return getAbsoluteStructureByStruc(struc);
 }
 
-export { getTheScriptDir, getWorkDir, getRootDir, getStructure };
+export { getTheScriptDir, getWorkingDir, getRootDir, getStructure };

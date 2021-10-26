@@ -20,14 +20,16 @@
   "homepage": "https://github.com/szdailei/mdx-show#readme",
   "main": "dist/index.js",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "workspaces": [
     "packages/*",
     "test"
   ],
+  "bin": {
+    "mdx-show": "cli.js"
+  },
   "files": [
-    "dist",
-    "example"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -43,7 +45,6 @@
     "bundle": "node --experimental-specifier-resolution=node scripts/bundle/bundle.js"
   },
   "dependencies": {
-    "@iarna/toml": "^2.2.5",
     "@stitches/react": "^1.2.5",
     "loglevel": "^1.7.1",
     "prop-types": "^15.7.2",
@@ -54,6 +55,7 @@
     "@babel/core": "^7.14.8",
     "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
+    "@iarna/toml": "^2.2.5",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
@@ -70,6 +72,7 @@
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
     "pkg": "^5.3.2",
+    "pkg-dir": "^6.0.1",
     "pkg-fetch": "^3.2.3",
     "postcss": "^8.3.11",
     "prettier": "^2.3.2",

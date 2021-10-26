@@ -8,12 +8,6 @@ import HtmlNode from './HtmlNode';
 import TableNode from './TableNode';
 
 function MarkdownNode(token, children, parent) {
-  const hoverStyle = {
-    '&:hover': {
-      fontWeight: 900,
-      outline: '1px solid',
-    },
-  };
   const trimedText = trim(token.text);
   let node;
 
@@ -114,13 +108,13 @@ function MarkdownNode(token, children, parent) {
     case 'text':
       if (parent && parent.type === 'paragraph' && parent.tokens && parent.tokens.length === 1) {
         node = (
-          <P key={makeid()} style={hoverStyle}>
+          <P key={makeid()}>
             {children}
           </P>
         );
       } else {
         node = (
-          <Span key={makeid()} style={hoverStyle}>
+          <Span key={makeid()}>
             {children}
           </Span>
         );

@@ -9,7 +9,7 @@ function exitProcess(code) {
 }
 
 function onSServerClosed() {
-  log.warn('static-server stoped');
+  log.warn('web-server stoped');
   isSServerClosed = true;
   exitProcess(1);
 }

@@ -1,13 +1,10 @@
-import { getStructure } from '../../structure';
-import { getConfig } from '../../src/config';
+import { defaultVars, getDefaultStaticServerEndPoint } from '../../default-vars';
 import config from './config';
 
 async function init() {
-  const { destOfConfig } = await getStructure();
-  const configData = await getConfig(destOfConfig);
-
-  config.TARGET = `http://localhost:${configData['static-server'].port}`;
-  config.env.PUPPETEER_EXECUTABLE_PATH = '/usr/bin/chromium';
+  config.TARGET = getDefaultStaticServerEndPoint();
+  config.env.PUPPETEER_EXECUTABLE_PATH = defaultVars.PUPPETEER_EXECUTABLE_PATH;
+  console.log("config",config)
 }
 
 export default init;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import TOMLParser from '@iarna/toml/parse-string';
-import { setApiServerEndPoint, getServerConfigUrl, setDownloadServerUrl } from './network';
+import { setApiServerEndPoint, setDownloadServerUrl } from './network';
 import request from './network-client';
 
 function useRemoteData(query, resType, endPoint, method) {
@@ -30,17 +29,10 @@ function useRemoteData(query, resType, endPoint, method) {
 }
 
 function useRemoteConfig() {
-  // eslint-disable-next-line prefer-const
-  let { data, error } = useRemoteData(null, 'text', getServerConfigUrl(), 'GET');
+  setApiServerEndPoint();
+  setDownloadServerUrl();
 
-  if (data || error) {
-    const config = data ? TOMLParser(data) : {};
-    data = data || error;
-    setApiServerEndPoint(config);
-    setDownloadServerUrl(config);
-  }
-
-  return { data };
+  return { data: true };
 }
 
 export { useRemoteConfig, useRemoteData };
