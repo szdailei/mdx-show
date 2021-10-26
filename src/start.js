@@ -8,13 +8,13 @@ function start({ staticRoot, storageRoot, staticServerPort, apiServerPort, downl
   storage.setStorageRoot(storageRoot);
 
   const sServer = staticServer(staticServerPort, staticRoot);
-  log.warn(`web-server started on http port ${staticServerPort}`);
+  log.warn(`web-server started on port ${staticServerPort}`);
 
   const gServer = graphqlServer(apiServerPort);
-  log.warn(`api-server started on http port ${apiServerPort}`);
+  log.warn(`api-server started on port ${apiServerPort}`);
 
   const dServer = staticServer(downloadServerPort, storage.getStorageRoot());
-  log.warn(`download-server started on http port ${downloadServerPort}`);
+  log.warn(`download-server started on port ${downloadServerPort}`);
 
   function onSignalTerm(eventType) {
     stop(eventType, sServer, gServer, dServer);

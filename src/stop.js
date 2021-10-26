@@ -1,33 +1,42 @@
 import log from './log.js';
 
-let isSServerClosed = false;
-let isGServerClosed = false;
-let isDServerClosed = false;
+const state = {
+  isSServerClosed: false,
+  isGServerClosed: false,
+  isDServerClosed: false,
+  sServerPort: 0,
+  gServerPort: 0,
+  DServerPort: 0,
+};
 
 function exitProcess(code) {
-  if (isSServerClosed && isGServerClosed && isDServerClosed) process.exit(code);
+  if (state.isSServerClosed && state.isGServerClosed && state.isDServerClosed) process.exit(code);
 }
 
 function onSServerClosed() {
-  log.warn('web-server stoped');
-  isSServerClosed = true;
+  log.warn(`web-server on port ${state.sServerPort} stoped`);
+  state.isSServerClosed = true;
   exitProcess(1);
 }
 
 function onGServerClosed() {
-  log.warn('api-server stoped');
-  isGServerClosed = true;
+  log.warn(`api-server on port ${state.gServerPort} stoped`);
+  state.isGServerClosed = true;
   exitProcess(1);
 }
 
 function onDServerClosed() {
-  log.warn('download-server stoped');
-  isDServerClosed = true;
+  log.warn(`download-server on port ${state.dServerPort} stoped`);
+  state.isDServerClosed = true;
   exitProcess(1);
 }
 
 async function stop(eventType, sServer, gServer, dServer) {
-  log.warn('%s received, api-server and static-server stoping ...', eventType);
+  log.warn(`\n${eventType} received, all servers are stoping ...`);
+
+  state.sServerPort = sServer.address().port;
+  state.gServerPort = gServer.address().port;
+  state.dServerPort = dServer.address().port;
 
   sServer.close(onSServerClosed);
   gServer.close(onGServerClosed);
