@@ -1,4 +1,10 @@
 #!/usr/bin/env node
-import mdxShow from './src/mdx-show.js';
+import { Worker } from 'worker_threads';
+import cliTitle from './src/cli-title.js';
 
-mdxShow(process.argv);
+const mdxShow = './dist/index.js';
+
+process.title = cliTitle;
+process.env.CLI_ARGV = process.argv
+// eslint-disable-next-line no-new
+new Worker(mdxShow);

@@ -28,7 +28,7 @@ function TableNode(table) {
 
   const tBodyRows = [];
   let isRequiredBackground = false;
-  table.cells.forEach((rowCells) => {
+  table.rows.forEach((rowCells) => {
     const dataCells = [];
     rowCells.forEach((text) => {
       const tDChildren = parseTDWithHtml(text);

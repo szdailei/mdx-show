@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -30,7 +30,7 @@
     "lint": "eslint packages src scripts test --ext .js,.jsx,.mjs",
     "stylelint": "stylelint --syntax \"css-in-js\" \"packages/client/src/**/*.{jsx,tsx}\"",
     "clean": "rimraf dist/",
-    "build": "node --experimental-specifier-resolution=node scripts/rollup/build.js",
+    "build": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node scripts/rollup/build.js",
     "start": "node dist/index.js",
     "debug": "DEBUG=* node dist/debug.js",
     "bundle": "node --experimental-specifier-resolution=node scripts/bundle/bundle.js"
@@ -62,6 +62,7 @@
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^3.0.0",
     "babel-plugin-transform-import-meta": "^2.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React, { useEffect, useRef } from 'react';
-import videojs from 'video.js';
+import videojs from 'video.js/dist/alt/video.core.min.js';
 import 'video.js/dist/video-js.css';
 
 // eslint-disable-next-line react/prop-types

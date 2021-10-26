@@ -4,9 +4,13 @@ import { defaultVars, getApiServerPort, getDownloadServerPort } from '../default
 import log from './log.js';
 import start from './start.js';
 import HELP from './HELP.js';
-import VERSION from './VERSION.js';
+import cliTitle from './cli-title';
+import packageJson from '../package.json';
 
-async function mdxShow(argv) {
+async function mdxShow() {
+  // Check if called by cli or node
+  const argv = process.title === cliTitle ? process.env.CLI_ARGV.split(',') : process.argv;
+
   const theScriptDir = new URL('.', import.meta.url).pathname;
   const theWorkingDir = process.cwd();
 
@@ -36,7 +40,7 @@ async function mdxShow(argv) {
   }
 
   if (args.version) {
-    log.warn(VERSION);
+    log.warn(packageJson.version);
     process.exit(0);
   }
 
