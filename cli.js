@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-import { Worker } from 'worker_threads';
-import cliTitle from './src/cli-title.js';
+import path from 'path';
+import { Worker,setEnvironmentData } from 'worker_threads';
 
-const mdxShow = './dist/index.js';
+const theScriptDir = new URL('.', import.meta.url).pathname;
+const mdxShow = path.join(theScriptDir, '../mdx-show/dist/index.js')
 
-process.title = cliTitle;
-process.env.CLI_ARGV = process.argv
+setEnvironmentData('execArgv', process.argv) 
+
 // eslint-disable-next-line no-new
 new Worker(mdxShow);

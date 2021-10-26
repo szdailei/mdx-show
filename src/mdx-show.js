@@ -1,15 +1,18 @@
+import { isMainThread, getEnvironmentData } from 'worker_threads';
 import path from 'path';
 import minimist from 'minimist';
 import { defaultVars, getApiServerPort, getDownloadServerPort } from '../default-vars.js';
 import log from './log.js';
 import start from './start.js';
 import HELP from './HELP.js';
-import cliTitle from './cli-title';
 import packageJson from '../package.json';
 
 async function mdxShow() {
   // Check if called by cli or node
-  const argv = process.title === cliTitle ? process.env.CLI_ARGV.split(',') : process.argv;
+  let { argv } = process;
+  if (!isMainThread) {
+    argv = getEnvironmentData('execArgv');
+  }
 
   const theScriptDir = new URL('.', import.meta.url).pathname;
   const theWorkingDir = process.cwd();
