@@ -34,8 +34,7 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
   if (shell.exec('git update-index --refresh').code !== 0) {
     shell.echo('Error: There is uncommitted changes, please "git add . && git-cz" before publish');
     shell.exit(1);
-  } 
-  return 
+  }  
 
   if (shell.exec(`git tag ${version}`).code !== 0) {
     shell.echo(`Error: Git tag ${version} failed`);
