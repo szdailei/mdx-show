@@ -38,8 +38,7 @@
     "bundle": "node scripts/bundle/bundle.js",
     "release": "node scripts/release/release.js",
     "export": "node --experimental-specifier-resolution=node test/export-slides.js",
-    "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
-    "commit": "git-cz"
+    "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
@@ -104,7 +103,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "git-cz"
+      "path": "./node_modules/cz-conventional-changelog"
     }
   }
 }
