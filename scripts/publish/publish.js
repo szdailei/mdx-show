@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable camelcase */
 import fs from 'fs';
-import shell from 'shelljs'
+import shell from 'shelljs';
 import { Octokit } from '@octokit/rest';
 import { readPackageUp } from 'read-pkg-up';
 import releaseInfo from './release-info.js';
@@ -30,24 +30,23 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
 
   const token = process.env.GITHUB_TOKEN.trim();
   const octokit = new Octokit({ auth: token });
-/*
-  if (shell.exec(`git tag ${version}`).code !== 0) {
-    shell.echo('Error: Git tag failed');
-    shell.exit(1);
-  }
-
-  if (shell.exec(`git status -uno`).code !== 0) {
-    shell.echo('Error: Git tag failed');
-    shell.exit(1);
-  }
-*/
 
   if (shell.exec('git commit -m "Auto-commit"').code !== 0) {
-    shell.echo('Error: Git commit failed');
+    shell.echo('Error: Git auto-commit failed, please "git add . and git-cz" before publish');
     shell.exit(1);
   }
 
-  return
+  if (shell.exec(`git tag ${version}`).code !== 0) {
+    shell.echo(`Error: Git tag ${version} failed`);
+    shell.exit(1);
+  }
+
+  if (shell.exec('git push').code !== 0) {
+    shell.echo('Error: Git push failed');
+    shell.exit(1);
+  }
+
+  return;
 
   try {
     await octokit.rest.repos.createRelease({
