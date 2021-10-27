@@ -38,7 +38,6 @@
     "export": "node --experimental-specifier-resolution=node test/export-slides.js",
     "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
     "bundle": "node scripts/bundle/bundle.js",
-    "":"node scripts/release/gen-release-note.js",
     "pre-release": "node scripts/release/gen-release-note.js",
     "release": "node scripts/release/release.js"
   },
