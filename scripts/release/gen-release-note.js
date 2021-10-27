@@ -4,7 +4,7 @@
 import { createWriteStream } from 'fs';
 import changelog from 'conventional-changelog';
 import releaseInfo from './release-info.js';
- 
+
 (async () => {
   const { tag_name, releaseNotefileName } = await releaseInfo();
 
