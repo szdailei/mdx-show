@@ -20,7 +20,6 @@ import releaseInfo from './release-info.js';
     },
   })
     .pipe(fileStream)
-    .pipe(process.stdout)
     .on('close', () => {
       console.log(`Generated release note at ${releaseNotefileName}\nYou MUST check it before release`);
     });
