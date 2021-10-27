@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
 import { createWriteStream } from 'fs';
 import changelog from 'conventional-changelog';
 import { readPackageUp } from 'read-pkg-up';

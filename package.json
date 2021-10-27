@@ -70,6 +70,7 @@
     "babel-plugin-transform-import-meta": "^2.1.0",
     "commitizen": "^4.2.4",
     "conventional-changelog": "^3.1.24",
+    "conventional-changelog-core": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.31.0",
