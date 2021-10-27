@@ -15,9 +15,7 @@ import releaseInfo from './release-info.js';
   const repo = repoWithGit.slice(0, repoWithGit.length - 4);
 
   const { tag_name, name, releaseNotefileName } = await releaseInfo();
-  const releaseNote = fs.readFileSync(releaseNotefileName);
-  console.log("releaseNote",releaseNote)
-  return
+  const releaseNote = fs.readFileSync(releaseNotefileName,'utf-8');
 
   const token = process.env.GITHUB_TOKEN.trim();
   const octokit = new Octokit({ auth: token });

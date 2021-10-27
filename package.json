@@ -39,7 +39,7 @@
     "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
     "bundle": "node scripts/bundle/bundle.js",
     "release-info": "node scripts/publish/gen-release-note.js",
-    "publish": "node scripts/publish/publish.js"
+    "to-github": "node scripts/publish/publish.js"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
