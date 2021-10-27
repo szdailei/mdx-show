@@ -30,6 +30,9 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
 
   const token = process.env.GITHUB_TOKEN.trim();
   const octokit = new Octokit({ auth: token });
+  const code = shell.exec('git commit -m "Auto-commit"').code
+  console.log("code",code)
+  return
 
   if (shell.exec('git commit -m "Auto-commit"').code !== 0) {
     shell.echo('Error: Git auto-commit failed, please "git add . and git-cz" before publish');
