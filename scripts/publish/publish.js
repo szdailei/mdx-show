@@ -34,7 +34,7 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
   if (shell.exec('git update-index --refresh').code !== 0) {
     shell.echo('Error: There is uncommitted changes, please "git add . && git-cz" before publish');
     shell.exit(1);
-  }  
+  }
 
   if (shell.exec(`git tag ${version}`).code !== 0) {
     shell.echo(`Error: Git tag ${version} failed`);
@@ -45,8 +45,6 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
     shell.echo('Error: Git push failed');
     shell.exit(1);
   }
-
-  return;
 
   try {
     await octokit.rest.repos.createRelease({
