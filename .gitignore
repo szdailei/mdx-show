@@ -91,3 +91,7 @@ yarn.lock
 # test output
 pdfs/
 reports/
+
+# temp files
+TODOs.md
+RELEASE_NOTE*.md

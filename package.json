@@ -38,7 +38,8 @@
     "bundle": "node scripts/bundle/bundle.js",
     "release": "node scripts/release/release.js",
     "export": "node --experimental-specifier-resolution=node test/export-slides.js",
-    "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
+    "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
+    "commit": "git-cz"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
@@ -61,13 +62,17 @@
     "@babel/preset-env": "^7.14.8",
     "@babel/preset-react": "^7.14.5",
     "@iarna/toml": "^2.2.5",
+    "@octokit/rest": "^18.12.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "@rollup/plugin-replace": "^3.0.0",
     "babel-plugin-transform-import-meta": "^2.1.0",
+    "commitizen": "^4.2.4",
+    "conventional-changelog": "^3.1.24",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.31.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -79,7 +84,6 @@
     "jest-html-reporters": "^2.1.6",
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
-    "node-fetch": "^3.0.0",
     "pdf-lib": "^1.17.0",
     "pkg": "^5.3.2",
     "pkg-dir": "^6.0.1",
@@ -97,5 +101,10 @@
     "stylelint-config-recess-order": "^2.3.0",
     "stylelint-config-standard": "^21.0.0",
     "web-resource-inliner": "^5.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "git-cz"
+    }
   }
 }
