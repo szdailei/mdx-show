@@ -1,7 +1,7 @@
 import React from 'react';
 import makeid from '../lib/makeid';
 import { convertSrcToLocal, convertSrcToServer, removeBlankLine, trim } from '../lib/markdown';
-import { Heading, P, Span } from '../styled';
+import { Heading, Img, P, Span } from '../styled';
 import { PrismCode } from '../components';
 import { isJSXTagAtBegginning } from './parse-jsx-utils';
 import HtmlNode from './HtmlNode';
@@ -44,7 +44,7 @@ function MarkdownNode(token, children, parent) {
       break;
     case 'image':
       node = (
-        <img
+        <Img
           key={makeid()}
           src={
             window.location.protocol === 'file:'
@@ -53,7 +53,6 @@ function MarkdownNode(token, children, parent) {
           }
           alt={trimedText}
           title={token.title}
-          style={{ display: 'block', margin: 'auto' }}
         />
       );
       break;

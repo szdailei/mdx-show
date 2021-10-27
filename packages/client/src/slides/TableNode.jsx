@@ -16,7 +16,7 @@ function TableNode(table) {
   table.header.forEach((header) => {
     tHeaders.push(
       <TH key={makeid()} style={{ padding, backgroundColor }}>
-        {header}
+        {header.text}
       </TH>
     );
   });
@@ -30,8 +30,8 @@ function TableNode(table) {
   let isRequiredBackground = false;
   table.rows.forEach((rowCells) => {
     const dataCells = [];
-    rowCells.forEach((text) => {
-      const tDChildren = parseTDWithHtml(text);
+    rowCells.forEach((cell) => {
+      const tDChildren = parseTDWithHtml(cell.text);
       dataCells.push(
         <TD key={makeid()} style={{ padding }}>
           {tDChildren}

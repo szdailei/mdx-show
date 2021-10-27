@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { packageDirectory } from 'pkg-dir';
-import TOMLParser from '@iarna/toml/parse-string';
+import TOMLParser from '@iarna/toml/parse-string.js';
 
 /*
 @require  none

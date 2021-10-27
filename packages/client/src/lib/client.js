@@ -1,4 +1,4 @@
-import { getApiServerEndPoint } from './network';
+import { getApiServerEndPoint } from './network.js';
 
 async function createErrorByRes(res) {
   const resBody = await res.text();
@@ -29,11 +29,11 @@ async function parseResBody(res, resType) {
   }
 }
 
-async function request(query, origResType, origEndPoint, origMethod) {
-  const resType = origResType || 'json';
-  const endPoint = origEndPoint || getApiServerEndPoint();
+async function request(query) {
+  const resType = 'json';
+  const endPoint = getApiServerEndPoint();
   const options = {
-    method: origMethod || 'POST',
+    method: 'POST',
     mode: 'cors',
     credentials: 'omit',
     body: query ? JSON.stringify({ query }) : null,

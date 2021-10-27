@@ -5,7 +5,7 @@ import { defaultVars, getApiServerPort, getDownloadServerPort } from '../default
 import log from './log.js';
 import start from './start.js';
 import HELP from './HELP.js';
-import packageJson from '../package.json';
+import { version } from '../package.json';
 
 async function mdxShow() {
   // Check if called by cli or node
@@ -43,7 +43,7 @@ async function mdxShow() {
   }
 
   if (args.version) {
-    log.warn(packageJson.version);
+    log.warn(version);
     process.exit(0);
   }
 

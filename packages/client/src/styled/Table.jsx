@@ -35,6 +35,7 @@ const TBody = React.forwardRef(({ style, ...rest }, ref) => {
 const Table = React.forwardRef(({ style, ...rest }, ref) => {
   const objStyle = {
     borderCollapse: 'collapse',
+    margin: 'auto',
     ...style,
   };
 

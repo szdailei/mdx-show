@@ -1,9 +1,9 @@
 import minimist from 'minimist';
 import log from 'loglevel';
 import shell from 'shelljs';
-import { getStructure } from '../structure';
-import HELP from './HELP';
-import bundleServers from './bundle-servers';
+import { getStructure } from '../structure.js';
+import HELP from './HELP.js';
+import bundleServers from './bundle-servers.js';
 
 (async () => {
   const args = minimist(process.argv.slice(2), {

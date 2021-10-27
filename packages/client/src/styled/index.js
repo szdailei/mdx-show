@@ -4,6 +4,7 @@ import Abbr from './Abbr';
 import Button from './Button';
 import Div from './Div';
 import Heading from './Heading';
+import Img from './Img';
 import Input from './Input';
 import Label from './Label';
 import Option from './Option';
@@ -20,7 +21,9 @@ export {
   Button,
   Div,
   Heading,
+  Img,
   Input,
+
   Label,
   Option,
   P,

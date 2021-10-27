@@ -9,6 +9,7 @@ function start({ staticRoot, storageRoot, staticServerPort, apiServerPort, downl
 
   const sServer = staticServer(staticServerPort, staticRoot);
   log.warn(`web-server started on port ${staticServerPort}`);
+  log.warn(`Please visit http://localhost:${staticServerPort} to show your slides\n`);
 
   const gServer = graphqlServer(apiServerPort);
   log.warn(`api-server started on port ${apiServerPort}`);

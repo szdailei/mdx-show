@@ -1,6 +1,5 @@
 import { dirname } from 'path';
 import fs from 'fs';
-// eslint-disable-next-line import/extensions
 import inlineHtml from 'web-resource-inliner/src/html.js';
 
 async function inline(input, output) {

@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -20,7 +20,8 @@
     "mdx-show": "cli.js"
   },
   "files": [
-    "dist"
+    "dist/web",
+    "dist/index.js"
   ],
   "publishConfig": {
     "access": "public"
@@ -30,10 +31,12 @@
     "lint": "eslint packages src scripts test --ext .js,.jsx,.mjs",
     "stylelint": "stylelint --syntax \"css-in-js\" \"packages/client/src/**/*.{jsx,tsx}\"",
     "clean": "rimraf dist/",
-    "build": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node scripts/rollup/build.js",
+    "build": "cross-env NODE_ENV=production node scripts/rollup/build.js",
+    "dev": "cross-env NODE_ENV=development node scripts/rollup/build.js",
     "start": "node dist/index.js",
     "debug": "DEBUG=* node dist/debug.js",
-    "bundle": "node --experimental-specifier-resolution=node scripts/bundle/bundle.js"
+    "bundle": "node scripts/bundle/bundle.js",
+    "release": "node scripts/release/release.js"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
@@ -74,6 +77,7 @@
     "jest-html-reporters": "^2.1.6",
     "minimist": "^1.2.5",
     "mkdirp": "^1.0.4",
+    "node-fetch": "^3.0.0",
     "pdf-lib": "^1.17.0",
     "pkg": "^5.3.2",
     "pkg-dir": "^6.0.1",
@@ -81,6 +85,7 @@
     "postcss": "^8.3.11",
     "prettier": "^2.3.2",
     "puppeteer-core": "^10.4.0",
+    "read-pkg-up": "^9.0.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.55.1",
     "rollup-plugin-node-externals": "^2.2.0",

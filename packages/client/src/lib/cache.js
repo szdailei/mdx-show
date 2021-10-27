@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { setApiServerEndPoint, setDownloadServerUrl } from './network';
-import request from './network-client';
+import request from './client';
 
-function useRemoteData(query, resType, endPoint, method) {
+function useRemoteData(query) {
   const [cache, setCache] = useState();
 
   function refetch() {
@@ -13,7 +13,7 @@ function useRemoteData(query, resType, endPoint, method) {
     let isMounted = true;
 
     async function getRemoteData() {
-      const result = await request(query, resType, endPoint, method);
+      const result = await request(query);
       if (isMounted) setCache(result);
     }
 
@@ -22,7 +22,7 @@ function useRemoteData(query, resType, endPoint, method) {
     return () => {
       isMounted = false;
     };
-  }, [cache, query, resType, endPoint, method]);
+  }, [cache, query]);
 
   const { data, error } = cache || { data: null, error: null };
   return { data, error, refetch };

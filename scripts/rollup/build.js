@@ -8,8 +8,8 @@ import json from '@rollup/plugin-json';
 import postcss from 'rollup-plugin-postcss';
 import path from 'path';
 import shell from 'shelljs';
-import { getStructure } from '../structure';
-import inline from './inline';
+import { getStructure } from '../structure.js';
+import inline from './inline.js';
 
 const mode = process.env.NODE_ENV;
 const plugins = [
