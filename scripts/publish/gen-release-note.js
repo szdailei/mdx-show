@@ -10,8 +10,6 @@ import releaseInfo from './release-info.js';
 
   const fileStream = createWriteStream(releaseNotefileName);
 
-  console.log("tag_name",tag_name)
-
   changelog({
     preset: 'angular',
     pkg: {
@@ -21,7 +19,7 @@ import releaseInfo from './release-info.js';
       },
     },
   })
-    //    .pipe(fileStream)
+    .pipe(fileStream)
     .pipe(process.stdout)
     .on('close', () => {
       console.log(`Generated release note at ${releaseNotefileName}\nYou MUST check it before release`);
