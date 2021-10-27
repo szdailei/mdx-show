@@ -1,6 +1,16 @@
 import { defaultVars } from './default-vars';
 import { getDownloadFileUrl } from './network';
 
+function isUrl(src) {
+  try {
+    // eslint-disable-next-line no-unused-vars
+    const url = new URL(src);
+  } catch (err) {
+    return false;
+  }
+  return true;
+}
+
 function getImagesDir() {
   return defaultVars.imagesDir;
 }
@@ -47,6 +57,12 @@ function convertSrcToServer(src, type) {
   return serverSrc;
 }
 
+function getRealSrc(src, type) {
+  if (isUrl(src)) return src;
+  const realSrc = window.location.protocol === 'file:' ? convertSrcToLocal(src, type) : convertSrcToServer(src, type);
+  return realSrc;
+}
+
 function removeBlankLine(text) {
   let result = '';
   for (let i = 0; i < text.length; i += 1) {
@@ -64,4 +80,4 @@ function trim(text) {
   return text;
 }
 
-export { convertSrcToLocal, convertSrcToServer, removeBlankLine, trim };
+export { getRealSrc, removeBlankLine, trim };

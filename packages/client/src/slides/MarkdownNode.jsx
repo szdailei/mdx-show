@@ -1,6 +1,6 @@
 import React from 'react';
 import makeid from '../lib/makeid';
-import { convertSrcToLocal, convertSrcToServer, removeBlankLine, trim } from '../lib/markdown';
+import { getRealSrc, removeBlankLine, trim } from '../lib/markdown';
 import { Heading, Img, P, Span } from '../styled';
 import { PrismCode } from '../components';
 import { isJSXTagAtBegginning } from './parse-jsx-utils';
@@ -10,6 +10,9 @@ import TableNode from './TableNode';
 function MarkdownNode(token, children, parent) {
   const trimedText = trim(token.text);
   let node;
+  let realSrc;
+  let hostname;
+  let msg;
 
   switch (token.type) {
     case 'blockquote':
@@ -43,18 +46,20 @@ function MarkdownNode(token, children, parent) {
       );
       break;
     case 'image':
-      node = (
-        <Img
-          key={makeid()}
-          src={
-            window.location.protocol === 'file:'
-              ? convertSrcToLocal(token.href, 'img')
-              : convertSrcToServer(token.href, 'img')
-          }
-          alt={trimedText}
-          title={token.title}
-        />
-      );
+      if (!trimedText || trimedText === '') {
+        realSrc = getRealSrc(token.href, 'img');
+        try {
+          const url = new URL(realSrc);
+          hostname = url.hostname;
+        } catch (err) {
+          hostname = 'localhost';
+        }
+
+        msg = `${realSrc} NOT FOUND or DENIED by SERVER. Please contact ${hostname} administrator to change CORS rule, or use LOCAL mdx-show.html instead of mdx-show SERVER to bypass ${hostname} CORS rule, or DOWNLOAD resources to local!`;
+      } else {
+        msg = trimedText;
+      }
+      node = <Img key={makeid()} src={realSrc} alt={msg} title={token.title} />;
       break;
     case 'link':
       node = (

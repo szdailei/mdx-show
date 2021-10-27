@@ -34,8 +34,6 @@ async function request(query) {
   const endPoint = getApiServerEndPoint();
   const options = {
     method: 'POST',
-    mode: 'cors',
-    credentials: 'omit',
     body: query ? JSON.stringify({ query }) : null,
   };
 

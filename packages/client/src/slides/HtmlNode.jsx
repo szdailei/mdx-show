@@ -1,6 +1,6 @@
 import React from 'react';
 import makeid from '../lib/makeid';
-import { convertSrcToLocal, convertSrcToServer, trim } from '../lib/markdown';
+import { getRealSrc, trim } from '../lib/markdown';
 import { Div, Span } from '../styled';
 import { VideoJS } from '../components';
 
@@ -61,7 +61,6 @@ function recursiveParseElement(element) {
   }
 
   let node;
-  let src;
   let options;
 
   switch (element.nodeName) {
@@ -92,19 +91,11 @@ function recursiveParseElement(element) {
       node = <hr key={makeid()} />;
       break;
     case 'SOURCE':
-      src =
-        window.location.protocol === 'file:'
-          ? convertSrcToLocal(attributes.src, 'video')
-          : convertSrcToServer(attributes.src, 'video');
-      attributes.src = src;
+      attributes.src = getRealSrc(attributes.src, 'video');
       node = <source key={makeid()} {...attributes} />;
       break;
     case 'TRACK':
-      src =
-        window.location.protocol === 'file:'
-          ? convertSrcToLocal(attributes.src, 'video')
-          : convertSrcToServer(attributes.src, 'video');
-      attributes.src = src;
+      attributes.src = getRealSrc(attributes.src, 'video');
       node = <track key={makeid()} {...attributes} />;
       break;
     case 'U':
