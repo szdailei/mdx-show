@@ -31,7 +31,7 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
   const token = process.env.GITHUB_TOKEN.trim();
   const octokit = new Octokit({ auth: token });
 
-  if (shell.exec('git status -s').code !== 0) {
+  if (shell.exec('git update-index --refresh').code !== 0) {
     shell.echo('Error: There is uncommitted changes, please "git add . && git-cz" before publish');
     shell.exit(1);
   } 
