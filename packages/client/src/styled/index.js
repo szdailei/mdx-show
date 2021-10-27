@@ -23,7 +23,6 @@ export {
   Heading,
   Img,
   Input,
-
   Label,
   Option,
   P,

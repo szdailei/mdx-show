@@ -1,10 +1,7 @@
 const defaultVars = {
   port: 3000,
-  webRoot:'./web',
-  mdxRoot:'.',
   imagesDir: 'images/',
   videosDir: 'videos/',
-  PUPPETEER_EXECUTABLE_PATH: '/usr/bin/chromium',
 };
 
 function getDefaultStaticServerEndPoint() {

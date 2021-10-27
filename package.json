@@ -27,16 +27,18 @@
     "access": "public"
   },
   "scripts": {
-    "format": "prettier --write packages/**/* src/**/* scripts/**/* test/src/**/*",
+    "format": "prettier --write packages/**/* src/**/* scripts/**/* test/**/*",
     "lint": "eslint packages src scripts test --ext .js,.jsx,.mjs",
     "stylelint": "stylelint --syntax \"css-in-js\" \"packages/client/src/**/*.{jsx,tsx}\"",
-    "clean": "rimraf dist/",
+    "clean": "rimraf dist/ pdfs/ reports/",
     "build": "cross-env NODE_ENV=production node scripts/rollup/build.js",
     "dev": "cross-env NODE_ENV=development node scripts/rollup/build.js",
     "start": "node dist/index.js",
     "debug": "DEBUG=* node dist/debug.js",
     "bundle": "node scripts/bundle/bundle.js",
-    "release": "node scripts/release/release.js"
+    "release": "node scripts/release/release.js",
+    "export": "node --experimental-specifier-resolution=node test/export-slides.js",
+    "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",

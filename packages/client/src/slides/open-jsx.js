@@ -1,4 +1,4 @@
-import marked from 'marked';
+import parser from '../lib/markdown-parser';
 import { debug, JSX_PARSE } from '../lib/debug';
 import recursiveParseMarkedToken from './recursive-parse-marked-token';
 import { createNode, addNodeToNodeList, getCurrentNode } from './tree';
@@ -12,7 +12,7 @@ function isParsingJSX(ctx) {
 }
 
 function getTokensByMarkdown(markdown) {
-  const tokensFromMarked = marked.lexer(markdown);
+  const tokensFromMarked = parser(markdown);
   let tokens;
   if (
     tokensFromMarked.length &&

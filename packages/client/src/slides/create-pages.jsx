@@ -1,4 +1,4 @@
-import marked from 'marked';
+import parser from '../lib/markdown-parser';
 import { debug, MD_PARSE } from '../lib/debug';
 import {
   addBlankLines,
@@ -117,7 +117,7 @@ function parsePageContent(ctx, tokens, index) {
 
 function createPages(markdown) {
   const formattedMarkdown = addBlankLines(markdown);
-  const tokens = marked.lexer(formattedMarkdown);
+  const tokens = parser(formattedMarkdown);
   modifyTokenIfMultiTagsInOneLine(tokens);
 
   const pages = [];

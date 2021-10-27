@@ -1,4 +1,4 @@
-import { defaultVars, getDefaultStaticServerEndPoint } from '../../default-vars';
+import { defaultVars, getDefaultStaticServerEndPoint } from './default-vars';
 import config from './config';
 
 async function init() {

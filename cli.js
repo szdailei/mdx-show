@@ -3,7 +3,7 @@ import path from 'path';
 import { Worker,setEnvironmentData } from 'worker_threads';
 
 const theScriptDir = new URL('.', import.meta.url).pathname;
-const mdxShow = path.join(theScriptDir, '../mdx-show/dist/index.js')
+const mdxShow = path.join(theScriptDir, '../mdx-show/dist/mdx-show.js')
 
 setEnvironmentData('execArgv', process.argv) 
 

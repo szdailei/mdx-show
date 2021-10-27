@@ -42,13 +42,13 @@ async function build(inputOptions, outputOptions) {
   shell.mkdir(dest, destOfWeb);
 
   const inputOptions = {
-    input: path.join(src, 'index.js'),
+    input: path.join(src, 'mdx-show.js'),
     plugins,
   };
   const outputOptions = {
     dir: dest,
     format: 'esm',
-    entryFileNames: 'index.js',
+    entryFileNames: 'mdx-show.js',
     chunkFileNames: '[name]-[hash].js',
   };
   await build(inputOptions, outputOptions);

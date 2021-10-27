@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
-function getApiServerEndPoint(){
-  return `https://api.github.com/graphql`
+function getApiServerEndPoint() {
+  return `https://api.github.com/graphql`;
 }
 
 async function createErrorByRes(res) {
@@ -33,15 +33,15 @@ async function parseResBody(res, resType) {
   }
 }
 
-async function request(query,{token}) {
+async function request(query, { token }) {
   const resType = 'json';
   const endPoint = getApiServerEndPoint();
   const options = {
     method: 'POST',
     mode: 'cors',
     credentials: 'omit',
-    headers:{
-      'Authorization': `bearer ${token}`
+    headers: {
+      Authorization: `bearer ${token}`,
     },
     body: query ? JSON.stringify({ query }) : null,
   };

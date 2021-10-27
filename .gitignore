@@ -87,3 +87,7 @@ yarn.lock
 
 # VS Code configure file
 .vscode
+
+# test output
+pdfs/
+reports/

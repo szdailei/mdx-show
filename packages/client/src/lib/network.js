@@ -1,4 +1,4 @@
-import { getApiServerPort, getDownloadServerPort } from '../../../../default-vars.js';
+import { getApiServerPort, getDownloadServerPort } from './default-vars.js';
 import config from '../config.js';
 
 function getApiServerEndPoint() {
