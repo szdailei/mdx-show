@@ -41,7 +41,8 @@ function removeTheFirstLineOfReleaseNote(origRelaseNote) {
     shell.exit(1);
   }
 */
-  if (shell.exec('git commit -am "Auto-commit"').code !== 0) {
+
+  if (shell.exec('git commit -m "Auto-commit"').code !== 0) {
     shell.echo('Error: Git commit failed');
     shell.exit(1);
   }
