@@ -14,7 +14,6 @@ import releaseInfo from './release-info.js';
     preset: 'angular',
     pkg: {
       transform(pkg) {
-        pkg.version = tag_name;
         return pkg;
       },
     },
