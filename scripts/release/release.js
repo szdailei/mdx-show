@@ -2,19 +2,18 @@
 /* eslint-disable camelcase */
 import { Octokit } from '@octokit/rest';
 import { readPackageUp } from 'read-pkg-up';
+import releaseInfo from './release-info.js';
 
 (async () => {
   const { packageJson } = await readPackageUp();
-  const { repository, version } = packageJson;
+  const { repository} = packageJson;
 
   const fields = repository.url.split('/');
   const owner = fields[fields.length - 2];
   const repoWithGit = fields[fields.length - 1];
   const repo = repoWithGit.slice(0, repoWithGit.length - 4);
 
-  const date = new Date();
-  const tag_name = `$v${version})`;
-  const name = `${tag_name} (${date.toDateString()})`;
+  const {tag_name,name} = await releaseInfo()
 
   const token = process.env.GITHUB_TOKEN.trim();
   const octokit = new Octokit({ auth: token });

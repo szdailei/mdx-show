@@ -1,27 +1,26 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createWriteStream } from 'fs';
 import changelog from 'conventional-changelog';
-import { readPackageUp } from 'read-pkg-up';
-
+import releaseInfo from './release-info.js';
+ 
 (async () => {
-  const { packageJson } = await readPackageUp();
+  const { tag_name, releaseNotefileName } = await releaseInfo();
 
-  const { version } = packageJson;
-  const file = `./RELEASE_NOTE${version ? `_${version}` : ``}.md`;
-  const fileStream = createWriteStream(file);
+  const fileStream = createWriteStream(releaseNotefileName);
 
   changelog({
     preset: 'angular',
     pkg: {
       transform(pkg) {
-        pkg.version = `v${version}`;
+        pkg.version = tag_name;
         return pkg;
       },
     },
   })
     .pipe(fileStream)
     .on('close', () => {
-      console.log(`Generated release note at ${file}`);
+      console.log(`Generated release note at ${releaseNotefileName}\nYou MUST check it before release`);
     });
 })();
