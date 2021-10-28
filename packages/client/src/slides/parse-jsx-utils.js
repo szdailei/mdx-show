@@ -220,7 +220,7 @@ function addBlankLines(markdown) {
     const trimedLine = trim(lines[i]);
     if (trimedLine.indexOf('```') !== -1) isInsideCode = !isInsideCode;
     if (!isInsideCode && isJSXTagAtBegginning(trimedLine)) {
-      result += `\n\n${trimedLine}\n`;
+      result += `\n\n\n${trimedLine}\n`;
     } else {
       result += `\n${lines[i]}`;
     }

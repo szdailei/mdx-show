@@ -46,8 +46,8 @@ function MarkdownNode(token, children, parent) {
       );
       break;
     case 'image':
+      realSrc = getRealSrc(token.href, 'img');
       if (!trimedText || trimedText === '') {
-        realSrc = getRealSrc(token.href, 'img');
         try {
           const url = new URL(realSrc);
           hostname = url.hostname;

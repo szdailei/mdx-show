@@ -25,29 +25,53 @@ function destructuringParams(propNames, params) {
 function MDXToReactHOC({ children, tag, params }) {
   switch (tag) {
     case 'Clock':
-      return <Clock style={params} />;
+      return <Clock key={makeid()} style={params} />;
     case 'Timer':
-      return <Timer style={params} />;
+      return <Timer key={makeid()} style={params} />;
     case 'ClockOrTimer':
-      return <ClockOrTimer style={params} />;
+      return <ClockOrTimer key={makeid()} style={params} />;
     case 'Split':
-      return <Split style={params}>{children}</Split>;
+      return (
+        <Split key={makeid()} style={params}>
+          {children}
+        </Split>
+      );
     case 'Div':
-      return <Div style={params}>{children}</Div>;
+      return (
+        <Div key={makeid()} style={params}>
+          {children}
+        </Div>
+      );
     case 'Header':
-      return <Span style={{ fontSize: '1.4em', fontWeight: '500', ...params }}>{children}</Span>;
+      return (
+        <Span key={makeid()} style={{ fontSize: '1.4em', fontWeight: '500', ...params }}>
+          {children}
+        </Span>
+      );
     case 'Footer':
     case 'Span':
-      return <Span style={params}>{children}</Span>;
+      return (
+        <Span key={makeid()} style={params}>
+          {children}
+        </Span>
+      );
     case 'Title':
-      return <Title style={params}>{getTextFromChildren(children)}</Title>;
+      return (
+        <Title key={makeid()} style={params}>
+          {getTextFromChildren(children)}
+        </Title>
+      );
     case 'Button':
-      return <Button {...params}>{children}</Button>;
+      return (
+        <Button key={makeid()} {...params}>
+          {children}
+        </Button>
+      );
     case 'Appear': {
       const propNames = ['id', 'hover', 'wrap'];
       const { props, rest } = destructuringParams(propNames, params);
       return (
-        <Appear {...props} style={rest}>
+        <Appear key={makeid()} {...props} style={rest}>
           {children}
         </Appear>
       );
@@ -67,13 +91,13 @@ function MDXToReactHOC({ children, tag, params }) {
         'src',
       ];
       const { props, rest } = destructuringParams(propNames, params);
-      return <Input {...props} style={rest} />;
+      return <Input key={makeid()} {...props} style={rest} />;
     }
     case 'Label': {
       const propNames = ['id', 'htmlFor'];
       const { props, rest } = destructuringParams(propNames, params);
       return (
-        <Label {...props} style={rest}>
+        <Label key={makeid()} {...props} style={rest}>
           {children}
         </Label>
       );

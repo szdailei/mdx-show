@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -21,7 +21,8 @@
   },
   "files": [
     "dist/web",
-    "dist/index.js"
+    "dist/mdx-show.js",
+    "mdx-show-intro.mdx"
   ],
   "publishConfig": {
     "access": "public"
@@ -31,20 +32,21 @@
     "lint": "eslint packages src scripts test --ext .js,.jsx,.mjs",
     "stylelint": "stylelint --syntax \"css-in-js\" \"packages/client/src/**/*.{jsx,tsx}\"",
     "clean": "rimraf dist/ pdfs/ reports/",
+    "build:dev": "cross-env NODE_ENV=development node scripts/rollup/build.js",
     "build": "cross-env NODE_ENV=production node scripts/rollup/build.js",
-    "dev": "cross-env NODE_ENV=development node scripts/rollup/build.js",
-    "debug": "DEBUG=* node dist/debug.js",
-    "start": "node dist/index.js",
+    "start": "node dist/mdx-show.js",
     "export": "node --experimental-specifier-resolution=node test/export-slides.js",
     "test": "node --experimental-vm-modules --experimental-specifier-resolution=node node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
     "bundle": "node scripts/bundle/bundle.js",
     "release-info": "node scripts/publish/gen-release-note.js",
-    "to-github": "node scripts/publish/publish.js"
+    "to-github": "node scripts/publish/to-github.js",
+    "to-npm": "node scripts/publish/to-npm.js"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
     "graphql": "^15.6.1",
     "history": "^5.0.1",
+    "html-parse-stringify": "^3.0.1",
     "is-alphabetical": "^2.0.0",
     "loglevel": "^1.7.1",
     "marked": "^3.0.8",

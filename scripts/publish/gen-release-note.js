@@ -21,6 +21,6 @@ import releaseInfo from './release-info.js';
   })
     .pipe(fileStream)
     .on('close', () => {
-      console.log(`Generated release note at ${releaseNotefileName}\nYou MUST check it before release`);
+      console.log(`Generated release note at ${releaseNotefileName}\nYou MUST check it before publish`);
     });
 })();

@@ -1,49 +1,51 @@
 import React from 'react';
+import HTML from 'html-parse-stringify';
 import makeid from '../lib/makeid';
 import { getRealSrc, trim } from '../lib/markdown';
-import { Div, Span } from '../styled';
 import { VideoJS } from '../components';
+import MDXToReactHOC from './MDXToReactHOC';
 
-function camelCase(name) {
-  let camelName = name;
-  switch (name) {
-    case 'autoplay':
-      camelName = 'autoPlay';
-      break;
-    case 'crossorigin':
-      camelName = 'crossOrigin';
-      break;
-    case 'srclang':
-      camelName = 'srcLang';
-      break;
-    default:
-      break;
-  }
-  return camelName;
-}
-
-function getAttributeValues(attributes) {
-  if (!attributes) return null;
+function adjustEmptyStringToTrue(attrs) {
   const obj = {};
-  const keys = Object.getOwnPropertyNames(attributes);
+  if (!attrs || attrs.length === 0) return obj;
+
+  const keys = Object.getOwnPropertyNames(attrs);
+
   for (let i = 0; i < keys.length; i += 1) {
-    if (Number.isNaN(Number.parseInt(keys[i].trim(), 10))) {
-      const key = camelCase(keys[i]);
-      if (attributes[keys[i]].value === '') {
-        obj[key] = true;
-      } else {
-        obj[key] = attributes[keys[i]].value;
-      }
+    const key = keys[i];
+    const value = attrs[key];
+    if (!value || (typeof value === 'string' && value.trim() === '')) {
+      obj[key] = true;
+    } else {
+      obj[key] = value;
     }
   }
+
   return obj;
+}
+
+function parseCssText(cssText) {
+  const result = {};
+  const attributes = cssText.split(';');
+
+  for (let i = 0; i < attributes.length; i += 1) {
+    const entry = attributes[i].split(':');
+    result[entry.splice(0, 1)[0].trim()] = entry.join(':').trim();
+  }
+
+  return result;
 }
 
 function recursiveParseElement(element) {
   const recursiveParseResult = [];
 
-  if (element.childNodes.length !== 0) {
-    element.childNodes.forEach((child) => {
+  const attrs = adjustEmptyStringToTrue(element.attrs);
+  if (attrs.style) {
+    attrs.style = parseCssText(attrs.style);
+  }
+
+  if (element.children && element.children.length !== 0) {
+    element.children.forEach((child) => {
       const subNode = recursiveParseElement(child);
       if (subNode) {
         recursiveParseResult.push(subNode);
@@ -51,86 +53,102 @@ function recursiveParseElement(element) {
     });
   }
 
-  const attributes = getAttributeValues(element.attributes);
-
   let children;
   if (recursiveParseResult.length !== 0) {
     children = recursiveParseResult;
   } else {
-    children = trim(element.textContent);
+    children = trim(element.content);
   }
 
   let node;
   let options;
+  let tag;
+  let params;
 
-  switch (element.nodeName) {
-    case 'BR':
-      node = <br key={makeid()} />;
-      break;
-    case 'DEL':
-      node = <del key={makeid()}>{children}</del>;
-      break;
-    case 'STRONG':
-      node = <strong key={makeid()}>{children}</strong>;
-      break;
-    case 'DIV':
-      node = (
-        <Div key={makeid()} {...attributes}>
+  if (element.type === 'text') {
+    node = trim(element.content);
+    return node;
+  }
+
+  switch (element.name) {
+    case 'br':
+      return <br key={makeid()} />;
+    case 'del':
+      return <del key={makeid()}>{children}</del>;
+    case 'strong':
+      return <strong key={makeid()}>{children}</strong>;
+    case 'code':
+      return <code key={makeid()}>{children}</code>;
+    case 'div':
+      return (
+        <div key={makeid()} {...attrs}>
           {children}
-        </Div>
+        </div>
       );
-      break;
-    case 'SPAN':
-      node = (
-        <Span key={makeid()} {...attributes}>
+    case 'span':
+      return (
+        <span key={makeid()} {...attrs}>
           {children}
-        </Span>
+        </span>
       );
-      break;
-    case 'HR':
-      node = <hr key={makeid()} />;
-      break;
-    case 'SOURCE':
-      attributes.src = getRealSrc(attributes.src, 'video');
-      node = <source key={makeid()} {...attributes} />;
-      break;
-    case 'TRACK':
-      attributes.src = getRealSrc(attributes.src, 'video');
-      node = <track key={makeid()} {...attributes} />;
-      break;
-    case 'U':
-      node = <u key={makeid()}>{children}</u>;
-      break;
-    case 'VIDEO':
+    case 'hr':
+      return <hr key={makeid()} />;
+    case 'source':
+      attrs.src = getRealSrc(attrs.src, 'video');
+      return <source key={makeid()} {...attrs} />;
+    case 'track':
+      attrs.src = getRealSrc(attrs.src, 'video');
+      return <track key={makeid()} {...attrs} />;
+    case 'u':
+      return <u key={makeid()}>{children}</u>;
+    case 'video':
       options = {
         crossOrigin: 'anonymous',
         controls: true,
         preload: 'auto',
-        width: attributes.width,
-        height: attributes.height,
+        width: attrs.width,
+        height: attrs.height,
       };
-      node = (
+      return (
         <VideoJS key={makeid()} options={options}>
           {children}
         </VideoJS>
       );
-      break;
     case '#text':
-      node = children;
-      break;
+      return children;
     default:
-      throw new TypeError(`Unknown html tag of ${element.tagName}`);
+      tag = element.name;
+      params = element.attrs;
+      return MDXToReactHOC({ children, tag, params });
   }
-  return node;
 }
 
-function HtmlNode(htmlString) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
-  const nodes = [];
+function getCodeText(htmlText) {
+  let lines = htmlText.split('<code>');
+  let textWithoutOpenTag = '';
+  for (let i = 0; i < lines.length; i += 1) {
+    textWithoutOpenTag += lines[i];
+  }
 
-  for (let i = 0; i < doc.body.children.length; i += 1) {
-    const node = recursiveParseElement(doc.body.children[i]);
+  let codeText = '';
+  lines = textWithoutOpenTag.split('</code>');
+  for (let i = 0; i < lines.length; i += 1) {
+    codeText += lines[i];
+  }
+
+  return codeText;
+}
+
+function HtmlNode(htmlText) {
+  const ast = HTML.parse(htmlText);
+  if (ast[0].type === 'tag' && ast[0].name === 'code') {
+    const codeText = getCodeText(htmlText);
+    return <code key={makeid()}>{codeText}</code>;
+  }
+
+  const nodes = [];
+  for (let i = 0; i < ast.length; i += 1) {
+    const node = recursiveParseElement(ast[i]);
     nodes.push(node);
   }
 

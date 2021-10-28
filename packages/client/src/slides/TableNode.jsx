@@ -4,8 +4,7 @@ import { TH, TD, TR, THead, TBody, Table } from '../styled';
 import HtmlNode from './HtmlNode';
 
 function parseTDWithHtml(text) {
-  const htmlString = `<span>${text}</span>`;
-  return HtmlNode(htmlString);
+  return HtmlNode(text);
 }
 
 function TableNode(table) {
