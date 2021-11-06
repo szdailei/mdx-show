@@ -1,0 +1,8 @@
+dest = "dist/"
+destOfWeb = "dist/web/"
+
+srcOfServer = "src/server"
+srcOfClient = "src/client/"
+srcOfHtml = "src/client/html/*"
+
+test = "test/"

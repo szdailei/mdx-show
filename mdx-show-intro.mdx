@@ -1,0 +1,35 @@
+<Span verticalAlign=super fontSize=0.7em>上标</Span>
+
+<Div textAlign=center fontSize=0.9em color=darkred>
+**扩展的Tag，大小写敏感**
+</Div>
+| Tag | 说明 | 样例 | 效果 |
+|  ----  |  ----  |  ----  |  ----  |
+| html标签 | 多个小写标签 | <code><span style="backgroundColor:red;fontSize:0.9em">css的驼峰写法</span></code> | <span style="backgroundColor:red;fontSize:0.9em">css的驼峰写法</span> |
+| Div | 类似div | <code><Div id=test color=darkred fontSize=0.9em>混合props和style</Div></code> | <Div id=test color=darkred fontSize=0.9em>混合props和style</Div> |
+| Span | 类似span | <code>Hello<Span verticalAlign=super fontSize=0.7em>上标</Span></code> | Hello<Span verticalAlign=super fontSize=0.7em>上标</Span> |
+| Title  | 文档标题 | <code><Title>mdx-show介绍</Title></code> | 字体过大，不展示 |
+| Header | 每页标题 | <code><Header>第一页</Header></code> | 字体过大，不展示 |
+| Footer | 每页页脚 | <code><Footer>表格内无效</Footer></code> | <code>表格内无效</code> |
+| Clock | 时钟 | <code><Clock></code> | <Clock> |
+| Timer | 自动计时 | <code><Timer></code> | <Timer> |
+| ClockOrTimer | 点击开始计时 | <code><ClockOrTimer></code> | <ClockOrTimer> |
+| Split | 左右分割 | <code><Split><Div>First</Div><Div>Second</Div></Split></code> | <Split><Div>First</Div><Div>Second</Div></Split> |
+| Appear | 点击/悬停出现 | <code><Appear><Div outline='2px solid'>点我</Div><Div>出现</Div></Appear></code> | <Appear><Div outline='2px solid'>点我</Div><Div>出现</Div></Appear> |
+| Input/Label | 输入 | <code><Input></code> | <Input> |
+| TextArea | 文本区 | <code><TextArea /> </code> | <TextArea /> |
+
+<Footer>按动Space键翻页</Footer>
+
+---
+
+<Div textAlign=center fontSize=0.9em color=darkred>
+**页面控制指令**
+</Div>
+| 事件 | 说明 |
+|  ----  |  ----  |
+| Key F | 全屏/退出全屏 |
+| Key Space/PageDown/Button MouseForward | 下一页 |
+| Key PageUp/Button MouseBackward  | 上一页 |
+| Key Home  | 第一页 |
+| Key End  | 最后一页 |
