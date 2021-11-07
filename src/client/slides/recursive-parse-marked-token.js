@@ -1,4 +1,4 @@
-import trim from './trim.js';
+import trim from '../utils/trim.js';
 import MarkdownNode from './MarkdownNode.jsx';
 
 function isTable(token) {

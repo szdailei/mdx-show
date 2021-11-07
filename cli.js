@@ -4,9 +4,9 @@ import { exec } from 'child_process';
 import minimist from 'minimist';
 import server from './dist/server.js';
 
-const HELP = `Usage: runtime-flow [options]
+const HELP = `Usage: mdx-show [options]
 
-start runtime-flow server and browser.
+start mdx-show server and browser.
 
 Options:
   -p, --port  Port of web. default: "3000".

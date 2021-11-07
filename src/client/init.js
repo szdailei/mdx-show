@@ -9,7 +9,7 @@ function setDownloadServerUrl(downloadServerUrl) {
   globalVars.downloadServerUrl = downloadServerUrl;
 }
 
-function init() {
+const init = () => {
   const { protocol, hostname, port } = window.location;
   const apiServerPort = getApiServerPort(port);
   const apiServerPath = getApiServerPath();
@@ -20,6 +20,9 @@ function init() {
   const downloadServerPort = getDownloadServerPort(port);
   const downloadServerUrl = `${protocol}//${hostname}:${downloadServerPort}`;
   setDownloadServerUrl(downloadServerUrl);
-}
+};
+
+// eslint-disable-next-line no-unneeded-ternary
+init.finished = () => globalVars.apiServerEndPoint ? true : false;
 
 export default init;

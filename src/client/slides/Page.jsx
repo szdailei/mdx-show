@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeid from '../lib/makeid.js';
+import makeid from '../utils/makeid.js';
 import { Div } from '../styled/index.js';
 import { Section, Main, Footer } from '../sectioning/index.js';
 

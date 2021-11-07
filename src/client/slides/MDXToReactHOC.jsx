@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Div, Span, Input, Label, TextArea } from '../styled/index.js';
 import { Title } from '../sectioning/index.js';
 import { Appear, Clock, Timer, ClockOrTimer, Split } from '../components/index.js';
-import makeid from '../lib/makeid.js';
+import makeid from '../utils/makeid.js';
 import { getTextFromChildren } from './parse-jsx-utils.js';
 
 function destructuringParams(propNames, params) {

@@ -18,7 +18,8 @@ import { defaultTheme, isThemeTag } from './theme.js';
 import Page from './Page.jsx';
 import { ExampleContainer, isExampleTag } from './Example.jsx';
 
-const contract = debug;
+function noUse() {}
+const contract = noUse;
 
 function createTotalPagesNum(tokens) {
   let totalCount = 1;

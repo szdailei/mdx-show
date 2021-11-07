@@ -1,4 +1,4 @@
-import trim from './trim.js';
+import trim from '../utils/trim.js';
 import { isCloseTagAtBeginning, getTextExceptTheFirstTag, isHtmlTag } from './parse-jsx-utils.js';
 import { getCurrentNode, addComponentToChildren } from './tree.js';
 import MDXToReactHOC from './MDXToReactHOC.jsx';

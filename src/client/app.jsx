@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import makeid from './lib/makeid.js';
+import makeid from './utils/makeid.js';
 import { ROOT_PATH, SLIDES_PATH_WITH_ID } from './route/route.js';
 import init from './init.js';
 import { NotFound } from './components/index.js';
@@ -9,8 +9,6 @@ import Home from './pages/Home.jsx';
 import Slides from './slides/Slides.jsx';
 
 function App() {
-  init();
-
   const routes = [
     { path: ROOT_PATH, element: <Home /> },
     { path: SLIDES_PATH_WITH_ID, element: <Slides /> },
@@ -28,4 +26,21 @@ function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function Init() {
+  const [inited, setInited] = useState(false);
+
+  useEffect(() => {
+    if (init.finished()) return;
+
+    init();
+    while (!init.finished()) {
+      // eslint-disable-next-line no-empty
+    }
+
+    setInited(true);
+  }, []);
+
+  return inited ? <App /> : null;
+}
+
+ReactDOM.render(<Init />, document.getElementById('root'));

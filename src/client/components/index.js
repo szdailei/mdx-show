@@ -5,7 +5,7 @@ import Timer from './Timer.jsx';
 import ClockOrTimer from './ClockOrTimer.jsx';
 import Split from './Split.jsx';
 import PrismCode from './PrismCode.jsx';
-import VideoJS from './VideoJS.jsx';
+import Player from './Player.jsx';
 import SignInInput from './SignInInput.jsx';
 import Error from './Error.jsx';
 import Loading from './Loading.jsx';
@@ -19,7 +19,7 @@ export {
   ClockOrTimer,
   Split,
   PrismCode,
-  VideoJS,
+  Player,
   SignInInput,
   Error,
   Loading,

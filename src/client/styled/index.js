@@ -14,6 +14,7 @@ import Select from './Select';
 import Span from './Span';
 import { TH, TD, TR, THead, TBody, Table } from './Table';
 import TextArea from './TextArea';
+import Video from './Video';
 
 export {
   FlexContainer,
@@ -37,4 +38,5 @@ export {
   TBody,
   Table,
   TextArea,
+  Video
 };

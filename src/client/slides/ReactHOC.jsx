@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import makeid from '../lib/makeid.js';
+import { Player } from '../components/index.js';
+import makeid from '../utils/makeid.js';
 import { getRealSrc } from '../markdown/markdown.js';
-import { VideoJS } from '../components/index.js';
 import MDXToReactHOC from './MDXToReactHOC.jsx';
 
 function ReactHOC({ children, tag, attrs }) {
@@ -37,22 +37,15 @@ function ReactHOC({ children, tag, attrs }) {
       // eslint-disable-next-line no-param-reassign
       attrs.src = getRealSrc(attrs.src, 'video');
       return <track key={makeid()} {...attrs} />;
+    case 'video': {
+      if (attrs.poster) {
+        // eslint-disable-next-line no-param-reassign
+        attrs.poster = getRealSrc(attrs.poster, 'img');
+      }
+      return <Player key={makeid()}  {...attrs}>{children}</Player>;
+    }
     case 'u':
       return <u key={makeid()}>{children}</u>;
-    case 'video': {
-      const options = {
-        crossOrigin: 'anonymous',
-        controls: true,
-        preload: 'auto',
-        width: attrs.width,
-        height: attrs.height,
-      };
-      return (
-        <VideoJS key={makeid()} options={options}>
-          {children}
-        </VideoJS>
-      );
-    }
     case '#text':
       return children;
     default: {

@@ -5,7 +5,8 @@ import { createNode, addNodeToNodeList, getCurrentNode } from './tree.js';
 import { isCloseTagAtEnd, isOpenTagAtBegginning, isSelfCloseTag, getTextExceptTheFirstTag } from './parse-jsx-utils.js';
 import { closeJSX } from './close-jsx.js';
 
-const contract = debug;
+function noUse() {}
+const contract = noUse;
 
 function isParsingJSX(ctx) {
   return ctx.jsxRoot;

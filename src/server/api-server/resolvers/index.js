@@ -1,6 +1,6 @@
 import { getFileList, getFile } from './files.js';
-import log from './log.js';
+import logger from './logger.js';
 
-const resolvers = [getFileList, getFile, log];
+const resolvers = [getFileList, getFile, logger];
 
 export default resolvers;

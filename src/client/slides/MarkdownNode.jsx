@@ -1,7 +1,7 @@
 import React from 'react';
-import makeid from '../lib/makeid.js';
+import makeid from '../utils/makeid.js';
 import { getRealSrc, removeBlankLine } from '../markdown/markdown.js';
-import trim from './trim.js';
+import trim from '../utils/trim.js';
 import { Heading, Img, List, P, Span } from '../styled/index.js';
 import { PrismCode } from '../components/index.js';
 import { isJSXTagAtBegginning } from './parse-jsx-utils.js';

@@ -1,5 +1,5 @@
 import React from 'react';
-import makeid from '../lib/makeid.js';
+import makeid from '../utils/makeid.js';
 import useRemoteData from '../network/cache.js';
 import { SLIDES_PATH } from '../route/route.js';
 import { FlexContainer } from '../styled/index.js';

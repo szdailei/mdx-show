@@ -1,5 +1,4 @@
-import { isAlphabetical } from 'is-alphabetical';
-import trim from './trim.js';
+import trim from '../utils/trim.js';
 import emptyTags from '../markdown/empty-tags.js';
 
 function getTagName(text) {
@@ -163,9 +162,8 @@ function getTextFromChildren(children) {
   return text;
 }
 
-function isCapitalLetter(letter) {
-  if (!isAlphabetical(letter)) return false;
-  if (letter.toUpperCase() === letter) return true;
+function isCapitalLetter(char) {
+  if (char.toUpperCase() === char) return true;
   return false;
 }
 

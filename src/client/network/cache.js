@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import request from './client.js';
 
-function useRemoteData(command) {
+function useRemoteData(query) {
   const [cache, setCache] = useState();
 
   function refetch() {
@@ -12,7 +12,7 @@ function useRemoteData(command) {
     let isMounted = true;
 
     async function getRemoteData() {
-      const result = await request(command);
+      const result = await request(query);
       if (isMounted) setCache(result);
     }
 
@@ -21,7 +21,7 @@ function useRemoteData(command) {
     return () => {
       isMounted = false;
     };
-  }, [cache, command]);
+  }, [cache, query]);
 
   const { data, error } = cache || { data: null, error: null };
   return { data, error, refetch };

@@ -1,37 +1,34 @@
-function callStack() {
-  const { prepareStackTrace } = Error;
-  Error.prepareStackTrace = (_, stack) => stack;
-  const stack = new Error().stack.slice(1);
-  Error.prepareStackTrace = prepareStackTrace;
-  return stack;
+import request from './client/network/client.js';
+import callInfo from './debug/caller-info.js';
+
+function toServer(data) {
+  const query = {
+    command: 'logger',
+    params: data,
+  };
+
+  request(query);
 }
 
-function shortPath(fullPath) {
-  const level = 3;
-  let path = '';
+function debug(msg) {
+  var aaa = new Error().stack;
 
-  const fields = fullPath.split('/');
-  let start = fields.length - level;
-  start = start >= 0 ? start : 0;
-  for (let i = start; i < fields.length; i += 1) {
-    path = `${path}/${fields[i]}`;
-  }
-  return path;
-}
+  console.log(aaa);
+  console.log(callInfo());
+  return;
 
-function toServer() {}
-
-function debug(data) {
   const stack = callStack();
   const fileName = shortPath(stack[1].getFileName());
-  const info = {
+  const data = {
     file: fileName,
     func: stack[1].getFunctionName(),
     line: stack[1].getLineNumber(),
-    data,
+    stack,
+    //    msg,
   };
+  console.log('debug stack', stack);
 
-  toServer(info);
+  // toServer(stack);
 }
 
 export default debug;
