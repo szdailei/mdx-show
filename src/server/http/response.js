@@ -14,12 +14,7 @@ function sendResponseBySteam(res, statusCode, statusMessage) {
 */
 function sendResponse(res, statusCode, statusMessage) {
   if (statusMessage) {
-    if (statusMessage.length < 320) {
-      res.writeHead(statusCode, { 'Content-Length': statusMessage.length });
-      res.end(statusMessage);
-    } else {
-      sendResponseBySteam(res, statusCode, statusMessage);
-    }
+    sendResponseBySteam(res, statusCode, statusMessage);
   } else {
     res.writeHead(statusCode);
     res.end();

@@ -38,5 +38,5 @@ export {
   TBody,
   Table,
   TextArea,
-  Video
+  Video,
 };

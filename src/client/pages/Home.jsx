@@ -59,7 +59,7 @@ function Home() {
     <Article>
       <Section
         style={{
-          margin: '48px 48px 24px 48px',
+          margin: '48px 48px 24px',
           fontSize: '1.2em',
           letterSpacing: '2px',
           gridTemplateColumns: '1fr',

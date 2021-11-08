@@ -23,6 +23,6 @@ const init = () => {
 };
 
 // eslint-disable-next-line no-unneeded-ternary
-init.finished = () => globalVars.apiServerEndPoint ? true : false;
+init.finished = () => (globalVars.apiServerEndPoint ? true : false);
 
 export default init;

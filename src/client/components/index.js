@@ -11,17 +11,4 @@ import Error from './Error.jsx';
 import Loading from './Loading.jsx';
 import NotFound from './NotFound.jsx';
 
-export {
-  Message,
-  Appear,
-  Clock,
-  Timer,
-  ClockOrTimer,
-  Split,
-  PrismCode,
-  Player,
-  SignInInput,
-  Error,
-  Loading,
-  NotFound,
-};
+export { Message, Appear, Clock, Timer, ClockOrTimer, Split, PrismCode, Player, SignInInput, Error, Loading, NotFound };

@@ -5,7 +5,7 @@ import { keyframes } from '../styled/styled.js';
 import { Div, Video } from '../styled/index.js';
 
 const playButton = (
-  <svg xmlns="http://www.w3.org/2000/svg">
+  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
     <circle fill="#666666" cx="29" cy="29" r="29" />
     <polygon fill="#FFFFFF" points="44,29 22,44 22,29.273 22,14" />
     <path
@@ -16,7 +16,7 @@ const playButton = (
 );
 
 const pauseButton = (
-  <svg xmlns="http://www.w3.org/2000/svg">
+  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
     <circle fill="#666666" cx="29" cy="29" r="29" />
     <rect x="33" y="14" fill="#FFFFFF" width="6" height="30" />
     <path fill="#FFFFFF" d="M40,45h-8V13h8V45z M34,43h4V15h-4V43z" />
@@ -25,21 +25,30 @@ const pauseButton = (
   </svg>
 );
 
+function requestFullscreen({ playerRef, videoRef }) {
+  playerRef.current.requestFullscreen();
+  videoRef.current.style.width = '100vw';
+  videoRef.current.style.height = '100vh';
+}
+
+function exitFullscreen({ videoRef }) {
+  document.exitFullscreen();
+  videoRef.current.style.width = videoRef.current.dataStoredWidth;
+  videoRef.current.style.height = videoRef.current.dataStoredHeight;
+}
+
 const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   const [paused, setPaused] = useState(true);
+  const [hover, setHover] = useState(false);
 
   const onClick = useCallback(
     (event) => {
       event.preventDefault();
       if (paused) {
-        playerRef.current.requestFullscreen();
-        videoRef.current.style.width = '100vw';
-        videoRef.current.style.height = '100vh';
+        requestFullscreen({ playerRef, videoRef });
         videoRef.current.play();
       } else {
-        document.exitFullscreen();
-        videoRef.current.style.width = playerRef.current.dataStoredWidth;
-        videoRef.current.style.height = playerRef.current.dataStoredHeight;
+        exitFullscreen({ videoRef });
         videoRef.current.pause();
       }
 
@@ -55,41 +64,88 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   }));
 
   useEffect(() => {
-    playerRef.current.dataStoredWidth = videoRef.current.style.width;
-    playerRef.current.dataStoredHeight = videoRef.current.style.height;
-    setPaused(videoRef.current.paused);
-  }, [playerRef, videoRef]);
+    videoRef.current.dataStoredWidth = videoRef.current.style.width;
+    videoRef.current.dataStoredHeight = videoRef.current.style.height;
 
-  const breath = keyframes`
-  from {opacity:1}
-  to {opacity:0}
+    videoRef.current.addEventListener('playing', () => {
+      setPaused(videoRef.current.paused);
+    });
+
+    videoRef.current.addEventListener('pause', () => {
+      setPaused(videoRef.current.paused);
+    });
+
+    setPaused(videoRef.current.paused);
+  }, [videoRef]);
+
+  const onMouseEnter = useCallback((event) => {
+    event.preventDefault();
+    setHover(true);
+  }, []);
+  const onMouseLeave = useCallback((event) => {
+    event.preventDefault();
+    setHover(false);
+  }, []);
+
+  const eventHandles = {
+    onClick,
+    onMouseEnter,
+    onMouseLeave,
+  };
+
+  const breath = keyframes`from { opacity: 1; }
+to { opacity: 0; }
 `;
 
   const commonStyle = {
+    display: 'block',
     position: 'absolute',
     cursor: 'pointer',
-    top: '55%',
-    left: '55%',
-    transform: 'scale(2)',
+    top: '50%',
+    left: '50%',
+    lineHeight: 0,
+    transform: 'translate(-50%, -50%) scale(1.5)',
+  };
+
+  const animationCommonStyle = {
+    animationName: `${breath}`,
+    animationDuration: '2s',
+    animationTimingFunction: 'ease-out',
+    animationFillMode: 'forwards',
+  };
+
+  const playButtonAnimationStyle = hover
+    ? {}
+    : {
+        ...animationCommonStyle,
+
+        animationIterationCount: 'infinite',
+        animationDirection: 'alternate-reverse',
+      };
+
+  const pauseButtonAnimationStyle = {
+    ...animationCommonStyle,
+
+    animationIterationCount: 1,
+    animationDirection: 'alternate',
   };
 
   const playButtonStyle = {
     ...commonStyle,
-    animation: `${breath} 2s infinite ease-out alternate-reverse forwards`,
+    ...playButtonAnimationStyle,
   };
 
   const pauseButtonStyle = {
     ...commonStyle,
-    animation: `${breath} 2s infinite ease-out alternate forwards`,
-    animationIterationCount: 1,
+    ...pauseButtonAnimationStyle,
   };
 
   return paused ? (
-    <Div onClick={onClick} style={playButtonStyle}>
+    <Div style={playButtonStyle} {...eventHandles}>
       {playButton}
     </Div>
   ) : (
-    <Div onClick={onClick} style={pauseButtonStyle}>
+    <Div style={pauseButtonStyle} {...eventHandles}>
       {pauseButton}
     </Div>
   );

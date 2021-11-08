@@ -42,7 +42,11 @@ function ReactHOC({ children, tag, attrs }) {
         // eslint-disable-next-line no-param-reassign
         attrs.poster = getRealSrc(attrs.poster, 'img');
       }
-      return <Player key={makeid()}  {...attrs}>{children}</Player>;
+      return (
+        <Player key={makeid()} {...attrs}>
+          {children}
+        </Player>
+      );
     }
     case 'u':
       return <u key={makeid()}>{children}</u>;

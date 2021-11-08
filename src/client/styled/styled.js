@@ -1,6 +1,6 @@
 import { styled, createStitches } from '@stitches/react';
 
-const { keyframes } = createStitches()
+const { keyframes } = createStitches();
 
 export default styled;
 export { keyframes };

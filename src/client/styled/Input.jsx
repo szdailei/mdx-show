@@ -13,7 +13,7 @@ const Input = React.forwardRef(({ type, style, ...rest }, ref) => {
         fontSize: '1em',
         width: '1em',
         height: '1em',
-        margin: '0 0.8em 0 0.8em',
+        margin: '0 0.8em',
         ...style,
       };
       break;
@@ -22,7 +22,7 @@ const Input = React.forwardRef(({ type, style, ...rest }, ref) => {
         fontSize: '1em',
         cursor: 'text',
         outline: 0,
-        borderStyle: 'none none solid none',
+        borderStyle: 'none none solid',
         ...style,
       };
       break;

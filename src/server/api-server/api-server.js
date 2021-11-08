@@ -1,4 +1,4 @@
-import init from './init.js'
+import init from './init.js';
 import startServer from '../http/start-server.js';
 import { notFound } from '../http/response.js';
 import match from './route/match.js';
@@ -15,7 +15,7 @@ async function resolveUrl(req, res, { method, url }, options) {
 }
 
 function apiServer(port, options) {
-  init(options.root)
+  init(options.root);
 
   const server = startServer(port, options, resolveUrl);
   return server;
