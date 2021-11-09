@@ -1,5 +1,5 @@
 import defaultVars from '../default-vars.js';
-import globalVars from '../global-vars.js';
+import request from '../network/client.js';
 
 function isUrl(src) {
   try {
@@ -46,10 +46,10 @@ function convertSrcToServer(src, type) {
   let serverSrc;
   switch (type) {
     case 'img':
-      serverSrc = `${globalVars.downloadServerUrl}/${getImagesDir()}${src}`;
+      serverSrc = `${request.getDownloadServerUrl()}/${getImagesDir()}${src}`;
       break;
     case 'video':
-      serverSrc = `${globalVars.downloadServerUrl}/${getVideosDir()}${src}`;
+      serverSrc = `${request.getDownloadServerUrl()}/${getVideosDir()}${src}`;
       break;
     default:
       break;

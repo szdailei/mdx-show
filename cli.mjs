@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 /* eslint-disable no-console */
 import { exec } from 'child_process';
 import minimist from 'minimist';

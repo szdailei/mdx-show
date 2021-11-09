@@ -1,25 +1,23 @@
 import fs from 'fs';
 import path from 'path';
 
-const storageConfig = {
-  root: null,
+const storage = {
+  root:undefined
 };
 
-function storage() {}
-
-storage.getStorageRoot = () => storageConfig.root;
+storage.getStorageRoot = () => storage.root;
 
 storage.setStorageRoot = (root) => {
-  storageConfig.root = root;
+  storage.root = root;
 };
 
 storage.getFile = async (relativeFileName, format) => {
-  const fileName = path.join(storageConfig.root, relativeFileName);
+  const fileName = path.join(storage.root, relativeFileName);
   return fs.promises.readFile(fileName, format || 'utf8');
 };
 
 storage.getFileList = async (relativeDirName) => {
-  const dirName = path.join(storageConfig.root, relativeDirName);
+  const dirName = path.join(storage.root, relativeDirName);
   const files = await fs.promises.readdir(dirName);
   const fileNames = [];
   for (let i = 0; i < files.length; i += 1) {

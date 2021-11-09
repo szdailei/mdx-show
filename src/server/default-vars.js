@@ -7,6 +7,9 @@ const defaultVars = {
   storage: {
     root: '.',
   },
+  logger: {
+    fileSuffix: '-debug.log',
+  },
 };
 
 export default defaultVars;

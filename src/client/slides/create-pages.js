@@ -152,6 +152,9 @@ function createPages(markdown) {
     theme: defaultTheme,
   };
 
+  debug(markdown)
+
+
   contract('@require MD \n%s\n@ensure 解析为%d个token%O', markdown, tokens.length, tokens);
   for (let i = 0; i < tokens.length; i += 1) {
     const token = tokens[i];

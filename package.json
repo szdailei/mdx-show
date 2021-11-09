@@ -41,10 +41,10 @@
     "debug": "DEBUG=* node dist/debug/cli-debug.js",
     "build:debug:app": "cross-env NODE_ENV=development node scripts/rollup/cli-build-debug-app.js",
     "chart": "node debug/cli-flow-chart.js",
-    "server": "node cli.js",
-    "pdfs": "node cli-pdfs.js",
+    "server": "node cli.mjs",
+    "pdfs": "node cli-pdfs.mjs",
     "test": "node --experimental-vm-modules node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
-    "bundle": "node scripts/bundle/bundle.js",
+    "bundle": "node scripts/bundle/cli_bundle.js",
     "release-info": "node scripts/publish/gen-release-note.js",
     "to-github": "node scripts/publish/to-github.js",
     "to-npm": "node scripts/publish/to-npm.js"

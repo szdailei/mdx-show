@@ -7,8 +7,5 @@ import Split from './Split.jsx';
 import PrismCode from './PrismCode.jsx';
 import Player from './Player.jsx';
 import SignInInput from './SignInInput.jsx';
-import Error from './Error.jsx';
-import Loading from './Loading.jsx';
-import NotFound from './NotFound.jsx';
 
-export { Message, Appear, Clock, Timer, ClockOrTimer, Split, PrismCode, Player, SignInInput, Error, Loading, NotFound };
+export { Message, Appear, Clock, Timer, ClockOrTimer, Split, PrismCode, Player, SignInInput};

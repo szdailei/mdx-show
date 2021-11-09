@@ -1,11 +1,16 @@
 import { createWriteStream } from 'fs';
 
-function logger(params, req) {
-  const fileName = `${req.client.remoteAddress}-debug.log`;
+const logger = (params, req) => {
+  const fileName = `${req.client.remoteAddress}${logger.loggerFileSuffix}`;
   const stream = createWriteStream(fileName, { flags: 'a' });
-  stream.write(JSON.stringify(params));
-}
+  stream.write(`${JSON.stringify(params)}\n`);
+};
 
-logger.init = () => {};
+logger.loggerFileSuffix = undefined;
+
+logger.setLoggerFileSuffix = (fileSuffix) => {
+  logger.loggerFileSuffix = fileSuffix;
+};
+
 
 export default logger;

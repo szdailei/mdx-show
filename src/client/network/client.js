@@ -1,4 +1,9 @@
-import globalVars from '../global-vars.js';
+import { getApiServerPort, getApiServerPath, getDownloadServerPort } from '../../api-server-vars.js';
+
+const clientVars = {
+  apiServerEndPoint: undefined,
+  downloadServerUrl: undefined,
+};
 
 async function createErrorByRes(res) {
   const resBody = await res.text();
@@ -30,9 +35,9 @@ async function parseResBody(res, resType) {
   }
 }
 
-async function request(body) {
+const request = async (body) => {
   const resType = 'json';
-  const endPoint = globalVars.apiServerEndPoint;
+  const endPoint = clientVars.apiServerEndPoint;
   const options = {
     method: 'POST',
     mode: 'cors',
@@ -58,6 +63,24 @@ async function request(body) {
   }
 
   return { data, error };
-}
+};
+
+request.getDownloadServerUrl = () => clientVars.downloadServerUrl;
+
+request.init = () => {
+  const { protocol, hostname, port } = window.location;
+  const apiServerPort = getApiServerPort(port);
+  const apiServerPath = getApiServerPath();
+  const apiServerEndPoint = `${protocol}//${hostname}:${apiServerPort}${apiServerPath}`;
+
+  clientVars.apiServerEndPoint = apiServerEndPoint;
+
+  const downloadServerPort = getDownloadServerPort(port);
+  const downloadServerUrl = `${protocol}//${hostname}:${downloadServerPort}`;
+  clientVars.downloadServerUrl = downloadServerUrl;
+};
+
+// eslint-disable-next-line no-unneeded-ternary
+request.finished = () => (clientVars.apiServerEndPoint ? true : false);
 
 export default request;

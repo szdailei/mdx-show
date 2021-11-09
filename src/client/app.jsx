@@ -4,7 +4,7 @@ import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import makeid from './utils/makeid.js';
 import { ROOT_PATH, SLIDES_PATH_WITH_ID } from './route/route.js';
 import init from './init.js';
-import { NotFound } from './components/index.js';
+import { NotFound } from './page-components/index.js';
 import Home from './pages/Home.jsx';
 import Slides from './slides/Slides.jsx';
 
@@ -32,7 +32,7 @@ function Init() {
   useEffect(() => {
     if (init.finished()) return;
 
-    init();
+    init({entryFunc:App});
     while (!init.finished()) {
       // eslint-disable-next-line no-empty
     }

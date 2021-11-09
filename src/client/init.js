@@ -1,28 +1,19 @@
-import globalVars from './global-vars.js';
-import { getApiServerPort, getApiServerPath, getDownloadServerPort } from '../api-server-vars.js';
+import request from './network/client.js';
+import debug from './debug/debug.js';
 
-function setServerEndPoint(apiServerEndPoint) {
-  globalVars.apiServerEndPoint = apiServerEndPoint;
+function toServer({data}) {
+  const query = {
+    command: 'logger',
+    params: data,
+  };
+  request(query);
 }
 
-function setDownloadServerUrl(downloadServerUrl) {
-  globalVars.downloadServerUrl = downloadServerUrl;
-}
-
-const init = () => {
-  const { protocol, hostname, port } = window.location;
-  const apiServerPort = getApiServerPort(port);
-  const apiServerPath = getApiServerPath();
-  const apiServerEndPoint = `${protocol}//${hostname}:${apiServerPort}${apiServerPath}`;
-
-  setServerEndPoint(apiServerEndPoint);
-
-  const downloadServerPort = getDownloadServerPort(port);
-  const downloadServerUrl = `${protocol}//${hostname}:${downloadServerPort}`;
-  setDownloadServerUrl(downloadServerUrl);
+const init = ({ entryFunc }) => {
+  request.init();
+  debug.init({ entryFunc, writeToFunc: toServer });
 };
 
-// eslint-disable-next-line no-unneeded-ternary
-init.finished = () => (globalVars.apiServerEndPoint ? true : false);
+init.finished = () => request.finished();
 
 export default init;

@@ -8,7 +8,12 @@ import { terser } from 'rollup-plugin-terser';
 const compileMode = process.env.NODE_ENV;
 const plugins = [
   nodeResolve({ extensions: ['.mjs', '.js', '.jsx'], preferBuiltins: false }),
-  replace({ 'process.env.NODE_ENV': JSON.stringify(compileMode), preventAssignment: true }),
+  replace({
+    'process.env.NODE_ENV': JSON.stringify(compileMode),
+    preventAssignment: true,
+    delimiters: ['', ''],
+    '#!/usr/bin/env node': '',
+  }),
   commonjs(),
   babel({
     babelHelpers: 'bundled',
@@ -22,7 +27,9 @@ async function rollupBuild(inputOptions, outputOptions) {
   const bundle = await rollup(inputOptions);
 
   const prodOutputOptions = { ...outputOptions };
-  prodOutputOptions.plugins = process.env.NODE_ENV === 'production' ? [terser()] : [];
+  if (process.env.NODE_ENV === 'production') {
+    inputOptions.plugins.push(terser());
+  }
   await bundle.write(prodOutputOptions);
   await bundle.close();
 }

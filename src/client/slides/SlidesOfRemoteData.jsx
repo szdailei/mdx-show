@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import useRemoteData from '../network/cache.js';
-import { Error } from '../components/index.js';
+import { Error } from '../page-components/index.js';
 import createPages from './create-pages.js';
 import Controller from './Controller.jsx';
 

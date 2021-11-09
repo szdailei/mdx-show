@@ -4,7 +4,7 @@ import useRemoteData from '../network/cache.js';
 import { SLIDES_PATH } from '../route/route.js';
 import { FlexContainer } from '../styled/index.js';
 import { Article, Header, Main, Section } from '../sectioning/index.js';
-import { Error } from '../components/index.js';
+import { Error } from '../page-components/index.js';
 
 function exitFullscreen() {
   if (document.fullscreenEnabled && document.fullscreenElement && document.exitFullscreen) {

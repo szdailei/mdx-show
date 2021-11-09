@@ -19,6 +19,7 @@ async function buildApp() {
   };
 
   const outputOptions = {
+//    sourcemap:process.env.NODE_ENV !== 'production',
     dir: destOfWeb,
     format: 'esm',
     entryFileNames: 'app.js',
