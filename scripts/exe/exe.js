@@ -16,12 +16,12 @@ async function trans(origFile, targetFile) {
   await fs.promises.writeFile(targetFile, code);
 }
 
-async function bundleServer(mjs, cjs, exe) {
-  await trans(mjs, cjs);
-  await exec([cjs, '--target', 'linux-x64,win-x64', '--output', exe]);
+async function exeServer(mjsFile, cjsFile, exeFile) {
+  await trans(mjsFile, cjsFile);
+  await exec([cjsFile, '--target', 'linux-x64,win-x64', '--output', exeFile]);
 }
 
-async function bundle() {
+async function exe() {
   await buildCliServer()
 
   const { dest } = await getStructure();
@@ -30,7 +30,7 @@ async function bundle() {
   const cjsOfServer = join(dest, 'server.cjs');
   const exeOfServer = join(dest, 'server');
 
-  await bundleServer(mjsOfServer, cjsOfServer, exeOfServer);
+  await exeServer(mjsOfServer, cjsOfServer, exeOfServer);
 }
 
-export default bundle;
+export default exe;

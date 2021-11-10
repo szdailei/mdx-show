@@ -81,6 +81,6 @@ request.init = () => {
 };
 
 // eslint-disable-next-line no-unneeded-ternary
-request.finished = () => (clientVars.apiServerEndPoint ? true : false);
+request.isFinished = () => (clientVars.apiServerEndPoint ? true : false);
 
 export default request;

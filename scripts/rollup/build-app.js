@@ -1,8 +1,16 @@
 import postcss from 'rollup-plugin-postcss';
+import {existsSync} from 'fs'
 import { join } from 'path';
 import shell from 'shelljs';
 import { getStructure } from '../structure.js';
 import { plugins, rollupBuild } from './rollup.js';
+
+async function cleanApp() {
+  const { destOfWeb } = await getStructure();
+  if (existsSync(destOfWeb)) {
+    shell.rm('-rf', destOfWeb);
+  }
+}
 
 async function buildApp() {
   const { srcOfClient, srcOfHtml, destOfWeb } = await getStructure();
@@ -19,7 +27,6 @@ async function buildApp() {
   };
 
   const outputOptions = {
-//    sourcemap:process.env.NODE_ENV !== 'production',
     dir: destOfWeb,
     format: 'esm',
     entryFileNames: 'app.js',
@@ -31,4 +38,4 @@ async function buildApp() {
   shell.cp('-R', srcOfHtml, destOfWeb);
 }
 
-export default buildApp;
+export { buildApp, cleanApp };

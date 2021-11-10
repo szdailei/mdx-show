@@ -26,10 +26,13 @@ const plugins = [
 async function rollupBuild(inputOptions, outputOptions) {
   const bundle = await rollup(inputOptions);
 
-  const prodOutputOptions = { ...outputOptions };
+  const sourcemap = process.env.NODE_ENV !== 'production';
+  const prodOutputOptions = { ...outputOptions, sourcemap };
+
   if (process.env.NODE_ENV === 'production') {
     inputOptions.plugins.push(terser());
   }
+
   await bundle.write(prodOutputOptions);
   await bundle.close();
 }

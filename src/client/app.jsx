@@ -30,10 +30,10 @@ function Init() {
   const [inited, setInited] = useState(false);
 
   useEffect(() => {
-    if (init.finished()) return;
+    if (init.isFinished()) return;
 
     init({entryFunc:App});
-    while (!init.finished()) {
+    while (!init.isFinished()) {
       // eslint-disable-next-line no-empty
     }
 

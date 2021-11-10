@@ -1,17 +1,28 @@
-import stack from './debug/stack.js';
+import debugSite from './debug/debug-site.js';
 
 const debugVars = {
   writeToFunc: undefined,
 };
 
 const debug = (message) => {
-  const debugStack = stack({ belowFunc: debug });
-  debugStack.message = message;
-  debugVars.writeToFunc({data:debugStack});
+  let site;
+  try {
+    site = debugSite({ belowFuncOfFilterStack: debug });
+  } catch (error) {
+    if (error instanceof RangeError) {
+      // eslint-disable-next-line no-console
+      console.log(`${error.name}:${error.message}\nDebug message is ${message}`);
+      return;
+    }
+    throw error;
+  }
+
+  site.message = message;
+  debugVars.writeToFunc({ data: site });
 };
 
-debug.init = ({ entryFunc, writeToFunc }) => {
-  stack.init({ entryFunc });
+debug.init = ({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack, writeToFunc }) => {
+  debugSite.init({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack });
   debugVars.writeToFunc = writeToFunc;
 };
 

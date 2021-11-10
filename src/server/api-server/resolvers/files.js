@@ -7,7 +7,6 @@ async function getFileList(dir) {
 
 async function getFile(file) {
   const content = await storage.getFile(file);
-  if (!content) throw new Error('null result');
   return content;
 }
 

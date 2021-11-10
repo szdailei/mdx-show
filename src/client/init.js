@@ -14,6 +14,6 @@ const init = ({ entryFunc }) => {
   debug.init({ entryFunc, writeToFunc: toServer });
 };
 
-init.finished = () => request.finished();
+init.isFinished = () => request.isFinished();
 
 export default init;

@@ -15,15 +15,14 @@
   "main": "server.js",
   "type": "module",
   "bin": {
-    "mdx-show": "cli.js",
-    "mdx-show-pdfs": "cli-pdfs.js"
+    "mdx-show": "cli.mjs",
+    "mdx-show-pdfs": "cli-pdfs.mjs"
   },
   "files": [
     "dist/web/",
     "dist/server.js",
     "server.js",
     "pdfs.js",
-    "packages/",
     "src/",
     "test/"
   ],
@@ -37,14 +36,11 @@
     "clean": "rimraf dist/ pdfs/ reports/",
     "build": "cross-env NODE_ENV=production node scripts/rollup/cli-build.js",
     "build:dev": "cross-env NODE_ENV=development node scripts/rollup/cli-build.js",
-    "build:debug": "node scripts/rollup/cli-build-debug.js",
-    "debug": "DEBUG=* node dist/debug/cli-debug.js",
-    "build:debug:app": "cross-env NODE_ENV=development node scripts/rollup/cli-build-debug-app.js",
-    "chart": "node debug/cli-flow-chart.js",
     "server": "node cli.mjs",
     "pdfs": "node cli-pdfs.mjs",
+    "work":"node work-flow/cli-work-flow.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest && chromium reports/jest_html_reporters.html",
-    "bundle": "node scripts/bundle/cli_bundle.js",
+    "exe": "node scripts/exe/cli-exe.js",
     "release-info": "node scripts/publish/gen-release-note.js",
     "to-github": "node scripts/publish/to-github.js",
     "to-npm": "node scripts/publish/to-npm.js"
@@ -109,7 +105,6 @@
     "shelljs": "^0.8.4",
     "stylelint": "^14.0.1",
     "stylelint-config-recess-order": "^2.5.0",
-    "stylelint-config-recommended": "^6.0.0",
     "stylelint-config-standard": "^23.0.0",
     "web-resource-inliner": "^5.0.0"
   },

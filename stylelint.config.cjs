@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['stylelint-config-recommended', 'stylelint-config-standard', 'stylelint-config-recess-order'],
+  extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
   customSyntax: '@stylelint/postcss-css-in-js',
   rules: {
     'font-family-name-quotes': 'always-where-recommended',

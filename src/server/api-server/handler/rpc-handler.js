@@ -9,7 +9,7 @@ function handler(req, res, { data }) {
       return resolvers[i](data.params, req, res);
     }
   }
-  throw Error(http.STATUS_CODES[404]);
+  throw RangeError(http.STATUS_CODES[404]);
 }
 
 function rpcHandler(req, res, { method, url }, options) {

@@ -1,8 +1,8 @@
 import shell from 'shelljs';
 import { getStructure } from '../structure.js';
-import buildServer from './build-server.js';
-// import buildLocalHtml from './build-local-html.js';
-import buildApp from './build-app.js';
+import { buildServer } from './build-server.js';
+// import {buildLocalHtml} from './build-local-html.js';
+import { buildApp } from './build-app.js';
 
 function clean(dest) {
   shell.rm('-rf', dest);

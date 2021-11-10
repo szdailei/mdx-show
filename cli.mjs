@@ -28,7 +28,7 @@ function openUrl(url) {
       cmd = 'xdg-open';
       break;
     default:
-      throw new Error(`Unsupported platform: ${process.platform}`);
+      throw new RangeError(`Unsupported platform: ${process.platform}`);
   }
   exec(`${cmd} "${url}"`);
 }
