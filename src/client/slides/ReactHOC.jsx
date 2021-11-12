@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Player } from '../components/index.js';
-import makeid from '../utils/makeid.js';
+import { makeid } from '../utils/index.js';
 import { getRealSrc } from '../markdown/markdown.js';
 import MDXToReactHOC from './MDXToReactHOC.jsx';
 

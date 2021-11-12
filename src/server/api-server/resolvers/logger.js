@@ -12,5 +12,4 @@ logger.setLoggerFileSuffix = (fileSuffix) => {
   logger.loggerFileSuffix = fileSuffix;
 };
 
-
 export default logger;

@@ -38,8 +38,8 @@ function exitFullscreen({ videoRef }) {
 }
 
 const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
-  const [paused, setPaused] = useState(true);
-  const [hover, setHover] = useState(false);
+  const [state, setState] = useState({ paused: true, hover: false });
+  const { paused, hover } = state;
 
   const onClick = useCallback(
     (event) => {
@@ -52,9 +52,9 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
         videoRef.current.pause();
       }
 
-      setPaused(!paused);
+      setState({ paused: !paused, hover });
     },
-    [paused, playerRef, videoRef]
+    [hover, paused, playerRef, videoRef]
   );
 
   useImperativeHandle(ref, () => ({
@@ -68,29 +68,30 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
     videoRef.current.dataStoredHeight = videoRef.current.style.height;
 
     videoRef.current.addEventListener('playing', () => {
-      setPaused(videoRef.current.paused);
+      setState({ paused: videoRef.current.paused, hover });
     });
 
     videoRef.current.addEventListener('pause', () => {
-      setPaused(videoRef.current.paused);
+      setState({ paused: videoRef.current.paused, hover });
     });
 
-    setPaused(videoRef.current.paused);
-  }, [videoRef]);
+    setState({ paused: videoRef.current.paused, hover });
+  }, [hover, videoRef]);
 
-  const onMouseEnter = useCallback((event) => {
+  const onPointerEnter = useCallback((event) => {
     event.preventDefault();
-    setHover(true);
-  }, []);
-  const onMouseLeave = useCallback((event) => {
-    event.preventDefault();
-    setHover(false);
-  }, []);
+    setState({ paused, hover: true });
+  }, [paused]);
 
-  const eventHandles = {
+  const onPointerLeave = useCallback((event) => {
+    event.preventDefault();
+    setState({ paused, hover: false });
+  }, [paused]);
+
+  const eventHandlers = {
     onClick,
-    onMouseEnter,
-    onMouseLeave,
+    onPointerEnter,
+    onPointerLeave,
   };
 
   const breath = keyframes`from { opacity: 1; }
@@ -141,11 +142,11 @@ to { opacity: 0; }
   };
 
   return paused ? (
-    <Div style={playButtonStyle} {...eventHandles}>
+    <Div style={playButtonStyle} {...eventHandlers}>
       {playButton}
     </Div>
   ) : (
-    <Div style={pauseButtonStyle} {...eventHandles}>
+    <Div style={pauseButtonStyle} {...eventHandlers}>
       {pauseButton}
     </Div>
   );

@@ -34,7 +34,7 @@ function log(msg) {
 }
 
 async function server({ port, web, storage } = {}) {
-  const theScriptDir = getTheScriptDir()
+  const theScriptDir = getTheScriptDir();
   const theWorkingDir = process.cwd();
 
   let staticServerPort = port || defaultVars.staticServer.port;

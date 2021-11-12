@@ -1,4 +1,4 @@
-import trim from '../utils/trim.js';
+import { trim } from '../utils/index.js';
 import emptyTags from '../markdown/empty-tags.js';
 
 function getTagName(text) {

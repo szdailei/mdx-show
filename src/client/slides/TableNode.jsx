@@ -1,5 +1,5 @@
 import React from 'react';
-import makeid from '../utils/makeid.js';
+import { makeid } from '../utils/index.js';
 import { TH, TD, TR, THead, TBody, Table } from '../styled/index.js';
 import parseText from './parse-one-line-text.js';
 

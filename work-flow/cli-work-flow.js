@@ -1,3 +1,3 @@
 import workFlow from './work-flow.js';
 
-workFlow();
+workFlow({loggerFile:'./log/work-flow.log'});

@@ -8,4 +8,11 @@ function makeid() {
   return result;
 }
 
-export default makeid;
+function trim(text) {
+  if (text) {
+    return text.trim();
+  }
+  return text;
+}
+
+export { makeid, trim };

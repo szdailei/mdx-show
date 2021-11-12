@@ -1,11 +1,11 @@
 /* eslint-disable react/forbid-prop-types */
 import React, { useState, useCallback, useImperativeHandle, useRef } from 'react';
 import PropTypes from 'prop-types';
-import makeid from '../utils/makeid.js';
-import { Button, Div, GridContainer, TextArea } from '../styled/index.js';
+import { makeid } from '../utils/index.js';
+import { Button, Div, Grid, TextArea } from '../styled/index.js';
 import { Message } from '../components/index.js';
 
-const Example = React.forwardRef((_, ref) => {
+const Parsed = React.forwardRef((_, ref) => {
   const [children, setChildren] = useState();
 
   useImperativeHandle(ref, () => ({
@@ -17,7 +17,7 @@ const Example = React.forwardRef((_, ref) => {
   return <Div ref={ref}>{children}</Div>;
 });
 
-const ParseButton = React.forwardRef(({ createPages, textAreaRef, exampleRef, messageRef }, ref) => {
+const ParseButton = React.forwardRef(({ createPages, textAreaRef, parsedRef, messageRef }, ref) => {
   const onClick = useCallback(
     (event) => {
       event.preventDefault();
@@ -37,9 +37,9 @@ const ParseButton = React.forwardRef(({ createPages, textAreaRef, exampleRef, me
       const parseMessage = <Div style={{ color: 'red', fontSize: '0.8em' }}>解析出{elementCount}个元素</Div>;
 
       messageRef.current.setChildren(parseMessage);
-      exampleRef.current.setChildren(firstPageMain);
+      parsedRef.current.setChildren(firstPageMain);
     },
-    [createPages, textAreaRef, exampleRef, messageRef]
+    [createPages, textAreaRef, parsedRef, messageRef]
   );
 
   return (
@@ -52,20 +52,20 @@ const ParseButton = React.forwardRef(({ createPages, textAreaRef, exampleRef, me
 ParseButton.propTypes = {
   createPages: PropTypes.func.isRequired,
   textAreaRef: PropTypes.object.isRequired,
-  exampleRef: PropTypes.object.isRequired,
+  parsedRef: PropTypes.object.isRequired,
   messageRef: PropTypes.object.isRequired,
 };
 
-function ExampleContainer({ createPages }) {
+function Example({ createPages }) {
   const textAreaRef = useRef();
-  const exampleRef = useRef();
+  const parsedRef = useRef();
   const messageRef = useRef();
 
   const onKeyUp = useCallback((event) => {
     event.nativeEvent.stopImmediatePropagation();
   }, []);
 
-  const gridContainerStyle = {
+  const gridStyle = {
     gridTemplateColumns: 'auto min-content max-content',
   };
 
@@ -75,29 +75,31 @@ function ExampleContainer({ createPages }) {
 
   return (
     <>
-      <GridContainer style={gridContainerStyle}>
+      <Grid style={gridStyle}>
         <TextArea onKeyUp={onKeyUp} style={textAreaStyle} ref={textAreaRef} />
         <ParseButton
           createPages={createPages}
           textAreaRef={textAreaRef}
-          exampleRef={exampleRef}
+          parsedRef={parsedRef}
           messageRef={messageRef}
         />
         <Message ref={messageRef} />
-      </GridContainer>
-      <Example ref={exampleRef} />
+      </Grid>
+      <Parsed ref={parsedRef} />
     </>
   );
 }
 
-ExampleContainer.propTypes = {
+Example.propTypes = {
   createPages: PropTypes.func.isRequired,
 };
 
-ExampleContainer.createComponent = (createPages) => <ExampleContainer key={makeid()} createPages={createPages} />;
+Example.createComponent = (createPages) => <Example key={makeid()} createPages={createPages} />;
 
 function isExampleTag(tagName) {
   return tagName === 'Example';
 }
 
-export { ExampleContainer, isExampleTag };
+export default Example;
+
+export { isExampleTag };

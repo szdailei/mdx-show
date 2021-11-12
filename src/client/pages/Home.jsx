@@ -1,8 +1,8 @@
 import React from 'react';
-import makeid from '../utils/makeid.js';
+import { makeid } from '../utils/index.js';
 import useRemoteData from '../network/cache.js';
 import { SLIDES_PATH } from '../route/route.js';
-import { FlexContainer } from '../styled/index.js';
+import { Flex } from '../styled/index.js';
 import { Article, Header, Main, Section } from '../sectioning/index.js';
 import { Error } from '../page-components/index.js';
 
@@ -44,9 +44,9 @@ function Home() {
   mdxFileList.forEach((fileName) => {
     const href = `#${SLIDES_PATH}${fileName.toString()}`;
     const child = (
-      <FlexContainer key={makeid()} style={{ margin: '0.6em 0 0 2em' }}>
+      <Flex key={makeid()} style={{ margin: '0.6em 0 0 2em' }}>
         <a href={href}>{fileName.toString()}</a>
-      </FlexContainer>
+      </Flex>
     );
     children.push(child);
   });

@@ -4,10 +4,10 @@ const debugVars = {
   writeToFunc: undefined,
 };
 
-const debug = (message) => {
+const debug = (desc, message) => {
   let site;
   try {
-    site = debugSite({ belowFuncOfFilterStack: debug });
+    site = debugSite();
   } catch (error) {
     if (error instanceof RangeError) {
       // eslint-disable-next-line no-console
@@ -17,7 +17,8 @@ const debug = (message) => {
     throw error;
   }
 
-  site.message = message;
+  site.desc = desc;
+  site.debug = message;
   debugVars.writeToFunc({ data: site });
 };
 

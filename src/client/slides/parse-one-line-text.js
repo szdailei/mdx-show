@@ -1,5 +1,5 @@
 import HTML from 'html-parse-stringify';
-import trim from '../utils/trim.js';
+import { trim } from '../utils/index.js';
 import Code from './Code.jsx';
 import ReactHOC from './ReactHOC.jsx';
 

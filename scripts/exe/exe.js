@@ -3,7 +3,7 @@ import fs from 'fs';
 import { transformSync } from '@babel/core';
 import { exec } from 'pkg';
 import { getStructure } from '../structure.js';
-import buildCliServer from '../rollup/build-cli-server.js'
+import buildCliServer from '../rollup/build-cli-server.js';
 
 async function trans(origFile, targetFile) {
   const options = {
@@ -22,7 +22,7 @@ async function exeServer(mjsFile, cjsFile, exeFile) {
 }
 
 async function exe() {
-  await buildCliServer()
+  await buildCliServer();
 
   const { dest } = await getStructure();
 

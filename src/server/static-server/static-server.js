@@ -10,27 +10,36 @@ import startServer from '../http/start-server.js';
 
 const MAX_CACHED_FILES = 50;
 const MAX_CACHED_SIZE = 10 * 1024 * 1024;
-const MIN_COMPRESS_SIZE = 2048;
 const MIN_BR_COMPRESS_SIZE = 5 * 1024 * 1024;
 const lru = new LRU({ maxSize: MAX_CACHED_FILES });
 
 function isCompressType(mimeType) {
   const types = mimeType.split('/');
-  const type = types[0];
-  if (type === 'application' || type === 'text') {
-    return true;
+  switch (types[0]) {
+    case 'application':
+      switch (types[1]) {
+        case 'zip':
+        case 'gzip':
+          return false;
+        default:
+          return true;
+      }
+    case 'audio':
+    case 'image':
+    case 'video':
+      return false;
+    default:
+      return true;
   }
-  return false;
 }
 
-function getContentType(filename) {
+function getMimeType(filename) {
   const extension = extname(filename);
   let mimeType;
   if (extension) {
     mimeType = mime.getType(extension);
     if (mimeType) {
-      const contentType = `${mimeType}; charset=utf-8`;
-      return contentType;
+      return mimeType;
     }
   }
   return 'application/octet-stream';
@@ -56,8 +65,8 @@ function getEncodings(acceptEncoding) {
 
 function getContentEncoding(acceptEncoding, size, mimeType) {
   const encodings = getEncodings(acceptEncoding);
-  if (size < MIN_COMPRESS_SIZE || !isCompressType(mimeType) || encodings.size === 0) {
-    return '';
+  if (!isCompressType(mimeType) || encodings.size === 0) {
+    return null;
   }
   // Speed: deflate = gzip >> br. Compress: br > deflate = gzip. So use br for big files, deflate for others
   if (size > MIN_BR_COMPRESS_SIZE) {
@@ -97,27 +106,53 @@ function createTransform(encoding) {
   }
 }
 
-function createEtag(mtimeStr, { encoding }) {
-  return `${encoding}:${mtimeStr}`;
+function makeCRCTable() {
+  let crc;
+  const crcTable = [];
+  for (let i = 0; i < 256; i += 1) {
+    crc = i;
+    for (let j = 0; j < 8; j += 1) {
+      // eslint-disable-next-line no-bitwise
+      crc = crc & 1 ? 0xedb88320 ^ (crc >>> 1) : crc >>> 1;
+    }
+    crcTable[i] = crc;
+  }
+  return crcTable;
 }
 
-function getCache(filename, { etag, encoding }) {
-  const value = lru.get(filename);
+function crc32(str) {
+  // eslint-disable-next-line no-bitwise
+  let crc = 0 ^ -1;
+
+  for (let i = 0; i < str.length; i += 1) {
+    // eslint-disable-next-line no-bitwise
+    crc = (crc >>> 8) ^ makeCRCTable()[(crc ^ str.charCodeAt(i)) & 0xff];
+  }
+
+  // eslint-disable-next-line no-bitwise
+  return (crc ^ -1) >>> 0;
+}
+
+function createEtag(url, mtime) {
+  return crc32(`${url}:${mtime}`).toString();
+}
+
+function getCachedDataBuffer(fileName, { etag, encoding }) {
+  const value = lru.get(fileName);
   if (!value) {
     return null;
   }
   if (value.etag !== etag || value.encoding !== encoding) {
-    lru.delete(filename);
+    lru.delete(fileName);
     return null;
   }
 
-  value.data.length = value.length;
   return value.data;
 }
 
-function setCache(filename, data, { etag, length, encoding }) {
-  const value = { data, etag, length, encoding };
-  lru.set(filename, value);
+function setCache(fileName, data, { etag, mimeType, encoding }) {
+  const value = { data, etag, mimeType, encoding };
+  lru.set(fileName, value);
 }
 
 /**
@@ -125,12 +160,14 @@ function setCache(filename, data, { etag, length, encoding }) {
 */
 function sendFile(res, { fileName, etag, mimeType, encoding }) {
   res.setHeader('ETag', etag);
-  res.setHeader('Content-Type', mimeType);
-  res.setHeader('Content-Encoding', encoding);
+  res.setHeader('Content-Type', `${mimeType}; charset=UTF-8`);
+  if (encoding) {
+    res.setHeader('Content-Encoding', encoding);
+  }
 
-  const cache = getCache(fileName, { etag, encoding });
-  if (cache) {
-    sendResponse(res, 200, cache.data);
+  const cachedDataBuffer = getCachedDataBuffer(fileName, { etag, encoding });
+  if (cachedDataBuffer) {
+    sendResponse(res, 200, cachedDataBuffer);
     return;
   }
 
@@ -152,7 +189,7 @@ function sendFile(res, { fileName, etag, mimeType, encoding }) {
         }
         const dataBuffer = Buffer.concat(dataArray, dataBufferLength);
         if (dataBufferLength < MAX_CACHED_SIZE) {
-          setCache(fileName, dataBuffer, { etag, length: dataBufferLength, encoding });
+          setCache(fileName, dataBuffer, { etag, mimeType, encoding });
         }
       });
   } catch (error) {
@@ -182,9 +219,9 @@ async function resolveUrl(req, res, { method, url }, options) {
     return;
   }
   if (stats.isFile()) {
-    const mimeType = getContentType(path);
+    const mimeType = getMimeType(path);
     const encoding = getContentEncoding(req.headers['accept-encoding'], stats.size, mimeType);
-    const etag = createEtag(stats.mtimeMs.toString(), { encoding });
+    const etag = createEtag(url, stats.mtimeMs.toString());
     if (req.headers['if-none-match'] === etag) {
       sendResponse(res, 304);
     } else {

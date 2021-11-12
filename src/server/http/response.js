@@ -1,10 +1,10 @@
 import http from 'http';
-import stream from 'stream';
+import {PassThrough} from 'stream';
 
 function sendResponseBySteam(res, statusCode, statusMessage) {
   res.writeHead(statusCode);
 
-  const bufferStream = new stream.PassThrough();
+  const bufferStream = new PassThrough();
   bufferStream.end(Buffer.from(statusMessage));
   bufferStream.pipe(res);
 }

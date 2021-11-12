@@ -12,7 +12,7 @@ async function buildCliServer() {
     input: join(root, 'cli.mjs'),
     plugins: nodePlugins,
   };
-  
+
   const outputOptions = {
     dir: dest,
     format: 'esm',

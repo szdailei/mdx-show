@@ -1,4 +1,4 @@
-import defaultVars from '../default-vars.js'
+import defaultVars from '../default-vars.js';
 import storage from './storage/storage.js';
 import logger from './resolvers/logger.js';
 

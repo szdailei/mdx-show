@@ -11,12 +11,11 @@ import {
   getTextExceptTheFirstTag,
 } from './parse-jsx-utils.js';
 import recursiveParseMarkedToken from './recursive-parse-marked-token.js';
-import { closeJSX } from './close-jsx.js';
-import { isParsingJSX, getTokensByMarkdown, openJSX, recursiveSpliceChildren } from './open-jsx.js';
+import { isParsingJSX, getTokensByMarkdown, openJSX, closeJSX, recursiveSpliceChildren } from './parse-jsx.js';
 import { getCurrentNode, addComponentToChildren } from './tree.js';
 import { defaultTheme, isThemeTag } from './theme.js';
 import Page from './Page.jsx';
-import { ExampleContainer, isExampleTag } from './Example.jsx';
+import Example, { isExampleTag } from './Example.jsx';
 
 function noUse() {}
 const contract = noUse;
@@ -54,7 +53,7 @@ function parsePageBreak(ctx, pages) {
 function createExample(ctx) {
   const currentNode = getCurrentNode(ctx.jsxRoot);
   // eslint-disable-next-line no-use-before-define
-  const component = ExampleContainer.createComponent(createPages);
+  const component = Example.createComponent(createPages);
   addComponentToChildren(ctx.jsxRoot, currentNode, component);
 
   if (ctx.jsxRoot === currentNode) {
@@ -152,8 +151,7 @@ function createPages(markdown) {
     theme: defaultTheme,
   };
 
-  debug(markdown)
-
+  debug(markdown);
 
   contract('@require MD \n%s\n@ensure 解析为%d个token%O', markdown, tokens.length, tokens);
   for (let i = 0; i < tokens.length; i += 1) {

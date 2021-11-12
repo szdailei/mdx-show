@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const storage = {
-  root:undefined
+  root: undefined,
 };
 
 storage.getStorageRoot = () => storage.root;

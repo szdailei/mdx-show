@@ -1,7 +1,7 @@
 import request from './network/client.js';
 import debug from './debug/debug.js';
 
-function toServer({data}) {
+function toServer({ data }) {
   const query = {
     command: 'logger',
     params: data,
@@ -9,9 +9,9 @@ function toServer({data}) {
   request(query);
 }
 
-const init = ({ entryFunc }) => {
+const init = ({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack }) => {
   request.init();
-  debug.init({ entryFunc, writeToFunc: toServer });
+  debug.init({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack, writeToFunc: toServer });
 };
 
 init.isFinished = () => request.isFinished();

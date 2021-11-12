@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GridContainer } from '../styled/index.js';
+import { Grid } from '../styled/index.js';
 
 // eslint-disable-next-line react/prop-types
 const Split = React.forwardRef(({ children, style, ...rest }, ref) => {
@@ -10,9 +10,9 @@ const Split = React.forwardRef(({ children, style, ...rest }, ref) => {
   objStyle.alignItems = objStyle.alignItems || 'end';
 
   return (
-    <GridContainer {...rest} style={objStyle} ref={ref}>
+    <Grid {...rest} style={objStyle} ref={ref}>
       {children}
-    </GridContainer>
+    </Grid>
   );
 });
 

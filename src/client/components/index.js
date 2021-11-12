@@ -8,4 +8,4 @@ import PrismCode from './PrismCode.jsx';
 import Player from './Player.jsx';
 import SignInInput from './SignInInput.jsx';
 
-export { Message, Appear, Clock, Timer, ClockOrTimer, Split, PrismCode, Player, SignInInput};
+export { Message, Appear, Clock, Timer, ClockOrTimer, Split, PrismCode, Player, SignInInput };

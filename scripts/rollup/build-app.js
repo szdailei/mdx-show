@@ -1,5 +1,5 @@
 import postcss from 'rollup-plugin-postcss';
-import {existsSync} from 'fs'
+import { existsSync } from 'fs';
 import { join } from 'path';
 import shell from 'shelljs';
 import { getStructure } from '../structure.js';

@@ -80,7 +80,6 @@ request.init = () => {
   clientVars.downloadServerUrl = downloadServerUrl;
 };
 
-// eslint-disable-next-line no-unneeded-ternary
-request.isFinished = () => (clientVars.apiServerEndPoint ? true : false);
+request.isFinished = () => (!!clientVars.apiServerEndPoint);
 
 export default request;

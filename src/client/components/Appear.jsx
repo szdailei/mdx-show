@@ -28,44 +28,44 @@ const Appear = React.forwardRef(({ children, hover, wrap, style, ...rest }, ref)
     [stateOfShown]
   );
 
-  let eventHandles;
+  let eventHandlers;
   if (hover) {
-    eventHandles = {
+    eventHandlers = {
       onMouseEnter,
       onMouseLeave,
     };
   } else {
-    eventHandles = { onClick };
+    eventHandlers = { onClick };
   }
 
-  const containerDivStyle = { ...objStyle };
-  containerDivStyle.width = containerDivStyle.width || 'fit-content';
+  const wrapStyle = { ...objStyle };
+  wrapStyle.width = wrapStyle.width || 'fit-content';
 
-  const firstChildContainerStyle = { ...children[0].props.style };
-  firstChildContainerStyle.width = firstChildContainerStyle.width || 'fit-content';
+  const firstChildWrapStyle = { ...children[0].props.style };
+  firstChildWrapStyle.width = firstChildWrapStyle.width || 'fit-content';
 
-  const secondChildContainer = stateOfShown ? <Div>{restChildren}</Div> : null;
+  const secondChildWrap = stateOfShown ? <Div>{restChildren}</Div> : null;
 
-  let firstChildContainer;
+  let firstChildWrap;
   if (wrap) {
-    firstChildContainer = <Div style={firstChildContainerStyle}> {firstChild}</Div>;
+    firstChildWrap = <Div style={firstChildWrapStyle}> {firstChild}</Div>;
     return (
-      <Div {...rest} style={containerDivStyle} {...eventHandles} ref={ref}>
-        {firstChildContainer}
-        {secondChildContainer}
+      <Div {...rest} style={wrapStyle} {...eventHandlers} ref={ref}>
+        {firstChildWrap}
+        {secondChildWrap}
       </Div>
     );
   }
 
-  firstChildContainer = (
-    <Div {...eventHandles} style={firstChildContainerStyle}>
+  firstChildWrap = (
+    <Div {...eventHandlers} style={firstChildWrapStyle}>
       {children[0]}
     </Div>
   );
   return (
-    <Div {...rest} style={containerDivStyle} ref={ref}>
-      {firstChildContainer}
-      {secondChildContainer}
+    <Div {...rest} style={wrapStyle} ref={ref}>
+      {firstChildWrap}
+      {secondChildWrap}
     </Div>
   );
 });

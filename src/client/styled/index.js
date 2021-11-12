@@ -1,24 +1,24 @@
-import FlexContainer from './FlexContainer';
-import GridContainer from './GridContainer';
-import Abbr from './Abbr';
-import Button from './Button';
-import Div from './Div';
-import Heading from './Heading';
-import Img from './Img';
-import Input from './Input';
-import Label from './Label';
-import List from './List';
-import Option from './Option';
-import P from './P';
-import Select from './Select';
-import Span from './Span';
-import { TH, TD, TR, THead, TBody, Table } from './Table';
-import TextArea from './TextArea';
-import Video from './Video';
+import Flex from './Flex.jsx';
+import Grid from './Grid.jsx';
+import Abbr from './Abbr.jsx';
+import Button from './Button.jsx';
+import Div from './Div.jsx';
+import Heading from './Heading.jsx';
+import Img from './Img.jsx';
+import Input from './Input.jsx';
+import Label from './Label.jsx';
+import List from './List.jsx';
+import Option from './Option.jsx';
+import P from './P.jsx';
+import Select from './Select.jsx';
+import Span from './Span.jsx';
+import { TH, TD, TR, THead, TBody, Table } from './Table.jsx';
+import TextArea from './TextArea.jsx';
+import Video from './Video.jsx';
 
 export {
-  FlexContainer,
-  GridContainer,
+  Flex,
+  Grid,
   Abbr,
   Button,
   Div,

@@ -2,15 +2,15 @@ import React from 'react';
 import styled from './styled.js';
 
 // eslint-disable-next-line react/prop-types
-const FlexContainer = React.forwardRef(({ style, ...rest }, ref) => {
+const Grid = React.forwardRef(({ style, ...rest }, ref) => {
   const objStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    flexFlow: 'column wrap',
+    display: 'grid',
+    alignItems: 'center',
     ...style,
   };
   const Styled = styled('div');
+
   return <Styled {...rest} style={objStyle} ref={ref} />;
 });
 
-export default FlexContainer;
+export default Grid;

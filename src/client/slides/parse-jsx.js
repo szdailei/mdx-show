@@ -1,15 +1,56 @@
+import { trim } from '../utils/index.js';
 import parser from '../markdown/markdown-parser.js';
-import debug from '../debug/debug.js';
 import recursiveParseMarkedToken from './recursive-parse-marked-token.js';
-import { createNode, addNodeToNodeList, getCurrentNode } from './tree.js';
-import { isCloseTagAtEnd, isOpenTagAtBegginning, isSelfCloseTag, getTextExceptTheFirstTag } from './parse-jsx-utils.js';
-import { closeJSX } from './close-jsx.js';
+import { createNode, addNodeToNodeList, getCurrentNode, addComponentToChildren } from './tree.js';
+import {
+  isCloseTagAtEnd,
+  isOpenTagAtBegginning,
+  isSelfCloseTag,
+  getTextExceptTheFirstTag,
+  isCloseTagAtBeginning,
+  isHtmlTag,
+} from './parse-jsx-utils.js';
+import MDXToReactHOC from './MDXToReactHOC.jsx';
+import ReactHOC from './ReactHOC.jsx';
 
 function noUse() {}
 const contract = noUse;
 
 function isParsingJSX(ctx) {
   return ctx.jsxRoot;
+}
+
+function closeJSX(ctx) {
+  const currentNode = getCurrentNode(ctx.jsxRoot);
+  if (currentNode.tagName === 'Title') {
+    ctx.hasTitleInCurrentPage = true;
+  }
+
+  let component;
+  if (isHtmlTag(currentNode.tagName)) {
+    component = ReactHOC.createComponentByNode(currentNode);
+  } else {
+    component = MDXToReactHOC.createComponentByNode(currentNode);
+  }
+
+  addComponentToChildren(ctx.jsxRoot, currentNode, component);
+
+  if (ctx.jsxRoot === currentNode) {
+    ctx.pageChildren.push(component);
+    ctx.jsxRoot = null;
+  }
+}
+
+function closeMultiJSXsInOneLine(ctx, inputText) {
+  let text = inputText;
+  if (!text || text.length < 4) return;
+
+  while (isCloseTagAtBeginning(text)) {
+    closeJSX(ctx);
+
+    text = trim(getTextExceptTheFirstTag(text));
+    if (!text || text.length < 4) return;
+  }
 }
 
 function getTokensByMarkdown(markdown) {
@@ -135,4 +176,4 @@ function recursiveSpliceChildren(inputChildren) {
   }
 }
 
-export { isParsingJSX, getTokensByMarkdown, openJSX, recursiveSpliceChildren };
+export { isParsingJSX, getTokensByMarkdown, openJSX, closeJSX, closeMultiJSXsInOneLine, recursiveSpliceChildren };
