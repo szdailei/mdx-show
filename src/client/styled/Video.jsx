@@ -1,8 +1,9 @@
+/* eslint-disable no-param-reassign */
 import React from 'react';
 import styled from './styled.js';
 
 // eslint-disable-next-line react/prop-types
-const Video = React.forwardRef(({ style, ...rest }, ref) => {
+const Video = React.forwardRef(({ saveViewPortCallback, style, ...rest }, ref) => {
   const props = {
     crossOrigin: 'anonymous',
     controls: true,

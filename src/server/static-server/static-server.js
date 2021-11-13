@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import fs from 'fs';
 import { join, extname } from 'path';
 import zlib from 'zlib';
@@ -112,7 +113,6 @@ function makeCRCTable() {
   for (let i = 0; i < 256; i += 1) {
     crc = i;
     for (let j = 0; j < 8; j += 1) {
-      // eslint-disable-next-line no-bitwise
       crc = crc & 1 ? 0xedb88320 ^ (crc >>> 1) : crc >>> 1;
     }
     crcTable[i] = crc;
@@ -121,15 +121,12 @@ function makeCRCTable() {
 }
 
 function crc32(str) {
-  // eslint-disable-next-line no-bitwise
   let crc = 0 ^ -1;
 
   for (let i = 0; i < str.length; i += 1) {
-    // eslint-disable-next-line no-bitwise
     crc = (crc >>> 8) ^ makeCRCTable()[(crc ^ str.charCodeAt(i)) & 0xff];
   }
 
-  // eslint-disable-next-line no-bitwise
   return (crc ^ -1) >>> 0;
 }
 

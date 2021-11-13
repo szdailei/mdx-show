@@ -25,16 +25,31 @@ const pauseButton = (
   </svg>
 );
 
-function requestFullscreen({ playerRef, videoRef }) {
-  playerRef.current.requestFullscreen();
-  videoRef.current.style.width = '100vw';
-  videoRef.current.style.height = '100vh';
+function saveVideoViewPort(videoRef) {
+  if (!videoRef.current.dataStoredViewPort) {
+    videoRef.current.dataStoredViewPort = {
+      width: videoRef.current.clientWidth,
+      height: videoRef.current.clientHeight,
+    };
+  }
 }
 
-function exitFullscreen({ videoRef }) {
-  document.exitFullscreen();
-  videoRef.current.style.width = videoRef.current.dataStoredWidth;
-  videoRef.current.style.height = videoRef.current.dataStoredHeight;
+function requestVideoFullScreen(playerRef, videoRef) {
+  if (!document.fullscreenElement) {
+    playerRef.current.requestFullscreen();
+    videoRef.current.style.width = '100vw';
+    videoRef.current.style.height = '100vh';
+  }
+}
+
+function exitVideoFullScreen(videoRef) {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  }
+  if (videoRef.current.dataStoredViewPort) {
+    videoRef.current.style.width = `${videoRef.current.dataStoredViewPort.width}px`;
+    videoRef.current.style.height = `${videoRef.current.dataStoredViewPort.height}px`;
+  }
 }
 
 const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
@@ -44,49 +59,79 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   const onClick = useCallback(
     (event) => {
       event.preventDefault();
+      saveVideoViewPort(videoRef);
       if (paused) {
-        requestFullscreen({ playerRef, videoRef });
+        requestVideoFullScreen(playerRef, videoRef);
         videoRef.current.play();
       } else {
-        exitFullscreen({ videoRef });
+        exitVideoFullScreen(videoRef);
         videoRef.current.pause();
       }
-
-      setState({ paused: !paused, hover });
     },
-    [hover, paused, playerRef, videoRef]
+    [paused, playerRef, videoRef]
   );
+
+  const onPlaying = useCallback(() => {
+    if (paused) {
+      setState({ paused: false, hover: state.hover });
+    }
+  }, [paused, state.hover]);
+
+  const onPause = useCallback(() => {
+    if (!paused) {
+      setState({ paused: true, hover: state.hover });
+    }
+  }, [paused, state.hover]);
 
   useImperativeHandle(ref, () => ({
     onClick: (event) => {
       onClick(event);
     },
+    onPlaying: (event) => {
+      onPlaying(event);
+    },
+    onPause: (event) => {
+      onPause(event);
+    },
   }));
 
+  const onFullScreenChange = useCallback(() => {
+    if (!document.fullscreenElement) {
+      exitVideoFullScreen(videoRef);
+    }
+  }, [videoRef]);
+
   useEffect(() => {
-    videoRef.current.dataStoredWidth = videoRef.current.style.width;
-    videoRef.current.dataStoredHeight = videoRef.current.style.height;
+    function initPaused() {
+      if (videoRef && videoRef.current) setState({ paused: videoRef.current.paused, hover: state.hover });
+    }
 
-    videoRef.current.addEventListener('playing', () => {
-      setState({ paused: videoRef.current.paused, hover });
-    });
+    initPaused();
+    const storedFullScreenChangeHandler = document.onfullscreenchange;
+    document.onfullscreenchange = onFullScreenChange;
 
-    videoRef.current.addEventListener('pause', () => {
-      setState({ paused: videoRef.current.paused, hover });
-    });
+    return () => {
+      document.onfullscreenchange = storedFullScreenChangeHandler;
+    };
+  }, [onFullScreenChange, state.hover, videoRef]);
 
-    setState({ paused: videoRef.current.paused, hover });
-  }, [hover, videoRef]);
+  const onPointerEnter = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!state.paused) return;
+      setState({ paused: state.paused, hover: true });
+    },
+    [state.paused]
+  );
 
-  const onPointerEnter = useCallback((event) => {
-    event.preventDefault();
-    setState({ paused, hover: true });
-  }, [paused]);
-
-  const onPointerLeave = useCallback((event) => {
-    event.preventDefault();
-    setState({ paused, hover: false });
-  }, [paused]);
+  const onPointerLeave = useCallback(
+    (event) => {
+      event.preventDefault();
+      if (!state.paused) return;
+      setState({ paused: state.paused, hover: false });
+    },
+    [state.paused]
+  );
 
   const eventHandlers = {
     onClick,
@@ -142,11 +187,11 @@ to { opacity: 0; }
   };
 
   return paused ? (
-    <Div style={playButtonStyle} {...eventHandlers}>
+    <Div style={playButtonStyle} {...eventHandlers} ref={ref}>
       {playButton}
     </Div>
   ) : (
-    <Div style={pauseButtonStyle} {...eventHandlers}>
+    <Div style={pauseButtonStyle} {...eventHandlers} ref={ref}>
       {pauseButton}
     </Div>
   );
@@ -161,9 +206,23 @@ function Player(props) {
     playButtonRef.current.onClick(event);
   };
 
+  const onPlaying = (event) => {
+    playButtonRef.current.onPlaying(event);
+  };
+
+  const onPause = (event) => {
+    playButtonRef.current.onPause(event);
+  };
+
+  const eventHandlers = {
+    onClick,
+    onPlaying,
+    onPause,
+  };
+
   return (
     <Div style={{ position: 'relative' }} ref={playerRef}>
-      <Video {...props} controlsList="nofullscreen" onClick={onClick} ref={videoRef} />
+      <Video controlsList="nofullscreen" {...props} {...eventHandlers} ref={videoRef} />
       <PlayButton videoRef={videoRef} playerRef={playerRef} ref={playButtonRef} />
     </Div>
   );
