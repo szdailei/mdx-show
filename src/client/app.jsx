@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { NotFound } from './page-components/index.js';
 import { makeid } from './utils/index.js';
 import { ROOT_PATH, SLIDES_PATH_WITH_ID } from './route/route.js';
 import init from './init.js';
-import { NotFound } from './page-components/index.js';
 import Home from './pages/Home.jsx';
 import Slides from './slides/Slides.jsx';
-import debugStartPoint from './slides/create-pages.js'
+import debugStartPoint from './slides/create-pages.js';
 
 function App() {
   const routes = [

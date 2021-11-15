@@ -1,5 +1,8 @@
 import defaultVars from '../default-vars.js';
-import request from '../network/client.js';
+
+const realSrcVars = {
+  downloadServerUrl:undefined,
+}
 
 function isUrl(src) {
   try {
@@ -46,10 +49,10 @@ function convertSrcToServer(src, type) {
   let serverSrc;
   switch (type) {
     case 'img':
-      serverSrc = `${request.getDownloadServerUrl()}/${getImagesDir()}${src}`;
+      serverSrc = `${realSrcVars.downloadServerUrl}/${getImagesDir()}${src}`;
       break;
     case 'video':
-      serverSrc = `${request.getDownloadServerUrl()}/${getVideosDir()}${src}`;
+      serverSrc = `${realSrcVars.downloadServerUrl}/${getVideosDir()}${src}`;
       break;
     default:
       break;
@@ -57,27 +60,23 @@ function convertSrcToServer(src, type) {
   return serverSrc;
 }
 
-function getRealSrc(src, type) {
+const realSrc = (src, type) => {
   if (isUrl(src)) return src;
-  const realSrc = window.location.protocol === 'file:' ? convertSrcToLocal(src, type) : convertSrcToServer(src, type);
-  return realSrc;
+  const source = window.location.protocol === 'file:' ? convertSrcToLocal(src, type) : convertSrcToServer(src, type);
+  return source;
 }
 
-function removeBlankLine(text) {
-  let result = '';
-  for (let i = 0; i < text.length; i += 1) {
-    if (text[i] !== '\r' && text[i] !== '\n') {
-      result += text[i];
-    }
-  }
-  return result;
+function getDownloadServerPort(staticServerPort) {
+  const port = typeof staticServerPort === 'string' ? parseInt(staticServerPort, 10) : staticServerPort;
+  return port + 2;
 }
 
-function trim(text) {
-  if (text) {
-    return text.trim();
-  }
-  return text;
-}
+realSrc.init = () => {
+  const { protocol, hostname, port } = window.location;
 
-export { getRealSrc, removeBlankLine, trim };
+  const downloadServerPort = getDownloadServerPort(port);
+  const downloadServerUrl = `${protocol}//${hostname}:${downloadServerPort}`;
+  realSrcVars.downloadServerUrl = downloadServerUrl;
+};
+
+export default realSrc

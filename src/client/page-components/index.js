@@ -1,5 +1,3 @@
-import Error from './Error.jsx';
-import Loading from './Loading.jsx';
-import NotFound from './NotFound.jsx';
+import { Error, Loading, NotFound } from '@szdailei/core/client/page-components/index.js';
 
 export { Error, Loading, NotFound };

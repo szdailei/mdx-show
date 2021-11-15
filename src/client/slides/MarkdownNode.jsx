@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeid, trim } from '../utils/index.js';
-import { getRealSrc, removeBlankLine } from '../markdown/markdown.js';
 import { Heading, Img, List, P, Span } from '../styled/index.js';
+import { realSrc, removeBlankLine } from '../markdown/index.js';
 import { PrismCode } from '../components/index.js';
 import { isJSXTagAtBegginning } from './parse-jsx-utils.js';
 import TableNode from './TableNode.jsx';
@@ -45,20 +45,20 @@ function MarkdownNode(token, children, options) {
     case 'image': {
       let hostname;
       let msg;
-      const realSrc = getRealSrc(token.href, 'img');
+      const source = realSrc(token.href, 'img');
       if (!trimedText || trimedText === '') {
         try {
-          const url = new URL(realSrc);
+          const url = new URL(source);
           hostname = url.hostname;
         } catch (err) {
           hostname = 'localhost';
         }
 
-        msg = `${realSrc} NOT FOUND or DENIED by SERVER. Please contact ${hostname} administrator to change CORS rule, or use LOCAL mdx-show.html instead of mdx-show SERVER to bypass ${hostname} CORS rule, or DOWNLOAD resources to local!`;
+        msg = `${source} NOT FOUND or DENIED by SERVER. Please contact ${hostname} administrator to change CORS rule, or use LOCAL mdx-show.html instead of mdx-show SERVER to bypass ${hostname} CORS rule, or DOWNLOAD resources to local!`;
       } else {
         msg = trimedText;
       }
-      node = <Img key={makeid()} src={realSrc} alt={msg} title={token.title} />;
+      node = <Img key={makeid()} src={source} alt={msg} title={token.title} />;
       break;
     }
     case 'link':

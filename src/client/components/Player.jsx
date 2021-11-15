@@ -25,15 +25,6 @@ const pauseButton = (
   </svg>
 );
 
-function saveVideoViewPort(videoRef) {
-  if (!videoRef.current.dataStoredViewPort) {
-    videoRef.current.dataStoredViewPort = {
-      width: videoRef.current.clientWidth,
-      height: videoRef.current.clientHeight,
-    };
-  }
-}
-
 function requestVideoFullScreen(playerRef, videoRef) {
   if (!document.fullscreenElement) {
     playerRef.current.requestFullscreen();
@@ -59,7 +50,6 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   const onClick = useCallback(
     (event) => {
       event.preventDefault();
-      saveVideoViewPort(videoRef);
       if (paused) {
         requestVideoFullScreen(playerRef, videoRef);
         videoRef.current.play();

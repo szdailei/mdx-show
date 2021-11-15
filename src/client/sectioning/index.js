@@ -1,8 +1,3 @@
-import Article from './Article.jsx';
-import Footer from './Footer.jsx';
-import Header from './Header.jsx';
-import Main from './Main.jsx';
-import Section from './Section.jsx';
-import Title from './Title.jsx';
+import { Article, Footer, Header, Main, Section, Title } from '@szdailei/core/client/sectioning/index.js';
 
 export { Article, Footer, Header, Main, Section, Title };

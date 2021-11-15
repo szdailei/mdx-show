@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { makeid } from '../utils/index.js';
 import { Button, Div, Span, Input, Label, TextArea } from '../styled/index.js';
 import { Title } from '../sectioning/index.js';
 import { Appear, Clock, Timer, ClockOrTimer, Split } from '../components/index.js';
-import { makeid } from '../utils/index.js';
 import { getTextFromChildren } from './parse-jsx-utils.js';
 
 function destructuringParams(propNames, params) {

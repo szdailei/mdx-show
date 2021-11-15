@@ -13,11 +13,13 @@ yarn build
 yarn pkg-fetch    // fetch nodejs binary to cache dir.
 yarn bundle
 ```
-## Prepare 
+
+## Prepare
 
 Copy your MDX files to dist, or create dist/web/mdx-show.toml and add static-server.root
 
 Default configuration of mdx-show.toml:
+
 ```
 [static-server]
 port = 3000
@@ -47,9 +49,10 @@ cd test
 yarn export // export to pdfs folder.
 ```
 
-## Slides show 
+## Slides show
 
 There are three methods to slides show:
+
 1. Open pdf file by pdf reader.
 2. Copy dist/mdx-show.html to MDXs folder, then open mdx-show.html by browser and select a MDX file.
 3. Run servers, then open web site and select one MDX file.

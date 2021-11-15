@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Player } from '../components/index.js';
 import { makeid } from '../utils/index.js';
-import { getRealSrc } from '../markdown/markdown.js';
+import { realSrc } from '../markdown/index.js';
 import MDXToReactHOC from './MDXToReactHOC.jsx';
 
 function ReactHOC({ children, tag, attrs }) {
@@ -31,16 +31,16 @@ function ReactHOC({ children, tag, attrs }) {
       return <hr key={makeid()} />;
     case 'source':
       // eslint-disable-next-line no-param-reassign
-      attrs.src = getRealSrc(attrs.src, 'video');
+      attrs.src = realSrc(attrs.src, 'video');
       return <source key={makeid()} {...attrs} />;
     case 'track':
       // eslint-disable-next-line no-param-reassign
-      attrs.src = getRealSrc(attrs.src, 'video');
+      attrs.src = realSrc(attrs.src, 'video');
       return <track key={makeid()} {...attrs} />;
     case 'video': {
       if (attrs.poster) {
         // eslint-disable-next-line no-param-reassign
-        attrs.poster = getRealSrc(attrs.poster, 'img');
+        attrs.poster = realSrc(attrs.poster, 'img');
       }
       return (
         <Player key={makeid()} {...attrs}>

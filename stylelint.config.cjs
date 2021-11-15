@@ -4,6 +4,6 @@ module.exports = {
   rules: {
     'font-family-name-quotes': 'always-where-recommended',
     'value-keyword-case': null,
-    'alpha-value-notation':'number',
+    'alpha-value-notation': 'number',
   },
 };

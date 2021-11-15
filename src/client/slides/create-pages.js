@@ -1,4 +1,4 @@
-import parser from '../markdown/markdown-parser.js';
+import { parser } from '../markdown/index.js';
 import debug from '../debug/debug.js';
 import {
   addBlankLinesAndRemoveIntent,

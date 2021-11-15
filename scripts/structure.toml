@@ -1,9 +1,0 @@
-dest = "dist/"
-destOfWeb = "dist/web/"
-
-srcOfServer = "src/server"
-srcOfClient = "src/client/"
-srcOfDebug = "src/debug/"
-srcOfHtml = "src/client/html/*"
-
-test = "test/"

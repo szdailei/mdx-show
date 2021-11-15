@@ -1,10 +1,10 @@
 import React from 'react';
 import { makeid } from '../utils/index.js';
-import useRemoteData from '../network/cache.js';
-import { SLIDES_PATH } from '../route/route.js';
+import { useRemoteData } from '../network/index.js';
 import { Flex } from '../styled/index.js';
 import { Article, Header, Main, Section } from '../sectioning/index.js';
 import { Error } from '../page-components/index.js';
+import { SLIDES_PATH } from '../route/route.js';
 
 function exitFullscreen() {
   if (document.fullscreenEnabled && document.fullscreenElement && document.exitFullscreen) {
