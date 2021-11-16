@@ -5,6 +5,8 @@ import { exec } from 'child_process';
 import minimist from 'minimist';
 import server from './dist/server.js';
 
+const name = 'mdx-show';
+
 const HELP = `Usage: mdx-show [options]
 
 start mdx-show server and browser.
@@ -56,7 +58,7 @@ async function main() {
   }
 
   const { port, web, storage } = args;
-  const actualPort = await server({ port, web, storage });
+  const actualPort = await server({ port, web, storage, name });
 
   const url = `http://localhost:${actualPort}`;
   //  openUrl(url);
