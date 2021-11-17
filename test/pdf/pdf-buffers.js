@@ -1,5 +1,5 @@
-import { getTotalPagesNum } from '../lib/eval-slides.js';
-import { createPdfBuffers } from '../lib/pdf.js';
+import { getTotalPagesNum } from '../eval/eval-slides.js';
+import { createPdfBuffers } from './pdf.js';
 
 async function testPdfBuffers(page) {
   const totalPagesNum = await getTotalPagesNum(page);

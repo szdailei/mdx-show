@@ -5,6 +5,8 @@ const debugVars = {
 };
 
 const debug = (desc, message) => {
+  if (process.env.NODE_ENV === 'production') return;
+
   let site;
   try {
     site = debugSite();

@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -18,13 +18,12 @@
   "main": "server.js",
   "type": "module",
   "bin": {
-    "mdx-show": "cli.mjs",
-    "mdx-show-pdfs": "cli-pdfs.mjs"
+    "mdx-show": "dist/cli-server.js",
+    "mdx-show-pdf": "dist/cli-pdf.js"
   },
   "files": [
     "dist/web/index.html",
-    "dist/web/app.js",
-    "dist/server.js"
+    "dist/web/app.js"
   ],
   "publishConfig": {
     "access": "public"
@@ -33,21 +32,23 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.mjs,.cjs,.ts,.tsx",
     "stylelint": "stylelint \"src/client/**/*.{jsx,tsx}\"",
-    "build": "cross-env NODE_ENV=production node node_modules/@szdailei/dev-scripts/cli/cli-build.js",
-    "build:dev": "cross-env NODE_ENV=development node node_modules/@szdailei/dev-scripts/cli/cli-build.js",
     "watch": "cross-env NODE_ENV=development node node_modules/@szdailei/dev-scripts/cli/cli-watch.js",
-    "release-info": "node node_modules/@szdailei/dev-scripts/cli/cli-gen-release-note.js",
+    "build:dev": "cross-env NODE_ENV=development node node_modules/@szdailei/dev-scripts/cli/cli-build.js",
+    "build": "cross-env NODE_ENV=production node node_modules/@szdailei/dev-scripts/cli/cli-build.js",
+    "build:local": "cross-env NODE_ENV=production node cli/cli-build-local-html.js",
+    "build:exe": "cross-env NODE_ENV=production node cli/cli-build-exe.js",
+    "build:pdf": "cross-env NODE_ENV=production node cli/cli-build-pdf.js",
+    "release": "node node_modules/@szdailei/dev-scripts/cli/cli-gen-release-note.js",
     "to-github": "node node_modules/@szdailei/dev-scripts/cli/cli-to-github.js",
     "to-npm": "node node_modules/@szdailei/dev-scripts/cli/cli-to-npm.js",
-    "exe": "node node_modules/@szdailei/dev-scripts/cli/cli-exe.js",
     "server": "node cli.mjs",
-    "pdfs": "node cli-pdfs.mjs",
     "work": "node work-flow/cli-work-flow.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
-    "@szdailei/core": "^0.1.0",
+    "@szdailei/core": "^0.4.0",
+    "bufferutil": "^4.0.5",
     "history": "^5.1.0",
     "html-parse-stringify": "^3.0.1",
     "marked": "^3.0.8",
@@ -58,10 +59,12 @@
     "quick-lru": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.0.0-beta.5"
+    "react-router-dom": "^6.0.2",
+    "utf-8-validate": "^5.0.7"
   },
   "devDependencies": {
-    "@szdailei/dev-scripts": "^0.1.0",
+    "@stylelint/postcss-css-in-js": "^0.37.2",
+    "@szdailei/dev-scripts": "^0.4.0",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
@@ -72,7 +75,18 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.4.1"
+    "jest": "^27.3.1",
+    "jest-html-reporters": "^2.1.6",
+    "pdf-lib": "^1.17.1",
+    "pkg": "^5.4.1",
+    "pkg-fetch": "^3.2.4",
+    "prettier": "^2.4.1",
+    "puppeteer": "^11.0.0",
+    "puppeteer-core": "^11.0.0",
+    "stylelint": "^14.0.1",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^23.0.0",
+    "web-resource-inliner": "^5.0.0"
   },
   "config": {
     "commitizen": {

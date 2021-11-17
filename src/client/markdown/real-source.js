@@ -1,8 +1,8 @@
 import defaultVars from '../default-vars.js';
 
 const realSrcVars = {
-  downloadServerUrl:undefined,
-}
+  downloadServerUrl: undefined,
+};
 
 function isUrl(src) {
   try {
@@ -64,7 +64,7 @@ const realSrc = (src, type) => {
   if (isUrl(src)) return src;
   const source = window.location.protocol === 'file:' ? convertSrcToLocal(src, type) : convertSrcToServer(src, type);
   return source;
-}
+};
 
 function getDownloadServerPort(staticServerPort) {
   const port = typeof staticServerPort === 'string' ? parseInt(staticServerPort, 10) : staticServerPort;
@@ -79,4 +79,4 @@ realSrc.init = () => {
   realSrcVars.downloadServerUrl = downloadServerUrl;
 };
 
-export default realSrc
+export default realSrc;

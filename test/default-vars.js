@@ -1,7 +1,7 @@
-import serverRefaultVars from '../src/server/default-vars.js';
+import serverDefaultVars from '../src/server/default-vars.js';
 
 const defaultVars = {
-  port: serverRefaultVars.staticServer.port,
+  port: serverDefaultVars.staticServer.port,
   PUPPETEER_EXECUTABLE_PATH: '/usr/bin/chromium',
   pdfsRoot: 'exported-pdfs',
   viewPort: {

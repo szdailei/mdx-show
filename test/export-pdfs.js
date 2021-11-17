@@ -2,13 +2,14 @@
 /* eslint-disable no-await-in-loop */
 import fs from 'fs';
 import { join } from 'path';
-import puppeteer from 'puppeteer-core';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import puppeteer from 'puppeteer-core/lib/esm/puppeteer/node.js';
 import init from './init.js';
 import config from './config.js';
-import { createPageByUrl } from './lib/eval-common.js';
-import { gotoFile, getFileNamesByPage } from './lib/eval-file-list.js';
-import { getTotalPagesNum } from './lib/eval-slides.js';
-import { exportPdf } from './lib/pdf.js';
+import { createPageByUrl } from './eval/eval-common.js';
+import { gotoFile, getFileNamesByPage } from './eval/eval-file-list.js';
+import { getTotalPagesNum } from './eval/eval-slides.js';
+import { exportPdf } from './pdf/pdf.js';
 
 async function getFileNames() {
   const browser = await puppeteer.launch({

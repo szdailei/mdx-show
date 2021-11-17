@@ -1,7 +1,7 @@
 import { join, isAbsolute } from 'path';
 import staticServer from './static-server/index.js';
 import apiServer from './api-server/index.js';
-import defaultVars from  './default-vars.js';
+import defaultVars from './default-vars.js';
 import { getTheScriptDir } from './utils/index.js';
 import { findTheFirstAvailablePort, registerRunningServers } from './controller/index.js';
 import { getApiServerPort, getDownloadServerPort } from '../api-server-vars.js';

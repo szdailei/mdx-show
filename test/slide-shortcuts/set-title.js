@@ -1,4 +1,4 @@
-import { getDocumentTitle, getTextContentById } from '../lib/eval-common.js';
+import { getDocumentTitle, getTextContentById } from '../eval/eval-common.js';
 
 async function setTitle(page) {
   const title = await getTextContentById(page, '#title');

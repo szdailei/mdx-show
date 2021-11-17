@@ -1,9 +1,9 @@
 import puppeteer from 'puppeteer-core';
 import init from '../init.js';
 import config from '../config.js';
-import { createPageByUrl } from '../lib/eval-common.js';
-import { gotoFirstFile } from '../lib/eval-file-list.js';
-import toggleFullScreen from './toggle-full-screen.js';
+import { createPageByUrl } from '../eval/eval-common.js';
+import { gotoFirstFile } from '../eval/eval-file-list.js';
+import toggleFullScreen from '../slide-shortcuts/toggle-full-screen.js';
 
 let browser;
 let page;
@@ -17,7 +17,7 @@ describe(ptFullScreenReq, () => {
 });
 
 beforeAll(async () => {
-  await init();
+  init();
 
   browser = await puppeteer.launch({
     headless: false,

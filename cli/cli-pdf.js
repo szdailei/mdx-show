@@ -2,7 +2,7 @@
 
 /* eslint-disable no-console */
 import minimist from 'minimist';
-import exportPdfs from './test/export-pdfs.js';
+import exportPdfs from '../test/export-pdfs.js';
 
 const HELP = `Usage: pdfs [options]
 

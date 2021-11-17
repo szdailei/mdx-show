@@ -1,7 +1,7 @@
 const config = {
   moduleFileExtensions: ['js', 'jsx', 'mjs'],
   transform: {},
-  testRegex: '(/__tests__/.*|(\\.|/)(spec))\\.(jsx?|js?|tsx?|ts?|mjs?)$',
+  testMatch: ['**/test/short-test/**/*.(spec|test).(js|mjs|ts|tsx)'],
   testPathIgnorePatterns: ['node_modules/', 'dist/', 'pdfs/', 'report/'],
   reporters: ['default', ['jest-html-reporters', { publicPath: 'reports' }]],
   verbose: false,

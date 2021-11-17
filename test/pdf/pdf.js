@@ -1,8 +1,7 @@
 /* eslint-disable no-await-in-loop */
-import fs from 'fs';
-import { PDFDocument } from 'pdf-lib';
 import config from '../config.js';
-import { waitForDone, getDocumentViewPort } from './eval-common.js';
+import { waitForDone, getDocumentViewPort } from '../eval/eval-common.js';
+import toPdf from '../to-pdf/index.js';
 
 async function setFontSizes(page, { fontSize }) {
   const client = await page.target().createCDPSession();
@@ -12,18 +11,6 @@ async function setFontSizes(page, { fontSize }) {
       standard: fontSize,
     },
   });
-}
-
-async function exportPdfBuffersToFile(buffers, { totalPagesNum, fileName }) {
-  const pdfDoc = await PDFDocument.create();
-  for (let i = 0; i < totalPagesNum; i += 1) {
-    const pdfBytes = await PDFDocument.load(buffers[i]);
-    const [firstPage] = await pdfDoc.copyPages(pdfBytes, [0]);
-    pdfDoc.addPage(firstPage);
-  }
-
-  const pdfBytes = await pdfDoc.save();
-  await fs.promises.writeFile(fileName, pdfBytes);
 }
 
 async function removeAriaTimers(page) {
@@ -63,7 +50,7 @@ async function createPdfBuffers(page, { totalPagesNum }) {
 
 async function exportPdf(page, { fileName, totalPagesNum }) {
   const pdfBuffers = await createPdfBuffers(page, { totalPagesNum });
-  await exportPdfBuffersToFile(pdfBuffers, { totalPagesNum, fileName });
+  await toPdf(pdfBuffers, { totalPagesNum, fileName });
 }
 
 export { createPdfBuffers, exportPdf };

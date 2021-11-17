@@ -1,5 +1,5 @@
 import { trim } from '../utils/index.js';
-import {parser} from '../markdown/index.js';
+import { parser } from '../markdown/index.js';
 import recursiveParseMarkedToken from './recursive-parse-marked-token.js';
 import { createNode, addNodeToNodeList, getCurrentNode, addComponentToChildren } from './tree.js';
 import {

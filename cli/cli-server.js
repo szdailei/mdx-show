@@ -3,7 +3,7 @@
 /* eslint-disable no-console */
 import { exec } from 'child_process';
 import minimist from 'minimist';
-import server from './dist/server.js';
+import server from '../src/server/server.js';
 
 const name = 'mdx-show';
 
@@ -61,7 +61,7 @@ async function main() {
   const actualPort = await server({ port, web, storage, name });
 
   const url = `http://localhost:${actualPort}`;
-  //  openUrl(url);
+  openUrl(url);
 }
 
 main();

@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer-core';
 import init from '../init.js';
 import config from '../config.js';
-import { createPageByUrl } from '../lib/eval-common.js';
-import { gotoFirstFile } from '../lib/eval-file-list.js';
-import setTitle from './set-title.js';
-import testForwardBackward from './forward-backward.js';
-import testPdfBuffers from './pdf-buffers.js';
+import { createPageByUrl } from '../eval/eval-common.js';
+import { gotoFirstFile } from '../eval/eval-file-list.js';
+import setTitle from '../slide-shortcuts/set-title.js';
+import testForwardBackward from '../slide-shortcuts/forward-backward.js';
+import testPdfBuffers from '../pdf/pdf-buffers.js';
 
 let browser;
 let page;
