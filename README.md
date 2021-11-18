@@ -2,7 +2,7 @@
 
 ## Installation
 
-**CLI:** `yarn add mdx-show`
+**CLI:** `yarn add --dev mdx-show`
 
 ## Usage
 
@@ -11,31 +11,22 @@
 Serve online:
 
 ```bash
-$ yarn mdx-show // serve your working folder
-$ yarn mdx-show -m your_mdx_folder // serve special folder
-$ yarn mdx-show -h // display help info
+$ yarn mdx-show -d ~/working_dir  (default: current dir)
 visit http://localhost:3000
 ```
 
-Export to PDFs
+Export to PDF
 
 ```bash
-$ yarn mdx-show // serve your working folder
-$ yarn mdx-show-pdfs // export all MD/MDX to PDFs
+$ yarn mdx-show     // serve current dir
+$ yarn mdx-show-pdf // export all MD/MDX to PDFs
 ```
 
-**Programmatically:**
+Serve without server:
 
-```
-import {mdxShow} from 'mdx-show'
-
-mdxShow({options})
-```
-
-```
-import pdfs from 'mdx-show/pdfs'
-
-pdfs({options})
+```bash
+cp ./node_modules/mdx-show/dist/mdx-show.html ~/working_dir
+open mdx-show.html    // Note: You can't load local subtitles without server
 ```
 
 ## License

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Player } from '../components/index.js';
 import { makeid } from '../utils/index.js';
-import { realSrc } from '../markdown/index.js';
+import { realSrc,isFileUrl } from '../markdown/index.js';
 import MDXToReactHOC from './MDXToReactHOC.jsx';
 
 function ReactHOC({ children, tag, attrs }) {
@@ -41,6 +41,10 @@ function ReactHOC({ children, tag, attrs }) {
       if (attrs.poster) {
         // eslint-disable-next-line no-param-reassign
         attrs.poster = realSrc(attrs.poster, 'img');
+      }
+      if (!isFileUrl()){
+        // eslint-disable-next-line no-param-reassign
+        attrs.crossOrigin = 'anonymous'
       }
       return (
         <Player key={makeid()} {...attrs}>

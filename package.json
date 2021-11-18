@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -18,12 +18,15 @@
   "main": "server.js",
   "type": "module",
   "bin": {
-    "mdx-show": "dist/cli-server.js",
-    "mdx-show-pdf": "dist/cli-pdf.js"
+    "mdx-show": "cli-server.js",
+    "mdx-show-pdf": "cli-pdf.js"
   },
   "files": [
     "dist/web/index.html",
-    "dist/web/app.js"
+    "dist/web/app.js",
+    "dist/server.js",
+    "dist/export-pdf.js",
+    "dist/mdx-show.html"
   ],
   "publishConfig": {
     "access": "public"
@@ -40,15 +43,15 @@
     "build:pdf": "cross-env NODE_ENV=production node cli/cli-build-pdf.js",
     "release": "node node_modules/@szdailei/dev-scripts/cli/cli-gen-release-note.js",
     "to-github": "node node_modules/@szdailei/dev-scripts/cli/cli-to-github.js",
-    "to-npm": "node node_modules/@szdailei/dev-scripts/cli/cli-to-npm.js",
-    "server": "node cli.mjs",
+    "to-npm": "node cli/cli-to-npm-without-dependencies.js",
+    "server": "node cli-server.js",
+    "pdf": "node cli-pdf.js",
     "work": "node work-flow/cli-work-flow.js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
   },
   "dependencies": {
     "@stitches/react": "^1.2.5",
-    "@szdailei/core": "^0.4.0",
-    "bufferutil": "^4.0.5",
+    "@szdailei/core": "^0.4.1",
     "history": "^5.1.0",
     "html-parse-stringify": "^3.0.1",
     "marked": "^3.0.8",
@@ -59,12 +62,11 @@
     "quick-lru": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^6.0.2",
-    "utf-8-validate": "^5.0.7"
+    "react-router-dom": "^6.0.2"
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.37.2",
-    "@szdailei/dev-scripts": "^0.4.0",
+    "@szdailei/dev-scripts": "^0.4.1",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
@@ -75,6 +77,9 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "stylelint": "^14.0.1",
+    "stylelint-config-recess-order": "^3.0.0",
+    "stylelint-config-standard": "^23.0.0",
     "jest": "^27.3.1",
     "jest-html-reporters": "^2.1.6",
     "pdf-lib": "^1.17.1",
@@ -83,9 +88,8 @@
     "prettier": "^2.4.1",
     "puppeteer": "^11.0.0",
     "puppeteer-core": "^11.0.0",
-    "stylelint": "^14.0.1",
-    "stylelint-config-recess-order": "^3.0.0",
-    "stylelint-config-standard": "^23.0.0",
+    "bufferutil": "^4.0.5",
+    "utf-8-validate": "^5.0.7",
     "web-resource-inliner": "^5.0.0"
   },
   "config": {

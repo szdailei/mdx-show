@@ -2,7 +2,8 @@
 
 /* eslint-disable no-console */
 import minimist from 'minimist';
-import exportPdfs from '../test/export-pdfs.js';
+// eslint-disable-next-line import/no-useless-path-segments
+import exportPdfs from '../mdx-show/dist/export-pdf.js';
 
 const HELP = `Usage: pdfs [options]
 

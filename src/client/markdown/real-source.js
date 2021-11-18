@@ -60,9 +60,13 @@ function convertSrcToServer(src, type) {
   return serverSrc;
 }
 
+function isFileUrl() {
+  return window.location.protocol === 'file:';
+}
+
 const realSrc = (src, type) => {
   if (isUrl(src)) return src;
-  const source = window.location.protocol === 'file:' ? convertSrcToLocal(src, type) : convertSrcToServer(src, type);
+  const source = isFileUrl() ? convertSrcToLocal(src, type) : convertSrcToServer(src, type);
   return source;
 };
 
@@ -80,3 +84,5 @@ realSrc.init = () => {
 };
 
 export default realSrc;
+
+export {isFileUrl}

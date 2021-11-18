@@ -1,6 +1,6 @@
-import { lexer } from 'marked';
+import { lexer as parser } from 'marked';
 import emptyTags from './empty-tags.js';
-import realSrc from './real-source.js';
+import realSrc, { isFileUrl } from './real-source.js';
 
 function removeBlankLine(text) {
   let result = '';
@@ -12,4 +12,4 @@ function removeBlankLine(text) {
   return result;
 }
 
-export { lexer as parser, emptyTags, realSrc, removeBlankLine };
+export { parser , emptyTags, realSrc, isFileUrl, removeBlankLine };

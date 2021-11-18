@@ -1,4 +1,4 @@
-import buildPdf from  '../scripts/rollup/build-pdf.js';
+import buildPdf from '../scripts/rollup/build-pdf.js';
 
 (async () => {
   buildPdf();

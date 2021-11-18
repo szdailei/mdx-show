@@ -11,7 +11,7 @@ function log(msg) {
   console.log(msg);
 }
 
-async function server({ port, web, storage, name } = {}) {
+async function server({ port, dir, name } = {}) {
   const theScriptDir = getTheScriptDir();
   const theWorkingDir = process.cwd();
 
@@ -25,21 +25,16 @@ async function server({ port, web, storage, name } = {}) {
     }
   }
 
-  let staticRoot;
-  if (!web) {
-    staticRoot = join(theScriptDir, defaultVars.staticServer.root);
-  } else {
-    staticRoot = isAbsolute(web) ? web : join(theWorkingDir, web);
-  }
+  const staticRoot = join(theScriptDir, defaultVars.staticServer.root);
 
   const sServer = staticServer(staticServerPort, { root: staticRoot });
   sServer.name = `${name} web-server`;
 
   let storageRoot;
-  if (!storage) {
+  if (!dir) {
     storageRoot = join(theWorkingDir, defaultVars.storage.root);
   } else {
-    storageRoot = isAbsolute(storage) ? storage : join(theWorkingDir, storage);
+    storageRoot = isAbsolute(dir) ? dir : join(theWorkingDir, dir);
   }
 
   const aServerPort = getApiServerPort(staticServerPort);

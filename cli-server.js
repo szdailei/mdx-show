@@ -3,7 +3,8 @@
 /* eslint-disable no-console */
 import { exec } from 'child_process';
 import minimist from 'minimist';
-import server from '../src/server/server.js';
+// eslint-disable-next-line import/no-useless-path-segments
+import server from '../mdx-show/dist/server.js';
 
 const name = 'mdx-show';
 
@@ -13,8 +14,7 @@ start mdx-show server and browser.
 
 Options:
   -p, --port  Port of web. default: "3000".
-  -s, --storage  Directory of storage files. default: "./".
-  -w, --web   Directory of index.html. default: "{server-dir}/web".
+  -d, --dir   Directory of md/mdx files. default: "./".
   -h, --help  Display help for command.`;
 
 function openUrl(url) {
@@ -43,8 +43,7 @@ async function main() {
     alias: {
       help: 'h',
       port: 'p',
-      web: 'w',
-      storage: 's',
+      dir: 'd',
     },
     unknown: () => {
       console.log(HELP);
@@ -57,8 +56,8 @@ async function main() {
     process.exit(0);
   }
 
-  const { port, web, storage } = args;
-  const actualPort = await server({ port, web, storage, name });
+  const { port, dir } = args;
+  const actualPort = await server({ port, dir, name });
 
   const url = `http://localhost:${actualPort}`;
   openUrl(url);
