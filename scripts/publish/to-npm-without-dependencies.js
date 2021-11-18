@@ -14,13 +14,13 @@ async function toNpmWithoutDependencies() {
   delete pkgJson.devDependencies;
   const withoutDependencies = JSON.stringify(pkgJson, undefined, 2);
 
-//  fs.writeFileSync(tempFile, pkgString, 'utf-8');
-//  fs.writeFileSync(pkgFile, withoutDependencies, 'utf-8');
+  fs.writeFileSync(tempFile, pkgString, 'utf-8');
+  fs.writeFileSync(pkgFile, withoutDependencies, 'utf-8');
 
   await toNpm();
 
-//  fs.writeFileSync(pkgFile, pkgString, 'utf-8');
-//  fs.unlinkSync(tempFile);
+  fs.writeFileSync(pkgFile, pkgString, 'utf-8');
+  fs.unlinkSync(tempFile);
 }
 
 export default toNpmWithoutDependencies;

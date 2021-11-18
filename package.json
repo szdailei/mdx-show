@@ -66,7 +66,7 @@
   },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.37.2",
-    "@szdailei/dev-scripts": "^0.4.1",
+    "@szdailei/dev-scripts": "^0.4.2",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
