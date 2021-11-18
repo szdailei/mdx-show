@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -43,7 +43,7 @@
     "build:pdf": "cross-env NODE_ENV=production node cli/cli-build-pdf.js",
     "release": "node node_modules/@szdailei/dev-scripts/cli/cli-gen-release-note.js",
     "to-github": "node node_modules/@szdailei/dev-scripts/cli/cli-to-github.js",
-    "to-npm": "node cli/cli-to-npm-without-dependencies.js",
+    "to-npm": "node cli/cli-to-npm-without-useless-dependencies.js",
     "server": "node cli-server.js",
     "pdf": "node cli-pdf.js",
     "work": "node work-flow/cli-work-flow.js",

@@ -1,7 +1,8 @@
 import fs from 'fs';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import toNpm from '@szdailei/dev-scripts/scripts/publish/to-npm.js';
 
-async function toNpmWithoutDependencies() {
+async function toNpmWithoutUselessDependencies() {
   const pkgFile = './package.json';
   const date = Date.now();
   const tempFile = `package.temp.${date}.json`;
@@ -10,8 +11,12 @@ async function toNpmWithoutDependencies() {
 
   const pkgJson = JSON.parse(pkgString);
   delete pkgJson.scripts;
-  delete pkgJson.dependencies;
   delete pkgJson.devDependencies;
+
+  const newDependencies = {
+    minimist: pkgJson.dependencies.minimist,
+  };
+  pkgJson.dependencies = newDependencies;
   const withoutDependencies = JSON.stringify(pkgJson, undefined, 2);
 
   fs.writeFileSync(tempFile, pkgString, 'utf-8');
@@ -23,4 +28,4 @@ async function toNpmWithoutDependencies() {
   fs.unlinkSync(tempFile);
 }
 
-export default toNpmWithoutDependencies;
+export default toNpmWithoutUselessDependencies;

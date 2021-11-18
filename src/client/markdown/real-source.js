@@ -85,4 +85,4 @@ realSrc.init = () => {
 
 export default realSrc;
 
-export {isFileUrl}
+export { isFileUrl };

@@ -12,4 +12,4 @@ function removeBlankLine(text) {
   return result;
 }
 
-export { parser , emptyTags, realSrc, isFileUrl, removeBlankLine };
+export { parser, emptyTags, realSrc, isFileUrl, removeBlankLine };
