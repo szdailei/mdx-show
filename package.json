@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -50,8 +50,8 @@
     "test": "node --experimental-vm-modules node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
   },
   "dependencies": {
+    "@szdailei/core": "^0.5.0",
     "@stitches/react": "^1.2.5",
-    "@szdailei/core": "^0.4.1",
     "history": "^5.1.0",
     "html-parse-stringify": "^3.0.1",
     "marked": "^3.0.8",
@@ -65,8 +65,8 @@
     "react-router-dom": "^6.0.2"
   },
   "devDependencies": {
+    "@szdailei/dev-scripts": "^0.5.0",
     "@stylelint/postcss-css-in-js": "^0.37.2",
-    "@szdailei/dev-scripts": "^0.4.2",
     "commitizen": "^4.2.4",
     "cross-env": "^7.0.3",
     "cz-conventional-changelog": "^3.3.0",
