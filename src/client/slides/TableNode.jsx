@@ -3,10 +3,6 @@ import { makeid } from '../utils/index.js';
 import { TH, TD, TR, THead, TBody, Table } from '../styled/index.js';
 import parseText from './parse-one-line-text.js';
 
-function parseTDWithHtml(text) {
-  return parseText(text);
-}
-
 function TableNode(table) {
   const padding = '6px 16px 6px 16px';
   const backgroundColor = 'linen';
@@ -30,7 +26,7 @@ function TableNode(table) {
   table.rows.forEach((rowCells) => {
     const dataCells = [];
     rowCells.forEach((cell) => {
-      const tDChildren = parseTDWithHtml(cell.text);
+      const tDChildren = parseText(cell.text);
       dataCells.push(
         <TD key={makeid()} style={{ padding }}>
           {tDChildren}

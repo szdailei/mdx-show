@@ -7,7 +7,7 @@ async function cjsToExe(cjsFile, exeFile) {
 }
 
 async function buildExe() {
-  await buildCliServer()
+  await buildCliServer();
 
   const mjs = 'cli-server.js';
   const cjs = 'cli-server.cjs';
