@@ -1,14 +1,10 @@
 import React, { useState, useImperativeHandle } from 'react';
 import { Div } from '../styled/index.js';
+import classes from './Message.module.css';
 
 // eslint-disable-next-line react/prop-types
-const Message = React.forwardRef(({ style, ...rest }, ref) => {
+const Message = React.forwardRef(({ className, ...rest }, ref) => {
   const [children, setChildren] = useState();
-
-  const objStyle = {
-    textAlign: 'center',
-    ...style,
-  };
 
   useImperativeHandle(ref, () => ({
     setChildren: (msg) => {
@@ -17,7 +13,7 @@ const Message = React.forwardRef(({ style, ...rest }, ref) => {
   }));
 
   return (
-    <Div {...rest} style={objStyle} ref={ref}>
+    <Div className={`${classes.message} ${className}`} {...rest} ref={ref}>
       {children}
     </Div>
   );

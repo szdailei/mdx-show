@@ -69,14 +69,10 @@ function Example({ createPages }) {
     gridTemplateColumns: 'auto min-content max-content',
   };
 
-  const textAreaStyle = {
-    caretColor: 'red',
-  };
-
   return (
     <>
       <Grid style={gridStyle}>
-        <TextArea onKeyUp={onKeyUp} style={textAreaStyle} ref={textAreaRef} />
+        <TextArea onKeyUp={onKeyUp} ref={textAreaRef} />
         <ParseButton
           createPages={createPages}
           textAreaRef={textAreaRef}

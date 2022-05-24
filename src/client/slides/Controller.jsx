@@ -18,6 +18,19 @@ function toggleFullScreen() {
   }
 }
 
+function isEditing() {
+  const { activeElement } = document;
+  if (!activeElement) return false;
+
+  switch (activeElement.tagName) {
+    case 'INPUT':
+    case 'TEXTAREA':
+      return true;
+    default:
+      return false;
+  }
+}
+
 function Controller({ pages, theme }) {
   requestFullscreen();
 
@@ -33,8 +46,16 @@ function Controller({ pages, theme }) {
       switch (event.code) {
         case 'KeyF':
           event.preventDefault();
-          toggleFullScreen();
+          if (!isEditing()) {
+            toggleFullScreen();
+          }
           break;
+        case 'Numpad8':
+        case 'ArrowUp':
+          if (isEditing()) {
+            break;
+          }
+        // eslint-disable-next-line no-fallthrough
         case 'PageUp':
         case 'Numpad9':
           event.preventDefault();
@@ -42,9 +63,15 @@ function Controller({ pages, theme }) {
             setCurrentPageCount(getCurrentPageCount() - 1);
           }
           break;
+        case 'Numpad2':
+        case 'ArrowDown':
+        case 'Space':
+          if (isEditing()) {
+            break;
+          }
+        // eslint-disable-next-line no-fallthrough
         case 'PageDown':
         case 'Numpad3':
-        case 'Space':
           event.preventDefault();
           if (getCurrentPageCount() < pages.length - 1) {
             setCurrentPageCount(getCurrentPageCount() + 1);

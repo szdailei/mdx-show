@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback, useImperativeHandle, useRef } from 'react';
-import { keyframes } from '../styled/styled.js';
 import { Div, Video } from '../styled/index.js';
+import classes from './Player.module.css';
 
 const playButton = (
   <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
@@ -129,59 +129,18 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
     onPointerLeave,
   };
 
-  const breath = keyframes`from { opacity: 1; }
-to { opacity: 0; }
-`;
+  const playButtonAnimationClass = hover ? '' : `${classes.animation} ${classes.playButtonAnimation}`;
+  const pauseButtonAnimationClass = `${classes.animation} ${classes.pauseButtonAnimation}`;
 
-  const commonStyle = {
-    display: 'block',
-    position: 'absolute',
-    cursor: 'pointer',
-    top: '50%',
-    left: '50%',
-    lineHeight: 0,
-    transform: 'translate(-50%, -50%) scale(1.5)',
-  };
-
-  const animationCommonStyle = {
-    animationName: `${breath}`,
-    animationDuration: '2s',
-    animationTimingFunction: 'ease-out',
-    animationFillMode: 'forwards',
-  };
-
-  const playButtonAnimationStyle = hover
-    ? {}
-    : {
-        ...animationCommonStyle,
-
-        animationIterationCount: 'infinite',
-        animationDirection: 'alternate-reverse',
-      };
-
-  const pauseButtonAnimationStyle = {
-    ...animationCommonStyle,
-
-    animationIterationCount: 1,
-    animationDirection: 'alternate',
-  };
-
-  const playButtonStyle = {
-    ...commonStyle,
-    ...playButtonAnimationStyle,
-  };
-
-  const pauseButtonStyle = {
-    ...commonStyle,
-    ...pauseButtonAnimationStyle,
-  };
+  const playButtonClass = `${classes.button} ${playButtonAnimationClass}`;
+  const pauseButtonClass = `${classes.button} ${pauseButtonAnimationClass}`;
 
   return paused ? (
-    <Div style={playButtonStyle} {...eventHandlers} ref={ref}>
+    <Div className={playButtonClass} {...eventHandlers} ref={ref}>
       {playButton}
     </Div>
   ) : (
-    <Div style={pauseButtonStyle} {...eventHandlers} ref={ref}>
+    <Div className={pauseButtonClass} {...eventHandlers} ref={ref}>
       {pauseButton}
     </Div>
   );

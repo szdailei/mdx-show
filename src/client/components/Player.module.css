@@ -1,0 +1,35 @@
+@keyframes breath {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.button {
+  display: block;
+  position: absolute;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  line-height: 0;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
+.animation {
+  animation-name: breath;
+  animation-duration: 2s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.playButtonAnimation {
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+}
+
+.pauseButtonAnimation {
+  animation-iteration-count: 1;
+  animation-direction: alternate;
+}

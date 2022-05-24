@@ -11,11 +11,12 @@ function TableNode(table) {
   const padding = '6px 16px 6px 16px';
   const backgroundColor = 'linen';
 
+  const { header } = table;
   const tHeaders = [];
-  table.header.forEach((header) => {
+  header.forEach((headerCell) => {
     tHeaders.push(
       <TH key={makeid()} style={{ padding, backgroundColor }}>
-        {header.text}
+        {headerCell.text}
       </TH>
     );
   });
@@ -25,9 +26,10 @@ function TableNode(table) {
     </THead>
   );
 
+  const { rows } = table;
   const tBodyRows = [];
   let isRequiredBackground = false;
-  table.rows.forEach((rowCells) => {
+  rows.forEach((rowCells) => {
     const dataCells = [];
     rowCells.forEach((cell) => {
       const tDChildren = parseTDWithHtml(cell.text);

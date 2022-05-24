@@ -160,8 +160,15 @@ function recursiveSpliceChildren(inputChildren) {
             }
 
             lastHtmlStartIndex = htmlStartIndexs.pop();
-            const currentNode = getCurrentNode(ctx.jsxRoot);
-            children.splice(lastHtmlStartIndex, i - lastHtmlStartIndex + 1, currentNode.component);
+
+            let componentWillInsertToChildren;
+            if (ctx.jsxRoot) {
+              componentWillInsertToChildren = getCurrentNode(ctx.jsxRoot).component;
+            } else {
+              // eslint-disable-next-line prefer-destructuring
+              componentWillInsertToChildren = ctx.pageChildren[0];
+            }
+            children.splice(lastHtmlStartIndex, i - lastHtmlStartIndex + 1, componentWillInsertToChildren);
             i = lastHtmlStartIndex;
           }
         } else if (isParsingJSX(ctx)) {
