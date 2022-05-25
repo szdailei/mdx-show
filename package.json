@@ -22,7 +22,7 @@
     "mdx-show-pdf": "cli-pdf.js"
   },
   "files": [
-    "./dist/web/**/*",
+    "dist/web/**/*",
     "dist/server.js",
     "dist/export-pdf*.js",
     "dist/mdx-show.html"
