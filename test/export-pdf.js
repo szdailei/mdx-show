@@ -3,7 +3,7 @@
 import fs from 'fs';
 import { join } from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import puppeteer from 'puppeteer-core/lib/esm/puppeteer/node.js';
+import puppeteer from 'puppeteer-core/lib/esm/puppeteer/node-puppeteer-core.js';
 import init from './init.js';
 import config from './config.js';
 import { createPageByUrl } from './eval/eval-common.js';
