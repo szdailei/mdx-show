@@ -27,7 +27,7 @@
     "dist/web/app.css",
     "dist/server.js",
     "dist/export-pdf.js",
-    "dist/export-pdf-*.js",
+    "dist/export-pdf-{*}.js",
     "dist/mdx-show.html"
   ],
   "publishConfig": {
