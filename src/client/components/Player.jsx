@@ -129,8 +129,8 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
     onPointerLeave,
   };
 
-  const playButtonAnimationClass = hover ? '' : `${classes.animation} ${classes.playButtonAnimation}`;
-  const pauseButtonAnimationClass = `${classes.animation} ${classes.pauseButtonAnimation}`;
+  const playButtonAnimationClass = hover ? '' : `${classes.animation} ${classes['play-button-animation']}`;
+  const pauseButtonAnimationClass = `${classes.animation} ${classes['pause-button-animation']}`;
 
   const playButtonClass = `${classes.button} ${playButtonAnimationClass}`;
   const pauseButtonClass = `${classes.button} ${pauseButtonAnimationClass}`;

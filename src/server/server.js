@@ -18,7 +18,9 @@ async function server({ port, dir, name } = {}) {
   let staticServerPort = port || defaultVars.staticServer.port;
 
   if (!port) {
-    staticServerPort = await findTheFirstAvailablePort(staticServerPort, { amount: 3 });
+    staticServerPort = await findTheFirstAvailablePort(staticServerPort, {
+      amount: 3,
+    });
     if (!staticServerPort) {
       log('No availablePort');
       process.exit(1);
@@ -38,7 +40,10 @@ async function server({ port, dir, name } = {}) {
   }
 
   const aServerPort = getApiServerPort(staticServerPort);
-  const aServer = apiServer(aServerPort, { storageRoot, loggerFileSuffix: defaultVars.logger.fileSuffix });
+  const aServer = apiServer(aServerPort, {
+    storageRoot,
+    loggerFileSuffix: defaultVars.logger.fileSuffix,
+  });
   aServer.name = `${name} api-server`;
 
   const dServerPort = getDownloadServerPort(staticServerPort);

@@ -117,7 +117,12 @@ function openJSX(ctx, text) {
         recursiveSpliceChildren(subNode.props.children);
         const currentNode = getCurrentNode(ctx.jsxRoot);
         currentNode.children.push(subNode);
+        return;
       }
+
+      // only Text, no children
+      const currentNode = getCurrentNode(ctx.jsxRoot);
+      currentNode.children.push(subNode);
     });
   }
 }
@@ -152,7 +157,9 @@ function recursiveSpliceChildren(inputChildren) {
             isSelfCloseTag(children[i].text) ||
             isCloseTagAtEnd(children[i].text)
           ) {
-            closeJSX(ctx);
+            if (ctx.jsxRoot) {
+              closeJSX(ctx);
+            }
 
             if (!htmlStartIndex) {
               htmlStartIndex = 0;
@@ -162,12 +169,13 @@ function recursiveSpliceChildren(inputChildren) {
             lastHtmlStartIndex = htmlStartIndexs.pop();
 
             let componentWillInsertToChildren;
+
             if (ctx.jsxRoot) {
               componentWillInsertToChildren = getCurrentNode(ctx.jsxRoot).component;
             } else {
-              // eslint-disable-next-line prefer-destructuring
-              componentWillInsertToChildren = ctx.pageChildren[0];
+              componentWillInsertToChildren = ctx.pageChildren.pop();
             }
+
             children.splice(lastHtmlStartIndex, i - lastHtmlStartIndex + 1, componentWillInsertToChildren);
             i = lastHtmlStartIndex;
           }

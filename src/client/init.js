@@ -13,7 +13,11 @@ function toServer({ data }) {
 const init = ({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack }) => {
   request.init();
   realSrc.init();
-  debug.init({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack, writeToFunc: toServer });
+  debug.init({
+    aboveUrlOfFilterStack,
+    aboveFuncNameOfFilterStack,
+    writeToFunc: toServer,
+  });
 };
 
 init.isFinished = () => request.isFinished();

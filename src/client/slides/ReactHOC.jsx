@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Div, Span } from '../styled/index.js';
 import { Player } from '../components/index.js';
 import { makeid } from '../utils/index.js';
 import { realSrc, isFileUrl } from '../markdown/index.js';
@@ -17,15 +18,15 @@ function ReactHOC({ children, tag, attrs }) {
       return <code key={makeid()}>{children}</code>;
     case 'div':
       return (
-        <div key={makeid()} {...attrs}>
+        <Div key={makeid()} {...attrs}>
           {children}
-        </div>
+        </Div>
       );
     case 'span':
       return (
-        <span key={makeid()} {...attrs}>
+        <Span key={makeid()} {...attrs}>
           {children}
-        </span>
+        </Span>
       );
     case 'hr':
       return <hr key={makeid()} />;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { NotFound } from './page-components/index.js';
 import { makeid } from './utils/index.js';
@@ -47,4 +47,6 @@ function Init() {
   return inited ? <App /> : null;
 }
 
-ReactDOM.render(<Init />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<Init />);

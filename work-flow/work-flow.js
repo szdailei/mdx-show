@@ -25,7 +25,11 @@ function workFlow({ loggerFile }) {
   const aboveUrlOfFilterStack = import.meta.url;
   const aboveFuncNameOfFilterStack = workFlow.name;
 
-  debug.init({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack, writeToFunc: writeToDisk });
+  debug.init({
+    aboveUrlOfFilterStack,
+    aboveFuncNameOfFilterStack,
+    writeToFunc: writeToDisk,
+  });
 
   run();
 

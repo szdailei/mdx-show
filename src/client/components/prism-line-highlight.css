@@ -5,16 +5,14 @@ pre[data-line] {
 
 .line-highlight {
   position: absolute;
-  left: 0;
   right: 0;
+  left: 0;
   padding: inherit 0;
   margin-top: 1em; /* Same as .prism’s padding-top */
-
-  background-color: rgba(0, 0, 0, 0.2);
-  pointer-events: none;
-
   line-height: inherit;
   white-space: pre;
+  pointer-events: none;
+  background-color: rgba(0 0 0 0.2);
 }
 
 @media print {
@@ -28,41 +26,43 @@ pre[data-line] {
   }
 }
 
-.line-highlight:before,
-.line-highlight[data-end]:after {
-  content: attr(data-start);
+.line-highlight::before,
+.line-highlight[data-end]::after {
   position: absolute;
   top: 0.4em;
   left: 0.6em;
   min-width: 1em;
   padding: 0 0.5em;
-  background-color: rgba(235, 229, 226, 0.4);
-  color: hsl(24, 20%, 95%);
   font: bold 65%/1.5 sans-serif;
+  color: hsl(24deg 20% 95%);
   text-align: center;
-  vertical-align: 0.3em;
-  border-radius: 999px;
   text-shadow: none;
+  vertical-align: 0.3em;
+  content: attr(data-start);
+  background-color: rgba(235 229 226 0.4);
+  border-radius: 999px;
   box-shadow: 0 1px white;
 }
 
-.line-highlight[data-end]:after {
-  content: attr(data-end);
+.line-highlight[data-end]::after {
   top: auto;
   bottom: 0.4em;
+  content: attr(data-end);
 }
 
-.line-numbers .line-highlight:before,
-.line-numbers .line-highlight:after {
+.line-numbers .line-highlight::before,
+.line-numbers .line-highlight::after {
   content: none;
 }
 
 pre[id].linkable-line-numbers span.line-numbers-rows {
   pointer-events: all;
 }
-pre[id].linkable-line-numbers span.line-numbers-rows > span:before {
+
+pre[id].linkable-line-numbers span.line-numbers-rows > span::before {
   cursor: pointer;
 }
-pre[id].linkable-line-numbers span.line-numbers-rows > span:hover:before {
-  background-color: rgba(255, 255, 255, 0.4);
+
+pre[id].linkable-line-numbers span.line-numbers-rows > span:hover::before {
+  background-color: rgba(255 255 255 0.4);
 }
