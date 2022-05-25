@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -24,7 +24,7 @@
   "files": [
     "dist/web/**/*",
     "dist/server.js",
-    "dist/dist/export-pdf*.js",
+    "dist/pdf/export-pdf*.js",
     "dist/mdx-show.html"
   ],
   "publishConfig": {
