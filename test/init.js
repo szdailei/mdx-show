@@ -9,9 +9,9 @@ function init({ port, dir, viewPort, format } = {}) {
 
   const theWorkingDir = process.cwd();
   if (!dir) {
-    config.pdfsRoot = join(theWorkingDir, defaultVars.pdfsRoot);
+    config.exportedPdfsRoot = join(theWorkingDir, defaultVars.exportedPdfsRoot);
   } else {
-    config.pdfsRoot = isAbsolute(dir) ? dir : join(theWorkingDir, dir);
+    config.exportedPdfsRoot = isAbsolute(dir) ? dir : join(theWorkingDir, dir);
   }
 
   config.viewPort = viewPort || defaultVars.viewPort;

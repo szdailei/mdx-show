@@ -43,19 +43,14 @@ function Controller({ pages, theme }) {
 
   const onKeyUp = useCallback(
     (event) => {
+      if (isEditing()) return
+
       switch (event.code) {
         case 'KeyF':
           event.preventDefault();
-          if (!isEditing()) {
             toggleFullScreen();
-          }
           break;
-        case 'Numpad8':
-        case 'ArrowUp':
-          if (isEditing()) {
-            break;
-          }
-        // eslint-disable-next-line no-fallthrough
+        case 'Enter':
         case 'PageUp':
         case 'Numpad9':
           event.preventDefault();
@@ -63,13 +58,7 @@ function Controller({ pages, theme }) {
             setCurrentPageCount(getCurrentPageCount() - 1);
           }
           break;
-        case 'Numpad2':
-        case 'ArrowDown':
         case 'Space':
-          if (isEditing()) {
-            break;
-          }
-        // eslint-disable-next-line no-fallthrough
         case 'PageDown':
         case 'Numpad3':
           event.preventDefault();

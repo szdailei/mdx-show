@@ -28,9 +28,9 @@ function getPdfFileName(mdxFileName) {
   const fileNameWithoutSuffix = mdxFileName.substring(0, mdxFileName.lastIndexOf('.'));
   let pdfFileName;
   if (fileNameWithoutSuffix) {
-    pdfFileName = join(config.pdfsRoot, `${fileNameWithoutSuffix}.pdf`);
+    pdfFileName = join(config.exportedPdfsRoot, `${fileNameWithoutSuffix}.pdf`);
   } else {
-    pdfFileName = join(config.pdfsRoot, `${mdxFileName}.pdf`);
+    pdfFileName = join(config.exportedPdfsRoot, `${mdxFileName}.pdf`);
   }
   return pdfFileName;
 }
@@ -42,8 +42,8 @@ async function exportPdfs({ port, dir, name, width, height, format } = {}) {
   }
   await init({ port, dir, viewPort, format });
 
-  if (!fs.existsSync(config.pdfsRoot)) {
-    fs.mkdirSync(config.pdfsRoot);
+  if (!fs.existsSync(config.exportedPdfsRoot)) {
+    fs.mkdirSync(config.exportedPdfsRoot);
   }
 
   const fileNames = name ? [name] : await getFileNames();
