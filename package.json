@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -31,53 +31,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "scripts": {
-    "format": "node_modules/@szdailei/dev-scripts/node_modules/.bin/prettier --ignore-path .gitignore --config node_modules/@szdailei/dev-scripts/prettier.config.cjs  --write .",
-    "lint": "node_modules/@szdailei/dev-scripts/node_modules/.bin/eslint --config node_modules/@szdailei/dev-scripts/.eslintrc.cjs . --ext .js,.jsx,.mjs,.cjs,.ts,.tsx",
-    "stylelint": "node_modules/@szdailei/dev-scripts/node_modules/.bin/stylelint --config node_modules/@szdailei/dev-scripts/stylelint.config.cjs --config-basedir node_modules/@szdailei/dev-scripts/ \"src/client/**/*.css\"",
-    "watch": "cross-env NODE_ENV=development node node_modules/@szdailei/dev-scripts/cli/cli-watch.js",
-    "build:dev": "cross-env NODE_ENV=development node node_modules/@szdailei/dev-scripts/cli/cli-build.js",
-    "build": "cross-env NODE_ENV=production node node_modules/@szdailei/dev-scripts/cli/cli-build.js",
-    "build:local": "cross-env NODE_ENV=production node cli/cli-build-local-html.js",
-    "build:exe": "cross-env NODE_ENV=production node cli/cli-build-exe.js",
-    "build:pdf": "cross-env NODE_ENV=production node cli/cli-build-pdf.js",
-    "release": "node node_modules/@szdailei/dev-scripts/cli/cli-gen-release-note.js",
-    "to-github": "node node_modules/@szdailei/dev-scripts/cli/cli-to-github.js",
-    "to-npm": "node cli/cli-to-npm-without-useless-dependencies.js",
-    "server": "node cli-server.js",
-    "pdf": "node cli-pdf.js",
-    "work": "node work-flow/cli-work-flow.js",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest && chromium reports/jest_html_reporters.html"
-  },
   "dependencies": {
-    "@szdailei/core": "^0.7.0",
-    "history": "^5.3.0",
-    "html-parse-stringify": "^3.0.1",
-    "marked": "^4.0.16",
-    "mime": "^3.0.0",
-    "minimist": "^1.2.6",
-    "prettier": "^2.6.2",
-    "prismjs": "^1.28.0",
-    "prop-types": "^15.8.1",
-    "quick-lru": "^6.1.1",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-router-dom": "^6.3.0"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^17.0.0",
-    "@commitlint/config-conventional": "^17.0.0",
-    "@szdailei/dev-scripts": "^0.7.0",
-    "bufferutil": "^4.0.6",
-    "cross-env": "^7.0.3",
-    "husky": "^8.0.1",
-    "jest": "^28.1.0",
-    "jest-html-reporters": "^3.0.7",
-    "pdf-lib": "^1.17.1",
-    "pkg": "^5.4.1",
-    "pkg-fetch": "^3.2.4",
-    "puppeteer-core": "^14.1.1",
-    "utf-8-validate": "^5.0.7",
-    "web-resource-inliner": "^5.0.0"
+    "minimist": "^1.2.6"
   }
 }
