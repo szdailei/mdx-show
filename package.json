@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.8.5",
+  "version": "0.8.4",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
   "keywords": [
@@ -43,7 +43,7 @@
     "build:all": "yarn build:local && yarn build:pdf && yarn build",
     "release": "node node_modules/@szdailei/dev-scripts/cli/cli-gen-release-note.js",
     "to-github": "node node_modules/@szdailei/dev-scripts/cli/cli-to-github.js",
-    "to-npm": "yarn build:all && node cli/cli-to-npm-without-useless-dependencies.js",
+    "to-npm": "yarn build:all && node node_modules/@szdailei/dev-scripts/cli/cli-to-npm.js",
     "server": "node cli-server.js",
     "pdf": "node cli-pdf.js",
     "work": "node work-flow/cli-work-flow.js",
