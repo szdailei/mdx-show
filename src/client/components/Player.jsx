@@ -45,41 +45,39 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   const { paused, hover } = state;
   let timer = null;
 
-  const onClick =
-    ((event) => {
-      function togglePause() {
-        event.preventDefault();
-        if (paused) {
-          videoRef.current.play();
-        } else {
-          videoRef.current.pause();
-        }
+  function onClick(event) {
+    function togglePause() {
+      event.preventDefault();
+      if (paused) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
       }
+    }
 
-      function toggleFullScreen() {
-        event.preventDefault();
-        if (document.fullscreenElement) {
-          exitVideoFullScreen(videoRef);
-        } else {
-          requestVideoFullScreen(playerRef, videoRef);
-        }
+    function toggleFullScreen() {
+      event.preventDefault();
+      if (document.fullscreenElement) {
+        exitVideoFullScreen(videoRef);
+      } else {
+        requestVideoFullScreen(playerRef, videoRef);
       }
+    }
 
-      switch (event.detail) {
-        case 1:
-          timer = setTimeout(togglePause, 200);
-          break;
-        case 2:
-        default:
-          if (timer) {
-            clearTimeout(timer);
-            timer = null;
-          }
-          toggleFullScreen();
-          break;
-      }
-    },
-    [paused, playerRef, videoRef]);
+    switch (event.detail) {
+      case 1:
+        timer = setTimeout(togglePause, 200);
+        break;
+      case 2:
+      default:
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+        toggleFullScreen();
+        break;
+    }
+  }
 
   const onPlaying = useCallback(() => {
     if (paused) {
