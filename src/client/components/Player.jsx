@@ -26,17 +26,14 @@ const pauseButton = (
 );
 
 function requestVideoFullScreen(playerRef, videoRef) {
-  if (!document.fullscreenElement) {
-    playerRef.current.requestFullscreen();
-    videoRef.current.style.width = '100vw';
-    videoRef.current.style.height = '100vh';
-  }
+  playerRef.current.requestFullscreen();
+  videoRef.current.style.width = '100vw';
+  videoRef.current.style.height = '100vh';
 }
 
 function exitVideoFullScreen(videoRef) {
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  }
+  document.exitFullscreen();
+
   if (videoRef.current.dataStoredViewPort) {
     videoRef.current.style.width = `${videoRef.current.dataStoredViewPort.width}px`;
     videoRef.current.style.height = `${videoRef.current.dataStoredViewPort.height}px`;
@@ -46,20 +43,43 @@ function exitVideoFullScreen(videoRef) {
 const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   const [state, setState] = useState({ paused: true, hover: false });
   const { paused, hover } = state;
+  let timer = null;
 
-  const onClick = useCallback(
-    (event) => {
-      event.preventDefault();
-      if (paused) {
-        requestVideoFullScreen(playerRef, videoRef);
-        videoRef.current.play();
-      } else {
-        exitVideoFullScreen(videoRef);
-        videoRef.current.pause();
+  const onClick =
+    ((event) => {
+      function togglePause() {
+        event.preventDefault();
+        if (paused) {
+          videoRef.current.play();
+        } else {
+          videoRef.current.pause();
+        }
+      }
+
+      function toggleFullScreen() {
+        event.preventDefault();
+        if (document.fullscreenElement) {
+          exitVideoFullScreen(videoRef);
+        } else {
+          requestVideoFullScreen(playerRef, videoRef);
+        }
+      }
+
+      switch (event.detail) {
+        case 1:
+          timer = setTimeout(togglePause, 200);
+          break;
+        case 2:
+        default:
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          toggleFullScreen();
+          break;
       }
     },
-    [paused, playerRef, videoRef]
-  );
+    [paused, playerRef, videoRef]);
 
   const onPlaying = useCallback(() => {
     if (paused) {
@@ -85,25 +105,19 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
     },
   }));
 
-  const onFullScreenChange = useCallback(() => {
-    if (!document.fullscreenElement) {
-      exitVideoFullScreen(videoRef);
-    }
-  }, [videoRef]);
-
   useEffect(() => {
     function initPaused() {
       if (videoRef && videoRef.current) setState({ paused: videoRef.current.paused, hover: state.hover });
     }
 
     initPaused();
-    const storedFullScreenChangeHandler = document.onfullscreenchange;
-    document.onfullscreenchange = onFullScreenChange;
 
     return () => {
-      document.onfullscreenchange = storedFullScreenChangeHandler;
+      if (timer) {
+        clearTimeout(timer);
+      }
     };
-  }, [onFullScreenChange, state.hover, videoRef]);
+  }, [state.hover, timer, videoRef]);
 
   const onPointerEnter = useCallback(
     (event) => {

@@ -43,12 +43,12 @@ function Controller({ pages, theme }) {
 
   const onKeyUp = useCallback(
     (event) => {
-      if (isEditing()) return
+      if (isEditing()) return;
 
       switch (event.code) {
         case 'KeyF':
           event.preventDefault();
-            toggleFullScreen();
+          toggleFullScreen();
           break;
         case 'Enter':
         case 'PageUp':
