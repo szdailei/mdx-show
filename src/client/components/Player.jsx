@@ -1,11 +1,22 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-param-reassign */
-import React, { useState, useEffect, useCallback, useImperativeHandle, useRef } from 'react';
-import { Div, Video } from '../styled/index.js';
-import classes from './Player.module.css';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import { Div, Video } from "../styled/index.js";
+import classes from "./Player.module.css";
 
 const playButton = (
-  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="58"
+    height="58"
+    viewBox="0 0 58 58"
+  >
     <circle fill="#666666" cx="29" cy="29" r="29" />
     <polygon fill="#FFFFFF" points="44,29 22,44 22,29.273 22,14" />
     <path
@@ -16,7 +27,12 @@ const playButton = (
 );
 
 const pauseButton = (
-  <svg xmlns="http://www.w3.org/2000/svg" width="58" height="58" viewBox="0 0 58 58">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="58"
+    height="58"
+    viewBox="0 0 58 58"
+  >
     <circle fill="#666666" cx="29" cy="29" r="29" />
     <rect x="33" y="14" fill="#FFFFFF" width="6" height="30" />
     <path fill="#FFFFFF" d="M40,45h-8V13h8V45z M34,43h4V15h-4V43z" />
@@ -27,8 +43,8 @@ const pauseButton = (
 
 function requestVideoFullScreen(playerRef, videoRef) {
   playerRef.current.requestFullscreen();
-  videoRef.current.style.width = '100vw';
-  videoRef.current.style.height = '100vh';
+  videoRef.current.style.width = "100vw";
+  videoRef.current.style.height = "100vh";
 }
 
 function exitVideoFullScreen(videoRef) {
@@ -62,11 +78,13 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   }
 
   function onClick(event) {
+    const TIMER_OF_DOUBLE_CLICK_INTERVAL = 300;
+
     event.preventDefault();
 
     switch (event.detail) {
       case 1:
-        timer = setTimeout(togglePause, 500);
+        timer = setTimeout(togglePause, TIMER_OF_DOUBLE_CLICK_INTERVAL);
         break;
       case 2:
         if (timer) {
@@ -106,7 +124,8 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
 
   useEffect(() => {
     function initPaused() {
-      if (videoRef && videoRef.current) setState({ paused: videoRef.current.paused, hover: state.hover });
+      if (videoRef && videoRef.current)
+        setState({ paused: videoRef.current.paused, hover: state.hover });
     }
 
     initPaused();
@@ -142,8 +161,10 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
     onPointerLeave,
   };
 
-  const playButtonAnimationClass = hover ? '' : `${classes.animation} ${classes['play-button-animation']}`;
-  const pauseButtonAnimationClass = `${classes.animation} ${classes['pause-button-animation']}`;
+  const playButtonAnimationClass = hover
+    ? ""
+    : `${classes.animation} ${classes["play-button-animation"]}`;
+  const pauseButtonAnimationClass = `${classes.animation} ${classes["pause-button-animation"]}`;
 
   const playButtonClass = `${classes.button} ${playButtonAnimationClass}`;
   const pauseButtonClass = `${classes.button} ${pauseButtonAnimationClass}`;
@@ -183,9 +204,13 @@ function Player(props) {
   };
 
   return (
-    <Div style={{ position: 'relative' }} ref={playerRef}>
+    <Div style={{ position: "relative" }} ref={playerRef}>
       <Video {...props} {...eventHandlers} ref={videoRef} />
-      <PlayButton videoRef={videoRef} playerRef={playerRef} ref={playButtonRef} />
+      <PlayButton
+        videoRef={videoRef}
+        playerRef={playerRef}
+        ref={playButtonRef}
+      />
     </Div>
   );
 }
