@@ -9,6 +9,7 @@ async function testForwardBackward(page) {
 
   for (count; count < totalPagesNum; count += 1) {
     await page.keyboard.up('PageDown');
+
     expect(await isFooterHidden(page)).toBe(await isTitleExist(page));
     expect(await getCurrentPageNum(page)).toBe(count + 1);
   }

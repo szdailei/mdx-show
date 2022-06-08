@@ -1,20 +1,18 @@
 async function getCurrentPageNum(page) {
   const footer = await page.$eval('footer', (element) => element.textContent);
   const footerStr = footer.toString();
-  const rightStr = footerStr.slice(footerStr.length - 6);
 
-  const tokens = rightStr.split('/');
-  const res = Number.parseInt(tokens[0].trim(), 10);
-  return res;
+  const fields = footerStr.split(' ');
+  const currentPageNum = Number.parseInt(fields[fields.length - 3], 10);
+  return currentPageNum;
 }
 
 async function getTotalPagesNum(page) {
   const footer = await page.$eval('footer', (element) => element.textContent);
   const footerStr = footer.toString();
-  const rightStr = footerStr.slice(footerStr.length - 6);
-
-  const tokens = rightStr.split('/');
-  return Number.parseInt(tokens[1].trim(), 10);
+  const fields = footerStr.split(' ');
+  const totalPagesNum = Number.parseInt(fields[fields.length - 1], 10);
+  return totalPagesNum;
 }
 
 async function isFooterHidden(page) {
