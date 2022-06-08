@@ -183,7 +183,7 @@ function Player(props) {
 
   return (
     <Div style={{ position: 'relative' }} ref={playerRef}>
-      <Video controlsList="nofullscreen" {...props} {...eventHandlers} ref={videoRef} />
+      <Video {...props} {...eventHandlers} ref={videoRef} />
       <PlayButton videoRef={videoRef} playerRef={playerRef} ref={playButtonRef} />
     </Div>
   );
