@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "eslint.enable": true,
+    "eslint.nodePath": "node_modules/@szdailei/dev-scripts/node_modules",
+    "eslint.options": { "overrideConfigFile": "node_modules/@szdailei/dev-scripts/.eslintrc.cjs" },
+    "prettier.configPath": "node_modules/@szdailei/dev-scripts/prettier.config.cjs",
+    "stylelint.configFile": "node_modules/@szdailei/dev-scripts/stylelint.config.cjs"
+  }
+}

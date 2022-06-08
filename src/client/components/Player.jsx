@@ -1,5 +1,5 @@
-/* eslint-disable no-param-reassign */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-param-reassign */
 import React, { useState, useEffect, useCallback, useImperativeHandle, useRef } from 'react';
 import { Div, Video } from '../styled/index.js';
 import classes from './Player.module.css';
@@ -45,36 +45,37 @@ const PlayButton = React.forwardRef(({ videoRef, playerRef }, ref) => {
   const { paused, hover } = state;
   let timer = null;
 
-  function onClick(event) {
-    function togglePause() {
-      event.preventDefault();
-      if (paused) {
-        videoRef.current.play();
-      } else {
-        videoRef.current.pause();
-      }
+  function togglePause() {
+    if (paused) {
+      videoRef.current.play();
+    } else {
+      videoRef.current.pause();
     }
+  }
 
-    function toggleFullScreen() {
-      event.preventDefault();
-      if (document.fullscreenElement) {
-        exitVideoFullScreen(videoRef);
-      } else {
-        requestVideoFullScreen(playerRef, videoRef);
-      }
+  function toggleFullScreen() {
+    if (document.fullscreenElement) {
+      exitVideoFullScreen(videoRef);
+    } else {
+      requestVideoFullScreen(playerRef, videoRef);
     }
+  }
+
+  function onClick(event) {
+    event.preventDefault();
 
     switch (event.detail) {
       case 1:
-        timer = setTimeout(togglePause, 200);
+        timer = setTimeout(togglePause, 500);
         break;
       case 2:
-      default:
         if (timer) {
           clearTimeout(timer);
           timer = null;
         }
         toggleFullScreen();
+        break;
+      default:
         break;
     }
   }
