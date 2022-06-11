@@ -31,6 +31,14 @@ function isEditing() {
   }
 }
 
+function isVideoActived() {
+  const { activeElement } = document;
+
+  if (activeElement.tagName !== 'VIDEO') return false;
+
+  return true;
+}
+
 function Controller({ pages, theme }) {
   requestFullscreen();
 
@@ -59,6 +67,10 @@ function Controller({ pages, theme }) {
           }
           break;
         case 'Space':
+          if (isVideoActived()) {
+            break;
+          }
+        // eslint-disable-next-line no-fallthrough
         case 'PageDown':
         case 'Numpad3':
           event.preventDefault();
