@@ -16,7 +16,7 @@ const init = ({ aboveUrlOfFilterStack, aboveFuncNameOfFilterStack }) => {
   debug.init({
     aboveUrlOfFilterStack,
     aboveFuncNameOfFilterStack,
-    writeToFunc: toServer,
+//    writeToFunc: toServer, // comment this line to avoid write log file
   });
 };
 
