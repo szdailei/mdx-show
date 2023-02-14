@@ -7,6 +7,8 @@ const config = {
   outOfClientAssets: 'dist/client/assets/',
   entryPointOfServer: 'src/server/cli.js',
   outOfServer: 'dist/server/',
+  srcOfTest: 'test',
+  outOfPdf: 'dist/pdf/',
 };
 
 export default config;
