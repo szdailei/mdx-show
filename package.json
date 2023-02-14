@@ -1,8 +1,26 @@
 {
-  "name": "dailei-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "mdx-show",
+  "version": "0.9.0",
   "type": "module",
+  "description": "Write with MDX, slides show with browser",
+  "author": "Dai Lei <szdailei@gmail.com>",
+  "keywords": [
+    "mdx",
+    "slides"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/szdailei/mdx-show.git"
+  },
+  "homepage": "https://github.com/szdailei/mdx-show#readme",
+  "main": "dist/cli.js",
+  "bin": {
+    "mdx-show": "dist/cli.js"
+  },
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "format": "prettier --ignore-path .gitignore --config prettier.config.cjs --write .",
     "lint": "eslint --config .eslintrc.cjs . --ext .js,.jsx,.mjs,.cjs,.ts,.tsx",
@@ -12,7 +30,10 @@
     "css": "tailwindcss -i ./src/client/static/index.css -o ./dist/output.css ",
     "load-test": "wrk -t12 -c400 -d30s --latency http://localhost:3000/index.html",
     "rel": "tauri build",
-    "rel-dev": "tauri build --debug"
+    "rel-dev": "tauri build --debug",
+    "release": "node scripts/cli/cli-gen-release-note.js",
+    "to-github": "node scripts/cli/cli-to-github.js",
+    "to-npm": "yarn scripts/cli/cli-to-npm.js"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.1.0",
@@ -36,6 +57,7 @@
     "react-router-dom": "^6.4.3"
   },
   "devDependencies": {
+    "@octokit/rest": "^19.0.7",
     "@tailwindcss/typography": "^0.5.8",
     "@tauri-apps/cli": "^1.1.0",
     "@types/domhandler": "^2.4.2",
@@ -44,6 +66,7 @@
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
     "arkit": "^1.6.4",
+    "conventional-changelog-core": "^4.2.4",
     "esbuild": "^0.16.4",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -55,6 +78,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.20",
     "prettier": "^2.6.2",
+    "shelljs": "^0.8.5",
     "source-map-explorer": "^2.5.3",
     "stylelint": "^14.15.0",
     "stylelint-config-recess-order": "^3.0.0",
