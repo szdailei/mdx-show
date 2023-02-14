@@ -1,0 +1,71 @@
+{
+  "package": {
+    "productName": "mdx-show",
+    "version": "1.0.0"
+  },
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devPath": "http://localhost:3000",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true,
+      "fs": {
+        "scope": ["*"]
+      }
+    },
+    "systemTray": {
+      "iconPath": "icons/icon.png"
+    },
+    "bundle": {
+      "active": false,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": ["icons/icon.png"],
+      "identifier": "dailei.dev",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "title": "用MDX写作，用浏览器演示",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "cli": {
+      "args": [
+        {
+          "name": "dir",
+          "short": "d",
+          "takesValue": true
+        }
+      ]
+    }
+  }
+}

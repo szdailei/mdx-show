@@ -1,0 +1,39 @@
+.top-px-20 {
+  margin-top: 20%;
+}
+
+.tracking-3 {
+  letter-spacing: 3px;
+}
+
+.grid-rows-b-2 {
+  grid-template-rows: auto min-content;
+}
+
+.grid-rows-b-3 {
+  grid-template-rows: auto 1fr min-content;
+}
+
+.grid-cols-right {
+  grid-template-columns: 1fr auto;
+}
+
+.leading-px-normal {
+  line-height: 56px;
+}
+
+.text-px-small {
+  font-size: 20px;
+}
+
+.text-px-normal {
+  font-size: 34px;
+}
+
+.text-px-bigger {
+  font-size: 45px;
+}
+
+.text-px-biggest {
+  font-size: 72px;
+}
