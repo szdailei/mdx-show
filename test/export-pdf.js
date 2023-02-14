@@ -13,8 +13,9 @@ import { exportPdf } from './pdf/pdf.js';
 
 async function getFileNames() {
   const browser = await puppeteer.launch({
-    headless: true,
     executablePath: defaultEnv.env.PUPPETEER_EXECUTABLE_PATH,
+    args: ['--no-sandbox', '--disabled-setupid-sandbox'],
+    headless: true,
     defaultViewport: defaultEnv.viewPort,
   });
 
@@ -35,6 +36,29 @@ function getPdfFileName(mdxFileName) {
   return pdfFileName;
 }
 
+const exportOnePDF = async (mdxFileName) => {
+  const browser = await puppeteer.launch({
+    executablePath: defaultEnv.env.PUPPETEER_EXECUTABLE_PATH,
+    args: ['--no-sandbox', '--disabled-setupid-sandbox'],
+    headless: true,
+    defaultViewport: defaultEnv.viewPort,
+  });
+
+  const page = await createPageByUrl(browser, defaultEnv.TARGET);
+  await gotoFile(page, mdxFileName);
+
+  const fileName = getPdfFileName(mdxFileName);
+  const totalPagesNum = await getTotalPagesNum(page);
+
+  await exportPdf(page, { totalPagesNum, fileName });
+  console.log('Exported', fileName);
+
+  await browser.close();
+  return new Promise((resolve) => {
+    resolve();
+  });
+};
+
 async function exportPdfs({ port, dir, name, width, height, format } = {}) {
   let viewPort;
   if (width && height) {
@@ -49,24 +73,23 @@ async function exportPdfs({ port, dir, name, width, height, format } = {}) {
   const fileNames = name ? [name] : await getFileNames();
   console.log('Exporting', fileNames);
 
-  fileNames.forEach(async (mdxFileName) => {
-    const browser = await puppeteer.launch({
-      headless: true,
-      executablePath: defaultEnv.env.PUPPETEER_EXECUTABLE_PATH,
-      defaultViewport: defaultEnv.viewPort,
-    });
-
-    const page = await createPageByUrl(browser, defaultEnv.TARGET);
-    await gotoFile(page, mdxFileName);
-
-    const fileName = getPdfFileName(mdxFileName);
-    const totalPagesNum = await getTotalPagesNum(page);
-
-    await exportPdf(page, { totalPagesNum, fileName });
-    console.log('Exported', fileName);
-
-    await browser.close();
+  const MAX_BROWSERS = 8;
+  const fileGroups = [];
+  let files = [];
+  fileNames.forEach((mdxFileName, index) => {
+    if ((index / MAX_BROWSERS) % 1 === 0) {
+      fileGroups.push(files);
+      files = [];
+    }
+    files.push(mdxFileName);
   });
+  fileGroups.push(files);
+  fileGroups.shift();
+
+  for (let i = 0, { length } = fileGroups; i < length; i += 1) {
+    const promises = fileGroups[i].map((mdxFileName) => exportOnePDF(mdxFileName));
+    await Promise.all(promises);
+  }
 }
 
 export default exportPdfs;
