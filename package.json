@@ -33,7 +33,7 @@
     "rel-dev": "tauri build --debug",
     "release": "node scripts/cli/cli-gen-release-note.js",
     "to-github": "node scripts/cli/cli-to-github.js",
-    "to-npm": "yarn scripts/cli/cli-to-npm.js"
+    "to-npm": "node scripts/cli/cli-to-npm.js"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.1.0",
