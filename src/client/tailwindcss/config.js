@@ -4,7 +4,7 @@ import overrideTypography from './typography.js';
 
 const config = tailwind({
   content: ['./src/client/**/*.{jsx,tsx}'],
-  safelist: [{ pattern: /(leading|animate)-./ }, { pattern: /bg-(sky)-(300|500|700)/, variants: ['hover', 'active'] }],
+  safelist: [{ pattern: /(leading|animate)-./ }, { pattern: /bg-(sky|gray|white|black)-(300|500|700)/, variants: ['hover', 'active'] }],
   plugins: [typography()],
   theme: {
     fontFamily: {

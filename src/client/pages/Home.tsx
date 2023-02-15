@@ -39,7 +39,7 @@ function Home() {
 
     const href = `#${SLIDES_RAW_PATH}${mdxFile}`;
     const child = (
-      <a href={href} key={makeid()} className="text-2xl cursor-pointer bg-white odd: bg-gray-300 hover:bg-violet-300">
+      <a href={href} key={makeid()} className="text-2xl cursor-pointer bg-white odd:bg-gray-300 hover:bg-sky-300">
         {mdxFile}
       </a>
     );
