@@ -1,7 +1,11 @@
 import type { ReactElement, PropsWithChildren } from 'react';
 
 export type ReactElementWithhChildren = ReactElement & {
-  props: PropsWithChildren;
+  props: {
+    children?: {
+      props?: PropsWithChildren;
+    };
+  };
 };
 
 export type CreatedNode = ReactElementWithhChildren | string;

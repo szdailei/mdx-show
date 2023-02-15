@@ -4,9 +4,10 @@ import * as acorn from 'acorn';
 import { ecmaVersion as EcmaVersion } from 'acorn';
 import acornJsx from 'acorn-jsx';
 import { generate } from 'astring';
-import { buildJsx, type Node as EstreeNode } from 'estree-util-build-jsx';
+import { buildJsx } from 'estree-util-build-jsx';
+import { type Node as EstreeNode } from 'estree-util-build-jsx/lib';
 import * as htmlparser2 from 'htmlparser2';
-import type { DomElement } from 'domhandler';
+import { isText, type Element as DomElement, type DataNode } from 'domhandler';
 import makeid from '../../utils/makeid';
 import { attrsToProps, attribsToString } from './attrs-to-props';
 import modifyPropsOfMedia from './modify-props-of-media';
@@ -62,7 +63,8 @@ function createP(text: string) {
   return element;
 }
 
-function shouldNotEval(node: DomElement) {
+function shouldNotEval(node) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (node.parent && node.parent.name === 'code') {
     return true;
   }
@@ -75,11 +77,11 @@ function createNodesByDepthFirst(currentNodes: DomElement[], jsCode?: string) {
   currentNodes.forEach((currentNode: DomElement) => {
     let createdNode: CreatedNode;
 
-    const { type, name } = currentNode;
+    const { name } = currentNode;
 
-    if (type === 'text') {
+    if (isText(currentNode)) {
       // text node
-      const { data } = currentNode as { data: string };
+      const { data } = currentNode as unknown as DataNode;
       const isWhitespace = data.trim().length === 0;
       if (isWhitespace) return;
 
@@ -93,7 +95,7 @@ function createNodesByDepthFirst(currentNodes: DomElement[], jsCode?: string) {
       return;
     }
 
-    const children = createNodesByDepthFirst(currentNode.children, jsCode);
+    const children = createNodesByDepthFirst(currentNode.children as DomElement[], jsCode);
 
     const tagName = name as TagName;
     const props = attrsToProps(currentNode.attribs, tagName, jsCode) as HTMLProps<unknown> & PlayGroundProps;
@@ -118,7 +120,9 @@ function createNodesByDepthFirst(currentNodes: DomElement[], jsCode?: string) {
         createdNodes.push(children);
         return;
       }
-      createdNode = children ? React.createElement(tagName, props, children) : React.createElement(tagName, props);
+      createdNode = children
+        ? (React.createElement(tagName, props, children) as ReactElementWithhChildren)
+        : (React.createElement(tagName, props) as ReactElementWithhChildren);
 
       createdNodes.push(createdNode);
       return;
@@ -150,7 +154,7 @@ function htmlJsxToReact(html: string, origJsxCode?: string) {
   const options = { lowerCaseTags: false, lowerCaseAttributeNames: false };
   const { children } = htmlparser2.parseDocument(html, options);
 
-  const nodes = createNodesByDepthFirst(children, jsCode) as ReactElementWithhChildren[] | string;
+  const nodes = createNodesByDepthFirst(children as DomElement[], jsCode) as ReactElementWithhChildren[] | string;
 
   const elements: ReactElementWithhChildren[] = [];
   if (typeof nodes === 'string') {

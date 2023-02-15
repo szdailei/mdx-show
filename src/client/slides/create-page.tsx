@@ -1,3 +1,4 @@
+import Clock from '../built-in/built-ins/Clock';
 import makeid from '../utils/makeid';
 import type { ReactElementWithhChildren } from './html-jsx-to-react/index.d';
 
@@ -6,8 +7,8 @@ function createPage(pageElements: ReactElementWithhChildren[], currentPageNum: n
   let header;
 
   const { length: pageElementsLength } = pageElements;
-  let footLeft;
-  let footCenter;
+  const footLeft = <Clock />;
+  let footCenter: string;
   if (pageElementsLength > 0) {
     const [first] = pageElements;
     if (first.type === 'header') {
@@ -24,18 +25,13 @@ function createPage(pageElements: ReactElementWithhChildren[], currentPageNum: n
     const maimElements = [];
     for (let i = header ? 1 : 0; i < pageElementsLength; i += 1) {
       const element = pageElements[i];
-      console.log(element);
       if (typeof element.type === 'string') {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (element.props?.children?.type?.name === 'Clock') {
-          footLeft = element;
-        } else if (element.type === 'footer' && element.props?.children?.props?.children) {
-          footCenter = element.props.children.props.children;
+        if (element.type === 'footer') {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          footCenter = element.props.children.props.children as string;
         } else {
           maimElements.push(element);
         }
-      } else if (element.type.name === 'Clock') {
-        footLeft = element;
       } else {
         maimElements.push(element);
       }
@@ -52,9 +48,13 @@ function createPage(pageElements: ReactElementWithhChildren[], currentPageNum: n
   const footRight = `page ${currentPageNum + 1}/${totalPageNum}`;
   const footer = (
     <footer key={makeid()} className="grid grid-cols-3 text-px-small">
-      <div>{footLeft}</div>
-      <div className="text-center">{footCenter}</div>
-      <div className="text-right">{footRight}</div>
+      <div id="footer_left">{footLeft}</div>
+      <div id="footer_center" className="text-center">
+        {footCenter}
+      </div>
+      <div id="footer_right" className="text-right">
+        {footRight}
+      </div>
     </footer>
   );
   page.push(footer);
