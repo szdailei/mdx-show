@@ -11,7 +11,7 @@ export pdfs.
 Options:
   -p, --port   Port of web. default: "3000".
   -d  --dir    Directory of exported pdfs. default: "./exported-pdfs".
-  -n  --name   File to export. default: "*".
+  -n  --name   Mdx filename to be exported. default: "*".
   -width, --width  Width of view port. default: "1920".
   -height, --height Height of view port. default: "1080".
   -f, --format Format of paper which will override view port. default: "A4".

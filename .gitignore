@@ -86,11 +86,10 @@ typings/
 # parcel/webpack build output
 dist/
 
-# yarn generate file
+# yarn/npm/pnpm generate file
 yarn.lock
-
-# pnpm generate file
 pnpm-lock.yaml
+package-lock.json
 
 # test output
 pdfs/

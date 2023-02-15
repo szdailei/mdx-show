@@ -78,6 +78,7 @@ if (argv[2] === 'clean') {
 const commonOptions = {
   bundle: true,
   format: 'esm',
+  target: 'esnext',
   write: false, // to run custom bundle
   sourcemap: !production,
   treeShaking: true,
@@ -110,6 +111,9 @@ const optionsOfServer = {
 const optionsOfPdf = {
   ...commonOptions,
   platform: 'node',
+  banner: {
+    js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);",
+  },
   entryPoints: [struc.entryPointOfPdf],
   outdir: struc.outOfPdf,
   minify: false,
@@ -127,9 +131,7 @@ build(optionsOfServer).then((result) => {
   bundleServer(result, struc, production);
 });
 */
-build(optionsOfPdf).then((result) => {
-  console.log(result);
-});
+build(optionsOfPdf)
 
 if (watch) {
   serve(struc);
