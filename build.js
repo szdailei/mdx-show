@@ -16,9 +16,10 @@ function removeDir(out) {
 }
 
 function clean() {
-  const { outOfClient, outOfServer } = struc;
+  const { outOfClient, outOfServer, outOfPdf } = struc;
   removeDir(outOfClient);
   removeDir(outOfServer);
+  removeDir(outOfPdf);
 }
 
 function mkdir(out) {
@@ -28,9 +29,10 @@ function mkdir(out) {
 }
 
 function prepare() {
-  const { outOfClient, outOfServer } = struc;
+  const { outOfClient, outOfServer, outOfPdf } = struc;
   mkdir(outOfClient);
   mkdir(outOfServer);
+  mkdir(outOfPdf);
 }
 
 function help() {
@@ -78,6 +80,7 @@ const commonOptions = {
   format: 'esm',
   write: false, // to run custom bundle
   sourcemap: !production,
+  treeShaking: true,
 };
 
 const optionsOfClient = {
@@ -90,7 +93,6 @@ const optionsOfClient = {
   splitting: true,
   chunkNames: '[name].[hash]',
   jsx: 'automatic', //  to override  "jsx" setting in tsconfig.json
-  treeShaking: true,
   minify: production,
 };
 
@@ -102,18 +104,31 @@ const optionsOfServer = {
   outdir: struc.outOfServer,
   legalComments: 'inline', // for run custom conditional compile in bundler
   define: { NODE_ENV_PRODUCTION: production ? 'true' : 'false' },
-  treeShaking: true,
   minifySyntax: true, // to remove dead code
+};
+
+const optionsOfPdf = {
+  ...commonOptions,
+  platform: 'node',
+  entryPoints: [struc.entryPointOfPdf],
+  outdir: struc.outOfPdf,
+  minify: false,
+  write: true,
 };
 
 prepare();
 
+/*
 build(optionsOfClient).then((result) => {
   bundleClient(result, struc, production);
 });
 
 build(optionsOfServer).then((result) => {
   bundleServer(result, struc, production);
+});
+*/
+build(optionsOfPdf).then((result) => {
+  console.log(result);
 });
 
 if (watch) {

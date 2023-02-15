@@ -7,7 +7,7 @@ const config = {
   outOfClientAssets: 'dist/client/assets/',
   entryPointOfServer: 'src/server/cli.js',
   outOfServer: 'dist/server/',
-  srcOfTest: 'test',
+  entryPointOfPdf: 'src-pdf/cli.js',
   outOfPdf: 'dist/pdf/',
 };
 

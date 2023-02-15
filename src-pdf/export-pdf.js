@@ -2,8 +2,7 @@
 /* eslint-disable no-await-in-loop */
 import fs from 'fs';
 import { join } from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import puppeteer from 'puppeteer-core/lib/esm/puppeteer/puppeteer-core.js';
+import puppeteer from 'puppeteer-core';
 import init from '../test/init.js';
 import defaultEnv from '../test/default-env.js';
 import { createPageByUrl } from '../test/eval/eval-common.js';
@@ -73,7 +72,7 @@ async function exportPdfs({ port, dir, name, width, height, format } = {}) {
   const fileNames = name ? [name] : await getFileNames();
   console.log('Exporting', fileNames);
 
-  const MAX_BROWSERS = 8;
+  const MAX_BROWSERS = 4;
   const fileGroups = [];
   let files = [];
   fileNames.forEach((mdxFileName, index) => {
