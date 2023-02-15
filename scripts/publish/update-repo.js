@@ -50,6 +50,13 @@ function mergeDevBranch() {
   }
 }
 
+function devToMain() {
+  switchToMainBranch();
+  mergeDevBranch();
+  pushToRemoteRepo();
+  switchToDevBranch();
+}
+
 export {
   updateGitIndex,
   addTagToLocalRepo,
@@ -58,4 +65,5 @@ export {
   switchToMainBranch,
   switchToDevBranch,
   mergeDevBranch,
+  devToMain,
 };

@@ -4,12 +4,12 @@ import fs from 'fs';
 import { join } from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import puppeteer from 'puppeteer-core/lib/esm/puppeteer/puppeteer-core.js';
-import init from './init.js';
-import defaultEnv from './default-env.js';
-import { createPageByUrl } from './eval/eval-common.js';
-import { gotoFile, getFileNamesByPage } from './eval/eval-file-list.js';
-import { getTotalPagesNum } from './eval/eval-slides.js';
-import { exportPdf } from './pdf/pdf.js';
+import init from '../test/init.js';
+import defaultEnv from '../test/default-env.js';
+import { createPageByUrl } from '../test/eval/eval-common.js';
+import { gotoFile, getFileNamesByPage } from '../test/eval/eval-file-list.js';
+import { getTotalPagesNum } from '../test/eval/eval-slides.js';
+import { exportPdf } from '../test/pdf/pdf.js';
 
 async function getFileNames() {
   const browser = await puppeteer.launch({

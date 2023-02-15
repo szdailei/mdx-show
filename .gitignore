@@ -96,6 +96,8 @@ pnpm-lock.yaml
 pdfs/
 exported-pdfs/
 reports/
+src-tauri/target/
+Cargo.lock
 
 # temp files
 TODOs.md

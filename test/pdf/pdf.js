@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 import defaultEnv from '../default-env.js';
 import { waitForDone, getDocumentViewPort } from '../eval/eval-common.js';
-import toPdf from '../to-pdf/index.js';
+import toPdf from './to-pdf.js';
 
 async function setFontSizes(page, { fontSize }) {
   const client = await page.target().createCDPSession();

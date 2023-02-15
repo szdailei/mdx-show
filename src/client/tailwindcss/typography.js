@@ -14,7 +14,7 @@ const override = {
           table: { width: 'max-content' },
           td: { paddingLeft: '17px', paddingRight: '17px' },
           pre: { lineHeight: 'inherit' },
-          code: { lineHeight: 'inherit' }
+          code: { lineHeight: 'inherit' },
         },
       },
     },

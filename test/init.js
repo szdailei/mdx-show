@@ -4,7 +4,8 @@ import defaultEnv from './default-env.js';
 function init({ port, dir, viewPort, format } = {}) {
   const endPoint = port ? `http://localhost:${port}` : `http://localhost:${defaultEnv.port}`;
   defaultEnv.TARGET = endPoint;
-  defaultEnv.env.PUPPETEER_EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH || defaultEnv.PUPPETEER_EXECUTABLE_PATH;
+  defaultEnv.env.PUPPETEER_EXECUTABLE_PATH =
+    process.env.PUPPETEER_EXECUTABLE_PATH || defaultEnv.PUPPETEER_EXECUTABLE_PATH;
 
   const theWorkingDir = process.cwd();
   if (!dir) {

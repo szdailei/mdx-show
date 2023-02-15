@@ -21,7 +21,7 @@ beforeAll(async () => {
 
   browser = await puppeteer.launch({
     executablePath: defaultEnv.env.PUPPETEER_EXECUTABLE_PATH,
-    args: ['--no-sandbox', "--disabled-setupid-sandbox"],
+    args: ['--no-sandbox', '--disabled-setupid-sandbox'],
     headless: false,
     defaultViewport: defaultEnv.viewPort,
   });

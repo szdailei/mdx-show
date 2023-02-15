@@ -8,9 +8,7 @@ import {
   addTagToLocalRepo,
   pushToRemoteRepo,
   isMajorOrMinorRelease,
-  switchToMainBranch,
-  switchToDevBranch,
-  mergeDevBranch,
+  devToMain,
 } from './update-repo.js';
 
 function removeTheFirstLineOfReleaseNote(origRelaseNote) {
@@ -50,10 +48,7 @@ async function toGitHub() {
   }
 
   if (isMajorOrMinorRelease(version)) {
-    switchToMainBranch();
-    mergeDevBranch();
-    pushToRemoteRepo();
-    switchToDevBranch();
+    devToMain();
   }
 
   addTagToLocalRepo(version);
