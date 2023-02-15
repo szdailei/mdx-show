@@ -1,0 +1,18 @@
+video,
+img,
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+thead {
+  text-align: center;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #dddddd;
+}
+
+code {
+  letter-spacing: 0;
+}
