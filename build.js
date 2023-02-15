@@ -78,7 +78,6 @@ if (argv[2] === 'clean') {
 const commonOptions = {
   bundle: true,
   format: 'esm',
-  target: 'esnext',
   write: false, // to run custom bundle
   sourcemap: !production,
   treeShaking: true,
@@ -122,7 +121,6 @@ const optionsOfPdf = {
 
 prepare();
 
-/*
 build(optionsOfClient).then((result) => {
   bundleClient(result, struc, production);
 });
@@ -130,8 +128,8 @@ build(optionsOfClient).then((result) => {
 build(optionsOfServer).then((result) => {
   bundleServer(result, struc, production);
 });
-*/
-build(optionsOfPdf)
+
+build(optionsOfPdf);
 
 if (watch) {
   serve(struc);
