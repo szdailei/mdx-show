@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "type": "module",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
