@@ -1,6 +1,6 @@
 {
   "name": "mdx-show",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "type": "module",
   "description": "Write with MDX, slides show with browser",
   "author": "Dai Lei <szdailei@gmail.com>",
@@ -16,7 +16,8 @@
   "homepage": "https://github.com/szdailei/mdx-show#readme",
   "main": "dist/cli.js",
   "bin": {
-    "mdx-show": "dist/cli.js"
+    "mdx-show": "dist/server/cli.js",
+    "mdx-show-pdf": "dist/pdf/cli.js"
   },
   "files": [
     "dist/**/*"
