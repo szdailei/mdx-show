@@ -1,0 +1,37 @@
+<header>第一页</header>
+
+<div style="text-align:center;font-size:0.9em;color:darkred">
+**扩展的Tag，大小写敏感**
+</div>
+
+export const mdx = `1. MDX = Markdown + JSX. 在Markdown里面调用JSX程序，可以实现web页面的所有功能。
+1. MDX可以定义变量，不能直接定义函数。<br>可以在外部定义函数，用import加载。<br>还可以import css文件。`
+
+| Tag        | 说明          | 样例                                                                              | 效果                                                                                       |
+| ---------- | ------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| header     | 每页标题      | `<header>第一页</header>`                                                         | 见页眉                                                                                     |
+| footer     | 每页页脚      | `<footer>按动Space向下翻页、Shift-Space向上翻页</footer>`                         | 见页脚                                                                                     |
+| Timer      | 时钟/计时     | `<Timer />`                                                                       | <Timer />                                                                                  |
+| Split      | 左右分割      | `<Split><div>First</div><div>Second</div></Split>`                                | <Split><div>First</div><div>Second</div></Split>                                           |
+| Appear     | 点击/悬停出现 | `<Appear hover><div style="outline:2px solid">点我</div><div>出现</div></Appear>` | <Appear hover><div ostyle="outline:2px solid">移动鼠标到这里</div><div>出现</div></Appear> |
+| PlayGround | mdx 演示      | `<PlayGround defaultValue={mdx} />`                                               | <PlayGround defaultValue={mdx} />                                                          |
+
+<footer>按动Space向下翻页、Shift-Space向上翻页</footer>
+
+---
+
+<header>第二页</header>
+
+<div style="text-align:center;font-size:0.9em;color:darkred">
+**页面控制指令**
+</div>
+| 事件 | 说明 |
+|  ----  |  ----  |
+| Shift-C | 不显示页脚时钟/显示页脚时钟 |
+| Key F | 全屏/退出全屏 |
+| Key Space/PageDown/Button/MouseForward | 下一页 |
+| Key Shift-Space/PageUp/Button/MouseBackward  | 上一页 |
+| Key Home  | 第一页 |
+| Key End  | 最后一页 |
+
+<footer>按动Space向下翻页、Shift-Space向上翻页</footer>

@@ -1,0 +1,13 @@
+code:hover {
+  outline: blue solid 2px;
+  box-shadow: 6px 6px 1px lightblue inset;
+  background-color: blue;
+  color: white;
+}
+
+p:hover,
+tr:hover,
+li:hover {
+  outline: blue solid 2px;
+  box-shadow: 6px 6px 1px lightblue inset;
+}
