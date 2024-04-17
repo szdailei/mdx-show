@@ -50,7 +50,7 @@ async function startServer({ client, port, dir, name } = {}) {
     defaultEnv.storage.root = join(theWorkingDir, defaultEnv.storage.root);
   }
 
-  try { 
+  try {
     const stats = await fs.promises.stat(defaultEnv.storage.root);
   } catch (error) {
     console.log(`  Storage root ${defaultEnv.storage.root} does not exist`)
